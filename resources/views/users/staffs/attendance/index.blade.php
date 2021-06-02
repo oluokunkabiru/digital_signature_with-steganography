@@ -1,11 +1,11 @@
 @extends('users.staffs.layout.app')
-@section('title', 'Faculty and department management')
+@section('title', 'Student management')
 @section('content')
     <section class="section">
         <div class="section-header">
-            <h1>Faculty and department </h1>
+            <h1>Attendance management</h1>
         </div>
-        <div class="container-fluid">
+        <div class="container">
             @if (session('success'))
                 <div class="alert alert-success alert-dismissible">
                     <button type="button" class="close" data-dismiss="alert">&times;</button>
@@ -25,16 +25,16 @@
             @endif
 
             <div class="row">
-                <div class="col-md-6">
+                <div class="col-12">
 
                     <div class="card">
 
 
                         <div class="card-header">
-                            <h3 class="card-title text-uppercase">Faculty</h3>
+                            <h3 class="card-title text-uppercase">Manage attendance</h3>
                         </div>
                         <div class="card-body">
-                            <a href="#addcourse" class="btn btn-success text-uppercase " data-toggle="modal">Add course</a>
+                            <a href="{{ route('attendance.create') }}" class="btn btn-success text-uppercase " >Add new attendance</a>
                             <div class="table-responsive">
                                 <table class="table table-striped v_center" id="table-1">
 
@@ -43,8 +43,12 @@
                                             <th class="text-center">
                                                 ID
                                             </th>
-                                            <th>Faculty name</th>
-
+                                            <th>Lecture name</th>
+                                             <th>Course code</th>
+                                             <th>Course title</th>
+                                            <th>Level</th>
+                                            <th>No. of attendee</th>
+                                            <th>QR code</th>
                                             <th>Create</th>
                                             <th>Action</th>
 
@@ -59,7 +63,11 @@
                                         <tr>
                                             <td>{{ ++$i }}</td>
                                             <td>{21</td>
-
+                                            <td>21</td>
+                                            <td>21</td>
+                                            <td>21</td>
+                                            <td>21</td>
+                                            <td>21</td>
                                             <td>21</td>
                                             <td>
                                                 <div class="row">
@@ -82,60 +90,7 @@
                     </div>
 
                 </div>
-                <div class="col-md-6">
-                    <div class="card">
-                        <div class="card-header">
-                            <h3 class="card-title text-uppercase">department</h3>
-                        </div>
-                        <div class="card-body">
-                            <a href="#addclass" class="btn btn-success text-uppercase " data-toggle="modal">Add class</a>
-                            <div class="table-responsive">
-                                <table class="table table-striped v_center" id="table-2">
 
-                                    <thead>
-                                        <tr>
-                                            <th class="text-center">
-                                                ID
-                                            </th>
-                                            <th>Department name</th>
-                                            <th>Faculty</th>
-                                            <th>Create</th>
-                                            <th>Action</th>
-
-                                        </tr>
-                                    </thead>
-                                    <tbody>
-                                        @php
-                                            $i = 0;
-                                        @endphp
-                                        {{-- @if ($categories)
-                                        @foreach ($categories as $category) --}}
-                                        <tr>
-                                            <td>{{ ++$i }}</td>
-                                            <td>{21</td>
-                                                <td>21</td>
-                                                <td>21</td>
-                                                <td>
-                                                <div class="row">
-                                                    <a href="#editCategory" data-toggle="modal" myurl="" mycategory=""
-                                                        class="badge badge-pill badge-warning mx-1"><span
-                                                            class="fa fa-edit p-1 text-white"></span></a>
-                                                    <a href="#deleteCategory" data-toggle="modal" delurl="" delcategory=""
-                                                        class="badge badge-pill badge-danger mx-1"><span
-                                                            class="fa fa-trash p-1 text-white"></span></a>
-                                                </div>
-                                            </td>
-                                        </tr>
-                                        {{-- @endforeach --}}
-                                        {{-- @endif --}}
-
-                                    </tbody>
-                                </table>
-                            </div>
-                        </div>
-                    </div>
-
-                </div>
 
 
             </div>
@@ -152,7 +107,7 @@
 
                 <!-- Modal Header -->
                 <div class="modal-header">
-                    <h4 class="modal-title text-uppercase">Add new class</h4>
+                    <h4 class="modal-title text-uppercase">Add new </h4>
                     <button type="button" class="btn btn-danger" data-dismiss="modal">&times;</button>
                 </div>
 

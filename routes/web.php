@@ -22,6 +22,9 @@ Route::prefix('staffs')->middleware(['auth', 'staff'])->group(function () {
     Route::get('dashboard', 'staffs\staffController@index')->name('staffDashboard');
     Route::resource('courses-and-classes', 'staffs\courseController');
     Route::resource('student-info', 'staffs\studentController');
+    Route::resource('faculty', 'staffs\facultyController');
+    Route::resource('department-info', 'staffs\deptController');
+    Route::resource('attendance', 'staffs\attendanceController');
 });
 
 Route::prefix('students')->middleware(['auth', 'student'])->group(function () {

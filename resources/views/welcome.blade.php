@@ -40,13 +40,25 @@ License URL: http://creativecommons.org/licenses/by/3.0/
 	<div class="video-w3l" data-vide-bg="{{ asset('asset/video/1') }}">
 		<!-- title -->
 		<h1>
-			<span>V</span>ideo
-			<span>L</span>ogin
-			<span>F</span>orm</h1>
+			<span>QR</span> code
+			<span>S</span>smart
+			<span>A</span>ttendance</h1>
 		<!-- //title -->
 		<!-- content -->
-
+@php
+    $dashboard="";
+    if (Auth::check() && Auth::user()->role=="staff") {
+        $dashboard = route('staffDashboard');
+    }elseif (Auth::check() && Auth::user()->role=="student") {
+        $dashboard = route('studentDashboard');
+    } else {
+        $dashboard = route('welcome');
+    }
+@endphp
 		<div class="sub-main-w3">
+            @if (! Auth::check())
+
+
 			<form method="POST" action="{{ route('login') }}">
                 {{ csrf_field() }}
 				<div class="form-style-agile">
@@ -115,6 +127,38 @@ License URL: http://creativecommons.org/licenses/by/3.0/
 				</div>
 				<!-- //social icons -->
 			</form>
+            @else
+                <div class="container">
+                    <div class="row">
+                        <div class="col-md-3"></div>
+                        <div class="col-md-6">
+                            <div class="card-cark">
+                                <div class="card-header">
+                                    <div class="text-center">
+                                        <span class="fa fa-user display-3"></span>
+                                    </div>
+
+                                    <h1 class="my-4">{{ ucwords(Auth::user()->name) }}</h1>
+
+                                    <div class="row">
+                                        <div class="col">
+                                            <a class="btn btn-lg btn-warning float-left mx-2" href="{{ route('logout') }}"
+                                            onclick="event.preventDefault(); document.getElementById('logout-form').submit();">Logout</a>
+                                            <form id="logout-form" action="{{ route('logout') }}" method="POST" class="d-none">
+                                                @csrf
+                                            </form>
+                                        </div>
+                                        {{--  <div class="col">  --}}
+                                            <a href="{{ $dashboard }}" class="btn btn-lg btn-dark float-right mx-2" style="color: #E91E63;">Dashboard</a>
+                                        {{--  </div>  --}}
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-3"></div>
+                    </div>
+                </div>
+            @endif
 		</div>
 		<!-- //content -->
 
