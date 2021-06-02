@@ -20,6 +20,7 @@ Auth::routes();
 
 Route::prefix('staffs')->middleware(['auth', 'staff'])->group(function () {
     Route::get('dashboard', 'staffs\staffController@index')->name('staffDashboard');
+    Route::resource('courses-and-classes', 'staffs\courseController@index');
 
 });
 
