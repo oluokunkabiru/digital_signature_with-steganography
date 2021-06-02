@@ -1,9 +1,9 @@
 @extends('users.staffs.layout.app')
-@section('title', 'Courses and classes management')
+@section('title', 'Faculty and department management')
 @section('content')
     <section class="section">
         <div class="section-header">
-            <h1>Course and classes</h1>
+            <h1>Faculty and department </h1>
         </div>
         <div class="container">
             @if (session('success'))
@@ -25,13 +25,13 @@
             @endif
 
             <div class="row">
-                <div class="col-md-7">
+                <div class="col-md-6">
 
                     <div class="card">
 
 
                         <div class="card-header">
-                            <h3 class="card-title text-uppercase">Courses</h3>
+                            <h3 class="card-title text-uppercase">Faculty</h3>
                         </div>
                         <div class="card-body">
                             <a href="#addcourse" class="btn btn-success text-uppercase " data-toggle="modal">Add course</a>
@@ -43,9 +43,8 @@
                                             <th class="text-center">
                                                 ID
                                             </th>
-                                            <th>Course title</th>
-                                            <th>Course Code</th>
-                                            <th>Course Unit</th>
+                                            <th>Faculty name</th>
+
                                             <th>Create</th>
                                             <th>Action</th>
 
@@ -60,8 +59,7 @@
                                         <tr>
                                             <td>{{ ++$i }}</td>
                                             <td>{21</td>
-                                            <td>21</td>
-                                            <td>21</td>
+
                                             <td>21</td>
                                             <td>
                                                 <div class="row">
@@ -101,7 +99,8 @@
                                             <th class="text-center">
                                                 ID
                                             </th>
-                                            <th>Class</th>
+                                            <th>Department name</th>
+                                            <th>Faculty</th>
                                             <th>Create</th>
                                             <th>Action</th>
 
@@ -116,8 +115,9 @@
                                         <tr>
                                             <td>{{ ++$i }}</td>
                                             <td>{21</td>
-                                            <td>21</td>
-                                            <td>
+                                                <td>21</td>
+                                                <td>21</td>
+                                                <td>
                                                 <div class="row">
                                                     <a href="#editCategory" data-toggle="modal" myurl="" mycategory=""
                                                         class="badge badge-pill badge-warning mx-1"><span

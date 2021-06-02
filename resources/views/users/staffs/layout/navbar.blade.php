@@ -84,7 +84,7 @@
                 <a href="#" class="nav-link has-dropdown"><i class="fas fa-users"></i> <span>Students</span></a>
                 <ul class="dropdown-menu">
                     <li><a class="nav-link" href="">New student</a></li>
-                    <li><a class="nav-link" href="">Manage student</a></li>
+                    <li><a class="nav-link" href="{{ route('student-info.index') }}">Manage student</a></li>
                 </ul>
             </li>
 

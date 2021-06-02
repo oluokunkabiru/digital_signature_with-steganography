@@ -15,6 +15,7 @@ class studentController extends Controller
     public function index()
     {
         //
+        return view('users.staffs.student-info.index');
     }
 
     /**
@@ -25,6 +26,7 @@ class studentController extends Controller
     public function create()
     {
         //
+        return view('users.staffs.student-info.create');
     }
 
     /**
