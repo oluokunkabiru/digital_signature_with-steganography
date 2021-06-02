@@ -25,6 +25,8 @@ License URL: http://creativecommons.org/licenses/by/3.0/
 	<link rel="stylesheet" href="{{ asset('asset/css/style.css') }}" type="text/css" media="all" />
 	<!-- Style-CSS -->
 	<link rel="stylesheet" href="{{ asset('asset/css/fontawesome-all.css') }}">
+    <link rel="stylesheet" href="{{ asset('asset/bootsrap/bootstrap.min.css') }}">
+    <link rel="stylesheet" href="{{ asset('asset/fontawesome-free/css/all.min.css') }}">
 	<!-- Font-Awesome-Icons-CSS -->
 	<!-- //css files -->
 	<!-- web-fonts -->
@@ -45,28 +47,43 @@ License URL: http://creativecommons.org/licenses/by/3.0/
 		<!-- content -->
 
 		<div class="sub-main-w3">
-			<form action="#" method="post">
+			<form method="POST" action="{{ route('login') }}">
+                {{ csrf_field() }}
 				<div class="form-style-agile">
 					<label>
 						<i class="fas fa-user"></i>Username</label>
-					<input placeholder="Username" name="Name" type="text" required="">
-				</div>
+					<input placeholder="Username" class="form-control @error('email') is-invalid @enderror" name="email" value="{{ old('email') }}" required autocomplete="email" autofocus type="text" >
+                    @error('email')
+                    <span class="invalid-feedback" role="alert">
+                        <strong>{{ $message }}</strong>
+                    </span>
+                @enderror
+                </div>
 				<div class="form-style-agile">
 					<label>
 						<i class="fas fa-unlock-alt"></i>Password</label>
-					<input placeholder="Password" name="Password" type="password" required="">
-				</div>
+					<input placeholder="Password" type="password" class="form-control @error('password') is-invalid @enderror" name="password" required autocomplete="current-password">
+                    @error('password')
+                    <span class="invalid-feedback" role="alert">
+                        <strong>{{ $message }}</strong>
+                    </span>
+                @enderror
+                </div>
 				<!-- switch -->
 				<div class="checkout-w3l">
 					<div class="demo5">
 						<div class="switch demo3">
-							<input type="checkbox">
+                            <input class="form-check-input" type="checkbox" name="remember" id="remember" {{ old('remember') ? 'checked' : '' }}>
 							<label>
 								<i></i>
 							</label>
 						</div>
 					</div>
-					<a href="#">Remember Me</a>
+					{{-- <a href="#">Remember Me</a> --}}
+
+                    <label class="form-check-label" for="remember">
+                        {{ __('Remember Me') }}
+                    </label>
 				</div>
 				<!-- //switch -->
 				<input type="submit" value="Log In">
@@ -112,7 +129,9 @@ License URL: http://creativecommons.org/licenses/by/3.0/
 
 
 	<!-- Jquery -->
-	<script src="{{ asset('asset/js/jquery-2.2.3.min.js') }}"></script>
+	<script src="{{ asset('asset/bootsrap/jquery.js') }}"></script>
+    <script src="{{ asset('asset/bootsrap/popper.js') }}"></script>
+    <script src="{{ asset('asset/bootsrap/bootstrap.min.js') }}"></script>
 	<!-- //Jquery -->
 
 	<!-- Video js -->
