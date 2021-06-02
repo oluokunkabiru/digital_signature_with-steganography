@@ -59,21 +59,13 @@
                 <a href="{{ route('staffDashboard') }}" class="nav-link"><i class="fas fa-fire"></i><span>Dashboard</span></a>
 
             </li>
-                <li class="menu-header">Faculty</li>
-            <li class="dropdown">
-                <a href="#" class="nav-link has-dropdown"><i class="fa fa-home"></i> <span>Faculty and department</span></a>
-                <ul class="dropdown-menu">
-                    {{--  <li><a href="">Add New Course</a></li>  --}}
-                    <li><a href="{{ route('department-info.index') }}">Manage faculty and dept</a></li>
 
-                </ul>
-            </li>
             <li class="menu-header">Courses</li>
             <li class="dropdown">
                 <a href="#" class="nav-link has-dropdown"><i class="far fa-compass"></i> <span>Courses</span></a>
                 <ul class="dropdown-menu">
                     {{--  <li><a href="">Add New Course</a></li>  --}}
-                    <li><a href="{{ route('courses-and-classes.index') }}">Manage Course</a></li>
+                    <li><a href="{{ route('courseTaken') }}">Manage Course</a></li>
 
                 </ul>
             </li>
@@ -82,35 +74,12 @@
             <li class="dropdown">
                 <a href="#" class="nav-link has-dropdown" data-toggle="dropdown"><i class="fas fa-columns"></i> <span>Attendance</span></a>
                 <ul class="dropdown-menu">
-                    <li><a class="nav-link" href="{{ route('attendance.create') }}">New attendance</a></li>
+                    <li><a class="nav-link" href="{{ route('student-info.create') }}">New attendance</a></li>
 
-                    <li><a class="nav-link" href="{{ route('attendance.index') }}">Manage Manage attendance</a></li>
+                    <li><a class="nav-link" href="{{ route('student-attendance.index') }}">Manage attendance</a></li>
                 </ul>
             </li>
 
-             <li class="menu-header">Student</li>
-            <li class="dropdown">
-                <a href="#" class="nav-link has-dropdown"><i class="fas fa-users"></i> <span>Students</span></a>
-                <ul class="dropdown-menu">
-                    <li><a class="nav-link" href="{{ route('student-info.create') }}">New student</a></li>
-                    <li><a class="nav-link" href="{{ route('student-info.index') }}">Manage student</a></li>
-                </ul>
-            </li>
-
-            {{-- <li class="menu-header">Article</li>
-            <li class="dropdown">
-                <a href="#" class="nav-link has-dropdown"><i class="fas fa-th-large"></i> <span>Typewriter</span></a>
-                <ul class="dropdown-menu">
-                    <li><a class="nav-link" href="components-article.html">Manage Typewriter</a></li>
-                </ul>
-            </li>
-            <li class="dropdown">
-                <a href="#" class="nav-link has-dropdown"><i class="far fa-file-alt"></i> <span>Articles</span></a>
-                <ul class="dropdown-menu">
-                    <li><a class="nav-link" href="forms-advanced-form.html">Managed Article</a></li>
-
-                </ul>
-            </li> --}}
 
 
 

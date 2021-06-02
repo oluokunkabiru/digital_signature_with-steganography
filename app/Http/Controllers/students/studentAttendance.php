@@ -5,7 +5,7 @@ namespace App\Http\Controllers\students;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 
-class studentController extends Controller
+class studentAttendance extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -15,11 +15,8 @@ class studentController extends Controller
     public function index()
     {
         //
-        return view('users.students.index');
     }
-    public function courseTaken(){
-        return view('users.students.courses');
-    }
+
     /**
      * Show the form for creating a new resource.
      *
