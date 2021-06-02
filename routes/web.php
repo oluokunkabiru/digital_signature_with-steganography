@@ -1,6 +1,7 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
+use Illuminate\Support\Facades\Auth;
 
 /*
 |--------------------------------------------------------------------------
@@ -13,10 +14,22 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/', function () {
-    return view('welcome');
-});
+Route::get('/', 'Pages@index')->name('welcome');
 
 Auth::routes();
 
-Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
+Route::prefix('staffs')->middleware(['auth', 'staff'])->group(function () {
+    Route::get('dashboard', 'staffs\staffController@index')->name('staffDashboard');
+
+});
+
+Route::prefix('students')->middleware(['auth', 'student'])->group(function () {
+    Route::get('dashboard', 'students\studentController@index')->name('studentDashboard');
+
+});
+
+
+// staffs routes
+
+// end of staff routes
+// Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');

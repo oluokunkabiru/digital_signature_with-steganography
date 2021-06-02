@@ -59,39 +59,32 @@
                 <a href="" class="nav-link"><i class="fas fa-fire"></i><span>Dashboard</span></a>
 
             </li>
-                <li class="menu-header">Themes</li>
+                <li class="menu-header">Courses</li>
             <li class="dropdown">
-                <a href="#" class="nav-link has-dropdown"><i class="far fa-compass"></i> <span>Themes</span></a>
+                <a href="#" class="nav-link has-dropdown"><i class="far fa-compass"></i> <span>Courses</span></a>
                 <ul class="dropdown-menu">
-                    <li><a href="">Add New Theme</a></li>
-                    <li><a href="">Manage Theme</a></li>
-                    <li><a href="">View Theme</a></li>
-                    <li><a href="">Theme Functionality</a></li>
-                </ul>
-            </li>
-
-            <li class="menu-header">Wish</li>
-            <li class="dropdown">
-                <a href="#" class="nav-link has-dropdown" data-toggle="dropdown"><i class="fas fa-columns"></i> <span>Wish</span></a>
-                <ul class="dropdown-menu">
-                    <li><a class="nav-link" href="layout-default.html">New Wish</a></li>
-
-                    <li><a class="nav-link" href="layout-top-navigation.html">Manage Wish</a></li>
-                </ul>
-            </li>
-            <li class="dropdown">
-                <a href="#" class="nav-link has-dropdown"><i class="fas fa-th"></i> <span>Media</span></a>
-                <ul class="dropdown-menu">
-                    <li><a class="nav-link" href="">All Media</a></li>
-
+                    <li><a href="">Add New Course</a></li>
+                    <li><a href="">Manage Course</a></li>
 
                 </ul>
             </li>
-             <li class="menu-header">Category</li>
+
+            <li class="menu-header">Attendance</li>
             <li class="dropdown">
-                <a href="#" class="nav-link has-dropdown"><i class="fas fa-th-large"></i> <span>Category</span></a>
+                <a href="#" class="nav-link has-dropdown" data-toggle="dropdown"><i class="fas fa-columns"></i> <span>Attendance</span></a>
                 <ul class="dropdown-menu">
-                    <li><a class="nav-link" href="">Manage Category</a></li>
+                    <li><a class="nav-link" href="layout-default.html">New attendance</a></li>
+
+                    <li><a class="nav-link" href="layout-top-navigation.html">Manage Manage attendance</a></li>
+                </ul>
+            </li>
+
+             <li class="menu-header">Student</li>
+            <li class="dropdown">
+                <a href="#" class="nav-link has-dropdown"><i class="fas fa-users"></i> <span>Students</span></a>
+                <ul class="dropdown-menu">
+                    <li><a class="nav-link" href="">New student</a></li>
+                    <li><a class="nav-link" href="">Manage student</a></li>
                 </ul>
             </li>
 
@@ -113,7 +106,7 @@
 
 
 
-            <li class="menu-header">Settings</li>
+            <li class="menu-header">Setting</li>
             <li class="dropdown">
                 <a href="#" class="nav-link has-dropdown"><i class="fas fa-cog"></i> <span>Settings</span></a>
                 <ul class="dropdown-menu">

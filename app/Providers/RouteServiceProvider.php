@@ -7,6 +7,7 @@ use Illuminate\Foundation\Support\Providers\RouteServiceProvider as ServiceProvi
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\RateLimiter;
 use Illuminate\Support\Facades\Route;
+use Illuminate\Support\Facades\Auth;
 
 class RouteServiceProvider extends ServiceProvider
 {
@@ -17,6 +18,24 @@ class RouteServiceProvider extends ServiceProvider
      *
      * @var string
      */
+
+    public static function redirectToAuth()
+    {
+        switch(Auth::user()->role){
+            case 'staff':
+            return route('staffDashboard'); //'/'. app()->getLocale(). '/users/admin';
+            // return $this->redirectTo;
+                break;
+            case 'student':
+                    return route('studentDashboard'); //'/'. app()->getLocale(). '/users/dashboard';
+                // return $this->redirectTo;
+                break;
+            default:
+                return route('welcome') ;//'/'. app()->getLocale(). '/login';
+                // return $this->redirectTo;
+        }
+    }
+
     public const HOME = '/home';
 
     /**
@@ -26,7 +45,7 @@ class RouteServiceProvider extends ServiceProvider
      *
      * @var string|null
      */
-    // protected $namespace = 'App\\Http\\Controllers';
+    protected $namespace = 'App\\Http\\Controllers';
 
     /**
      * Define your route model bindings, pattern filters, etc.

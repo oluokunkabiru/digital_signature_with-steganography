@@ -13,7 +13,7 @@
                 </div>
                 <div class="card-wrap">
                     <div class="card-header">
-                        <h4>Total Wish</h4>
+                        <h4>Total students</h4>
                     </div>
                     <div class="card-body">
                         10
@@ -28,10 +28,10 @@
                 </div>
                 <div class="card-wrap">
                     <div class="card-header">
-                        <h4>Incoming Event</h4>
+                        <h4>Today's classes</h4>
                     </div>
                     <div class="card-body">
-                        42
+                        400
                     </div>
                 </div>
             </div>
@@ -43,7 +43,7 @@
                 </div>
                 <div class="card-wrap">
                     <div class="card-header">
-                        <h4>Total Comments</h4>
+                        <h4>Today's attendance</h4>
                     </div>
                     <div class="card-body">
                         1,201
@@ -58,7 +58,7 @@
                 </div>
                 <div class="card-wrap">
                     <div class="card-header">
-                        <h4>Total Likes</h4>
+                        <h4>Total attendance</h4>
                     </div>
                     <div class="card-body">
                         47
@@ -68,8 +68,8 @@
         </div>
     </div>
     <div class="section-body">
-        <h2 class="section-title">Hi, Michelle!</h2>
-        <p class="section-lead">Change information about yourself on this page.</p>
+        <h2 class="section-title">Hi, {{ ucwords(Auth::user()->name) }}</h2>
+        {{--  <p class="section-lead">Change information about yourself on this page.</p>  --}}
 
         <div class="row mt-sm-4">
             <div class="col-12 col-md-12 col-lg-5">
@@ -78,15 +78,15 @@
                         <img alt="image" src="assets/img/avatar/avatar-1.png" class="rounded-circle profile-widget-picture">
                         <div class="profile-widget-items">
                             <div class="profile-widget-item">
-                                <div class="profile-widget-item-label">Posts</div>
+                                <div class="profile-widget-item-label">Total class create</div>
                                 <div class="profile-widget-item-value">187</div>
                             </div>
                             <div class="profile-widget-item">
-                                <div class="profile-widget-item-label">Comments</div>
+                                <div class="profile-widget-item-label">Total students attended</div>
                                 <div class="profile-widget-item-value">6,8K</div>
                             </div>
                             <div class="profile-widget-item">
-                                <div class="profile-widget-item-label">Likes</div>
+                                <div class="profile-widget-item-label">Incoming class</div>
                                 <div class="profile-widget-item-value">2,1K</div>
                             </div>
                         </div>
