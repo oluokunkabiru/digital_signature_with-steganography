@@ -18,7 +18,7 @@ class studentMiddleware
     public function handle(Request $request, Closure $next)
     {
         if (!Auth::check()) {
-            return redirect()->route('login')->with('status', 'Please login');
+            return redirect()->route('welcome')->withErrors('password', 'Please login');
         }
         if (Auth::user()->role =='student') {
                 return $next($request);

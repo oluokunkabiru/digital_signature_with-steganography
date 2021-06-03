@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\staffs;
 
 use App\Http\Controllers\Controller;
+use App\Models\Faculty;
 use Illuminate\Http\Request;
 
 class deptController extends Controller
@@ -15,7 +16,9 @@ class deptController extends Controller
     public function index()
     {
         //
-        return view('users.staffs.department.index');
+
+        $faculties = Faculty::orderBy('id', 'desc')->get();
+        return view('users.staffs.department.index', compact('faculties'));
     }
 
     /**

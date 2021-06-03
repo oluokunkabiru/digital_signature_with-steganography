@@ -18,7 +18,7 @@ class staffMiddleware
     public function handle(Request $request, Closure $next)
     {
         if (!Auth::check()) {
-            return redirect()->route('login')->with('status', 'Please login');
+            return redirect()->route('welcome')->withErrors('password', 'Please login');
         }
         if (Auth::user()->role =='staff') {
                 return $next($request);

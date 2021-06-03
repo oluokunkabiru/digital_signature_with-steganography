@@ -3,7 +3,8 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-
+use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Session;
 class Pages extends Controller
 {
     /**
@@ -15,6 +16,40 @@ class Pages extends Controller
     {
         //
         return view('welcome');
+    }
+
+    public function signOut(Request $request) {
+        Session::flush();
+        Auth::logout();
+
+        return Redirect(route('welcome'));
+    }
+
+
+
+
+
+    public function customLogin(Request $request)
+    {
+        $request->validate([
+            'email' => 'required',
+            'password' => 'required',
+        ]);
+
+        $credentials = $request->only('email', 'password');
+        if (Auth::attempt($credentials)) {
+            if(Auth::check() && Auth::user()->role=="staff"){
+                return redirect(route('staffDashboard'));
+            }elseif(Auth::check() && Auth::user()->role=="student"){
+                return redirect(route('studentDashboard'));
+
+            }else{
+                return redirect()->back()->withErrors('password',"Invalid login details");
+            }
+
+        }
+
+        return redirect()->back()->withErrors('password','Login details are not valid');
     }
 
     /**

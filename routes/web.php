@@ -15,8 +15,17 @@ use Illuminate\Support\Facades\Auth;
 */
 
 Route::get('/', 'Pages@index')->name('welcome');
+Route::post('customlogin', 'Pages@customLogin')->name('login');
+Route::post('logout', 'Pages@signOut')->name('logout');
 
-Auth::routes();
+
+// Auth::routes();
+// Authentication url
+// Route::get('/', 'Auth\AuthController@showLoginForm');
+    // Route::post('login', 'Auth\AuthController@login');
+    // Route::get('logout', 'Auth\AuthController@logout');
+
+
 
 Route::prefix('staffs')->middleware(['auth', 'staff'])->group(function () {
     Route::get('dashboard', 'staffs\staffController@index')->name('staffDashboard');
@@ -25,6 +34,8 @@ Route::prefix('staffs')->middleware(['auth', 'staff'])->group(function () {
     Route::resource('faculty', 'staffs\facultyController');
     Route::resource('department-info', 'staffs\deptController');
     Route::resource('attendance', 'staffs\attendanceController');
+    
+
 });
 
 Route::prefix('students')->middleware(['auth', 'student'])->group(function () {

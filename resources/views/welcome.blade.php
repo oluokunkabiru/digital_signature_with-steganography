@@ -42,7 +42,14 @@ License URL: http://creativecommons.org/licenses/by/3.0/
 		<h1>
 			<span>QR</span> code
 			<span>S</span>smart
-			<span>A</span>ttendance</h1>
+			<span>A</span>ttendance
+            @if ($errors->any())
+              {{ "eroor" }}
+              @else
+              {{ "no error" }}
+            @endif
+
+        </h1>
 		<!-- //title -->
 		<!-- content -->
 @php
@@ -56,6 +63,24 @@ License URL: http://creativecommons.org/licenses/by/3.0/
     }
 @endphp
 		<div class="sub-main-w3">
+            @if (session('success'))
+            <div class="alert alert-success alert-dismissible">
+                <button type="button" class="close" data-dismiss="alert">&times;</button>
+                <strong>Success! </strong> {{ session('success') }}
+            </div>
+        @endif
+        @if ($errors->any())
+
+            <div class="alert alert-danger alert-dismissible fade show">
+                <button type="button" class="close" data-dismiss="alert">&times;</button>
+                <strong style="font-size:20px;">Oops!
+                    {{ 'Kindly rectify below errors' }}</strong><br />
+                @foreach ($errors->all() as $error)
+                    {{ $error }} <br />
+                @endforeach
+            </div>
+        @endif
+
             @if (! Auth::check())
 
 

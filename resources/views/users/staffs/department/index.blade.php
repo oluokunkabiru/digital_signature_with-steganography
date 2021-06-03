@@ -13,7 +13,6 @@
                 </div>
             @endif
             @if ($errors->any())
-
                 <div class="alert alert-danger alert-dismissible fade show">
                     <button type="button" class="close" data-dismiss="alert">&times;</button>
                     <strong style="font-size:20px;">Oops!
@@ -34,7 +33,7 @@
                             <h3 class="card-title text-uppercase">Faculty</h3>
                         </div>
                         <div class="card-body">
-                            <a href="#addcourse" class="btn btn-success text-uppercase " data-toggle="modal">Add course</a>
+                            <a href="#addfaculty" class="btn btn-success text-uppercase my-1" data-toggle="modal">Add faculty</a>
                             <div class="table-responsive">
                                 <table class="table table-striped v_center" id="table-1">
 
@@ -54,26 +53,26 @@
                                         @php
                                             $i = 0;
                                         @endphp
-                                        {{-- @if ($categories)
-                                        @foreach ($categories as $category) --}}
+                                        @if ($faculties)
+                                        @foreach ($faculties as $faculty)
                                         <tr>
                                             <td>{{ ++$i }}</td>
-                                            <td>{21</td>
+                                            <td>{{ ucwords($faculty->faculty) }}</td>
 
-                                            <td>21</td>
+                                            <td>{{ ($faculty->created_at) }}</td>
                                             <td>
                                                 <div class="row">
-                                                    <a href="#editCategory" data-toggle="modal" myurl="" mycategory=""
+                                                    <a href="#updatefaculty" data-toggle="modal" myurl="{{ route('faculty.update', $faculty->id) }}" facultyname="{{ ucwords($faculty->faculty) }}"
                                                         class="badge badge-pill badge-warning mx-1"><span
                                                             class="fa fa-edit p-1 text-white"></span></a>
-                                                    <a href="#deleteCategory" data-toggle="modal" delurl="" delcategory=""
+                                                    <a href="#deletefaculty" data-toggle="modal"  myurl="{{ route('faculty.destroy', $faculty->id) }}" facultyname="{{ ucwords($faculty->faculty) }}"
                                                         class="badge badge-pill badge-danger mx-1"><span
                                                             class="fa fa-trash p-1 text-white"></span></a>
                                                 </div>
                                             </td>
                                         </tr>
-                                        {{-- @endforeach --}}
-                                        {{-- @endif --}}
+                                        @endforeach
+                                         @endif
 
                                     </tbody>
                                 </table>
@@ -146,22 +145,27 @@
 
     </section>
 
-    <div class="modal" id="addclass">
+    <div class="modal" id="addfaculty">
         <div class="modal-dialog">
             <div class="modal-content">
 
                 <!-- Modal Header -->
                 <div class="modal-header">
-                    <h4 class="modal-title text-uppercase">Add new class</h4>
+                    <h4 class="modal-title text-uppercase">Add new faculty</h4>
                     <button type="button" class="btn btn-danger" data-dismiss="modal">&times;</button>
                 </div>
 
                 <!-- Modal body -->
                 <div class="modal-body">
-                    <form id="newcategory" action="" method="POST">
+                    <form id="newcategory" action="{{ route('faculty.store') }}" method="POST">
                         <div class="form-group">
-                            <label for="email">Class name:</label>
-                            <input type="text" class="form-control" name="category" id="category">
+                            <label for="email">Faculty name:</label>
+                            <input type="text" class="form-control {{ $errors->has('category') ? ' is-invalid' : '' }}" value="{{ old('faculty') }}" name="faculty">
+                            @if ($errors->has('name'))
+                            <span class="invalid-feedback" role="alert">
+                                 <strong>{{ $errors->first('name') }}</strong>
+                            </span>
+                         @endif
                         </div>
                         {{ csrf_field() }}
                 </div>
@@ -176,6 +180,74 @@
     </div>
 
 
+
+    {{-- updatee faculty --}}
+    <div class="modal" id="updatefaculty">
+        <div class="modal-dialog">
+            <div class="modal-content">
+
+                <!-- Modal Header -->
+                <div class="modal-header">
+                    <h4 class="modal-title text-uppercase">update <span id="facultyname"></span></h4>
+                    <button type="button" class="btn btn-danger" data-dismiss="modal">&times;</button>
+                </div>
+
+                <!-- Modal body -->
+                <div class="modal-body">
+                    <form id="facultyupdateform" action="" method="POST">
+                        @method('PUT')
+                        <div class="form-group">
+                            <label for="email">Faculty name:</label>
+                            <input type="text" id="facultynameval" class="form-control {{ $errors->has('category') ? ' is-invalid' : '' }}" value="{{ old('faculty') }}" name="faculty">
+                            @if ($errors->has('name'))
+                            <span class="invalid-feedback" role="alert">
+                                 <strong>{{ $errors->first('name') }}</strong>
+                            </span>
+                         @endif
+                        </div>
+                        {{ csrf_field() }}
+                </div>
+
+                <!-- Modal footer -->
+                <div class="modal-footer">
+                    <button id="addcategorybtn" type="submit" class="btn btn-primary text-uppercase">update faculty</button>
+                </div>
+                </form>
+            </div>
+        </div>
+    </div>
+    {{-- end of faculty update --}}
+
+{{-- delete faculty --}}
+<div class="modal" id="deletefaculty">
+    <div class="modal-dialog">
+        <div class="modal-content">
+
+            <!-- Modal Header -->
+            <div class="modal-header">
+                <h4 class="modal-title text-uppercase">are you sure you want delete  <span id="facultydeletename"></span> ?</h4>
+                <button type="button" class="btn btn-danger" data-dismiss="modal">&times;</button>
+            </div>
+
+            <!-- Modal body -->
+            <div class="modal-body">
+                <form id="facultydeleteform" action="" method="POST">
+                    @method('DELETE')
+
+                    {{ csrf_field() }}
+
+
+            <!-- Modal footer -->
+            <div class="modal-footer">
+                <button class="btn btn-success float-left mx-2"  data-dismiss="modal">Cancel</button>
+                <button id="addcategorybtn" type="submit" class="btn btn-danger text-uppercase">delete faculty</button>
+            </div>
+            </form>
+        </div>
+    </div>
+</div>
+
+{{-- end of faculty deletion --}}
 
 
     <div class="modal" id="addcourse">
@@ -243,7 +315,39 @@
                 }]
             });
 
+
+
+
+// edit faculty
+
+$('#updatefaculty').on('show.bs.modal', function(e){
+          var facultyname = $(e.relatedTarget).attr('facultyname');
+        //   alert(facultyname)
+          var url = $(e.relatedTarget).attr('myurl');
+        $("#facultyname").text(facultyname);
+        $("#facultynameval").val(facultyname);
+
+          $("#facultyupdateform").attr("action", url);
+
+     })
+
+
+// delete
+
+        $('#deletefaculty').on('show.bs.modal', function(e){
+          var facultyname = $(e.relatedTarget).attr('facultyname');
+        //   alert(facultyname)
+          var url = $(e.relatedTarget).attr('myurl');
+        $("#facultydeletename").text(facultyname);
+          $("#facultydeleteform").attr("action", url);
+
+     })
+
+
+
         })
+
+
 
     </script>
 @endsection

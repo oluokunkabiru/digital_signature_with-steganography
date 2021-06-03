@@ -3,6 +3,8 @@
 namespace App\Http\Controllers\staffs;
 
 use App\Http\Controllers\Controller;
+use App\Http\Requests\facultRequest;
+use App\Models\Faculty;
 use Illuminate\Http\Request;
 
 class facultyController extends Controller
@@ -33,9 +35,15 @@ class facultyController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(facultRequest $request)
     {
         //
+        $faculty = new Faculty();
+        $faculty->faculty = $request->faculty;
+        $faculty->save();
+        return redirect()->back()->with('success', 'New faculty '. ucwords($request->faculty).' added successfully ');
+
+
     }
 
     /**
@@ -67,9 +75,13 @@ class facultyController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(facultRequest $request, $id)
     {
         //
+        $faculty = Faculty::where('id', $id)->firstOrFail();
+        $faculty->faculty = $request->faculty;
+        $faculty->update();
+        return redirect()->back()->with('success', 'Faculty <b>'. $faculty->faculty.'</b> updated successfully');
     }
 
     /**
@@ -81,5 +93,9 @@ class facultyController extends Controller
     public function destroy($id)
     {
         //
+
+        $faculty = Faculty::where('id', $id)->firstOrFail();
+        $faculty->forceDelete();
+        return redirect()->back()->with('success', 'faculty '. $faculty->faculty.' deleted successfully');
     }
 }
