@@ -87,7 +87,7 @@
                             <h3 class="card-title text-uppercase">department</h3>
                         </div>
                         <div class="card-body">
-                            <a href="#addclass" class="btn btn-success text-uppercase " data-toggle="modal">Add class</a>
+                            <a href="#adddept" class="btn btn-success text-uppercase " data-toggle="modal">Add department</a>
                             <div class="table-responsive">
                                 <table class="table table-striped v_center" id="table-2">
 
@@ -107,13 +107,13 @@
                                         @php
                                             $i = 0;
                                         @endphp
-                                        {{-- @if ($categories)
-                                        @foreach ($categories as $category) --}}
+                                        @if ($departments)
+                                        @foreach ($departments as $dept)
                                         <tr>
                                             <td>{{ ++$i }}</td>
-                                            <td>{21</td>
-                                                <td>21</td>
-                                                <td>21</td>
+                                            <td>{{ ucwords($dept->dept) }}</td>
+                                                <td>{{ ucwords($dept->faculty->faculty )}}</td>
+                                                <td>{{ $dept->created_at }}</td>
                                                 <td>
                                                 <div class="row">
                                                     <a href="#editCategory" data-toggle="modal" myurl="" mycategory=""
@@ -125,8 +125,8 @@
                                                 </div>
                                             </td>
                                         </tr>
-                                        {{-- @endforeach --}}
-                                        {{-- @endif --}}
+                                        @endforeach
+                                        @endif
 
                                     </tbody>
                                 </table>
@@ -246,44 +246,42 @@
         </div>
     </div>
 </div>
+</div>
 
 {{-- end of faculty deletion --}}
 
 
-    <div class="modal" id="addcourse">
+    <div class="modal" id="adddept">
         <div class="modal-dialog">
             <div class="modal-content">
 
                 <!-- Modal Header -->
                 <div class="modal-header">
-                    <h4 class="modal-title text-uppercase">Add new course</h4>
+                    <h4 class="modal-title text-uppercase">Add new department</h4>
                     <button type="button" class="btn btn-danger" data-dismiss="modal">&times;</button>
                 </div>
 
                 <!-- Modal body -->
                 <div class="modal-body">
-                    <form id="newcategory" action="" method="POST">
+                    <form id="newcategory" action="{{ route('department-info.store') }}" method="POST">
+
                         <div class="form-group">
-                            <label for="email">Course title:</label>
-                            <input type="text" class="form-control" name="category" id="category">
-                        </div>
-                        <div class="form-group">
-                            <label for="email">Course code:</label>
-                            <input type="text" class="form-control" name="category" id="category">
-                        </div>
-                        <div class="form-group">
-                            <label for="email">Course unit:</label>
-                            <input type="text" class="form-control" name="category" id="category">
+                            <label for="email">Department name:</label>
+                            <input type="text" class="form-control" name="dept">
                         </div>
 
                         <div class="form-group">
-                            <label for="sel1">Select course level:</label>
-                            <select class="form-control" id="sel1">
-                              <option>100</option>
-                              <option>200</option>
-                              <option>300</option>
-                              <option>400</option>
-                              <option>500</option>
+                            <label for="sel1">Select faculty:</label>
+                            <select class="form-control" id="sel1" name="faculty">
+                                <option value="">Faculty</option>
+                                @if ($faculties)
+                                @foreach ($faculties as $faculty)
+                                 <option value="{{ $faculty->id }}">{{ $faculty->faculty }}</option>
+
+                                @endforeach
+
+                                @endif
+
                             </select>
                           </div>
                         {{ csrf_field() }}

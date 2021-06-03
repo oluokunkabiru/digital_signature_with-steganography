@@ -189,9 +189,9 @@ License URL: http://creativecommons.org/licenses/by/3.0/
 
 		<!-- copyright -->
 		<div class="footer">
-			<p>&copy; 2018 Video Login Form. All rights reserved | Design by
+			{{-- <p>&copy; 2018 Video Login Form. All rights reserved | Design by
 				<a href="http://w3layouts.com">W3layouts</a>
-			</p>
+			</p> --}}
 		</div>
 		<!-- //copyright -->
 	</div>

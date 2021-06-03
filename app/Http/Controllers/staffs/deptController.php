@@ -3,6 +3,8 @@
 namespace App\Http\Controllers\staffs;
 
 use App\Http\Controllers\Controller;
+use App\Http\Requests\deptRequest;
+use App\Models\Department;
 use App\Models\Faculty;
 use Illuminate\Http\Request;
 
@@ -18,7 +20,8 @@ class deptController extends Controller
         //
 
         $faculties = Faculty::orderBy('id', 'desc')->get();
-        return view('users.staffs.department.index', compact('faculties'));
+        $departments = Department::with(['faculty'])->orderBy('id', 'desc')->get();
+        return view('users.staffs.department.index', compact(['faculties', 'departments']));
     }
 
     /**
@@ -37,9 +40,15 @@ class deptController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(deptRequest $request)
     {
         //
+
+        $dept = new Department();
+        $dept->dept = $request->dept;
+        $dept->faculty_id = $request->faculty;
+        $dept->save();
+        return redirect()->back()->with('success', 'New depatment '. ucwords($request->dept).' created succesfully');
     }
 
     /**
