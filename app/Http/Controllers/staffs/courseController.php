@@ -20,7 +20,8 @@ class courseController extends Controller
     {
         //
         $faculties = Faculty::orderBy('id', 'desc')->get();
-        return view('users.staffs.courses.index', compact(['faculties']));
+        $courses = Course::with(['faculty', 'department'])->orderBy('id', 'desc')->get();
+        return view('users.staffs.courses.index', compact(['faculties', 'courses']));
     }
 
     public function selesctFaculty(Request $request){
@@ -89,9 +90,19 @@ class courseController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(courseRequest $request, $id)
     {
         //
+        $course = Course::where('id', $id)->firstOrFail();
+        $course->code = $request->coursecode;
+        $course->title = $request->coursetitle;
+        $course->unit = $request->courseunit;
+        $course->faculty_id = $request->faculty;
+        $course->department_id = $request->dept;
+        $course->level = $request->level;
+        $course->update();
+        return redirect()->back()->with('success', $request->coursetitle.' updated successfully');
+
     }
 
     /**
@@ -103,5 +114,9 @@ class courseController extends Controller
     public function destroy($id)
     {
         //
+        $course = Course::where('id', $id)->firstOrFail();
+        $course->forceDelete();
+        return redirect()->back()->with('success', 'Course '. $course->title.' deleted successfully');
+
     }
 }

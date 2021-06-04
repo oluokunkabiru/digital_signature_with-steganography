@@ -1,6 +1,6 @@
 <div class="form-group">
     <label for="sel1">Select department:</label>
-    <select class="form-control" id="sel1" name="dept">
+    <select class="form-control" id="dept" name="dept">
 
         <option value="">Deparment</option>
         @if ($depts)

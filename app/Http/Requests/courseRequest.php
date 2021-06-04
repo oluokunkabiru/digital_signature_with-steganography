@@ -27,9 +27,9 @@ class courseRequest extends FormRequest
             //
             'faculty' => 'required',
             'dept' => 'required',
-            'coursetitle' => 'required|string|unique:courses,title',
+            'coursetitle' => 'required|string|unique:courses,title,except,id',
             'courseunit' => 'required|numeric',
-            'coursecode' => 'required|string|unique:courses,code',
+            'coursecode' => 'required|string|unique:courses,code, except,id',
             'level' => 'required|numeric'
         ];
     }
