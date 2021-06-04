@@ -34,7 +34,9 @@ Route::prefix('staffs')->middleware(['auth', 'staff'])->group(function () {
     Route::resource('faculty', 'staffs\facultyController');
     Route::resource('department-info', 'staffs\deptController');
     Route::resource('attendance', 'staffs\attendanceController');
+    Route::post('selectfaculty', 'staffs\courseController@selesctFaculty')->name('selectFaculty');
     
+
 
 });
 

@@ -25,7 +25,7 @@
             @endif
 
             <div class="row">
-                <div class="col-md-7">
+                <div class="col-md-12">
 
                     <div class="card">
 
@@ -55,8 +55,8 @@
                                         @php
                                             $i = 0;
                                         @endphp
-                                        {{-- @if ($categories)
-                                        @foreach ($categories as $category) --}}
+                                        @if ($courses)
+                                        @foreach ($courses as $course)
                                         <tr>
                                             <td>{{ ++$i }}</td>
                                             <td>{21</td>
@@ -84,7 +84,7 @@
                     </div>
 
                 </div>
-                <div class="col-md-5">
+                {{--  <div class="col-md-5">
                     <div class="card">
 
 
@@ -111,8 +111,8 @@
                                         @php
                                             $i = 0;
                                         @endphp
-                                        {{-- @if ($categories)
-                                        @foreach ($categories as $category) --}}
+                                        @if ($categories)
+                                        @foreach ($categories as $category)
                                         <tr>
                                             <td>{{ ++$i }}</td>
                                             <td>{21</td>
@@ -128,8 +128,8 @@
                                                 </div>
                                             </td>
                                         </tr>
-                                        {{-- @endforeach --}}
-                                        {{-- @endif --}}
+                                        @endforeach
+                                        @endif
 
                                     </tbody>
                                 </table>
@@ -137,7 +137,7 @@
                         </div>
                     </div>
 
-                </div>
+                </div>  --}}
 
 
             </div>
@@ -148,7 +148,7 @@
 
     </section>
 
-    <div class="modal" id="addclass">
+    {{--  <div class="modal" id="addclass">
         <div class="modal-dialog">
             <div class="modal-content">
 
@@ -175,7 +175,7 @@
                 </form>
             </div>
         </div>
-    </div>
+    </div>  --}}
 
 
 
@@ -192,28 +192,49 @@
 
                 <!-- Modal body -->
                 <div class="modal-body">
-                    <form id="newcategory" action="" method="POST">
+                    <form id="newcategory" action="{{ route('courses-and-classes.store') }}" method="POST">
+
                         <div class="form-group">
+                            <label for="sel1">Select faculty:</label>
+                            <select class="form-control" id="selectfaculty" name="faculty">
+                                <option value="">Faculty</option>
+                                @if ($faculties)
+                                    @foreach ($faculties as $faculty)
+                                        <option value="{{ $faculty->id }}">{{ $faculty->faculty }}</option>
+
+                                    @endforeach
+
+                                @endif
+
+                            </select>
+                        </div>
+                          <div class="form-group">
+                            <label for="sel1">Select department:</label>
+                            <select class="form-control" id="selectdept" name="dept">
+                              <option value="">Departments</option>
+                            </select>
+                          </div>
+                          <div class="form-group">
                             <label for="email">Course title:</label>
-                            <input type="text" class="form-control" name="category" id="category">
+                            <input type="text" class="form-control" name="coursetitle" id="coursetitle">
                         </div>
                         <div class="form-group">
                             <label for="email">Course code:</label>
-                            <input type="text" class="form-control" name="category" id="category">
+                            <input type="text" class="form-control" name="coursecode" id="coursecode">
                         </div>
                         <div class="form-group">
                             <label for="email">Course unit:</label>
-                            <input type="text" class="form-control" name="category" id="category">
+                            <input type="text" class="form-control" name="courseunit" id="courseunit">
                         </div>
-
                         <div class="form-group">
                             <label for="sel1">Select course level:</label>
-                            <select class="form-control" id="sel1">
-                              <option>100</option>
-                              <option>200</option>
-                              <option>300</option>
-                              <option>400</option>
-                              <option>500</option>
+                            <select class="form-control" name="level">
+                                <option value="">Level</option>
+                                <option value="100">100</option>
+                                <option value="200">200</option>
+                              <option value="300">300</option>
+                              <option value="400">400</option>
+                              <option value="500">500</option>
                             </select>
                           </div>
                         {{ csrf_field() }}
@@ -221,7 +242,7 @@
 
                 <!-- Modal footer -->
                 <div class="modal-footer">
-                    <button id="addcategorybtn" type="submit" class="btn btn-primary text-uppercase">Add</button>
+                    <button id="addcategorybtn" type="submit" class="btn btn-primary text-uppercase">Add course</button>
                 </div>
                 </form>
             </div>
@@ -244,6 +265,26 @@
                     "targets": [2, 3]
                 }]
             });
+
+
+
+            $("#selectfaculty").on('change', function(){
+              var facultyid =   $("#selectfaculty").val();
+              $.ajax({
+                headers: {
+                    'X-CSRF-TOKEN': '{{ csrf_token() }}'
+                },
+                type: 'POST',
+                url: '{{ route('selectFaculty') }}',
+                data: 'facultyid='+facultyid,
+                success: function(data) {
+                    $("#selectdept").html(data)
+                }
+
+
+              })
+
+            })
 
         })
 

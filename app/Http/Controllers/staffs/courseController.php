@@ -3,6 +3,10 @@
 namespace App\Http\Controllers\staffs;
 
 use App\Http\Controllers\Controller;
+use App\Http\Requests\courseRequest;
+use App\Models\Course;
+use App\Models\Department;
+use App\Models\Faculty;
 use Illuminate\Http\Request;
 
 class courseController extends Controller
@@ -15,7 +19,14 @@ class courseController extends Controller
     public function index()
     {
         //
-        return view('users.staffs.courses.index');
+        $faculties = Faculty::orderBy('id', 'desc')->get();
+        return view('users.staffs.courses.index', compact(['faculties']));
+    }
+
+    public function selesctFaculty(Request $request){
+        $id =  $request->facultyid;
+        $depts = Department::where('faculty_id', $id)->orderBy('id', 'desc')->get();
+        return view('users.staffs.courses.departmenList', compact(['depts']));
     }
 
     /**
@@ -34,9 +45,19 @@ class courseController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(courseRequest $request)
     {
         //
+        $course = new Course();
+        $course->code = $request->coursecode;
+        $course->title = $request->coursetitle;
+        $course->unit = $request->courseunit;
+        $course->faculty_id = $request->faculty;
+        $course->department_id = $request->dept;
+        $course->level = $request->level;
+        $course->save();
+        return redirect()->back()->with('success', 'New course '. $request->coursetitle.' added successfully');
+
     }
 
     /**

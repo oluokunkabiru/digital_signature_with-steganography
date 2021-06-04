@@ -80,9 +80,15 @@ class deptController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(deptRequest $request, $id)
     {
         //
+
+        $dept = Department::where('id', $id)->firstOrFail();
+        $dept->dept = $request->dept;
+        $dept->faculty_id = $request->faculty;
+        $dept->update();
+        return redirect()->back()->with('success',  ucwords($request->dept).' updated succesfully');
     }
 
     /**
@@ -94,5 +100,9 @@ class deptController extends Controller
     public function destroy($id)
     {
         //
+
+        $dept = Department::where('id', $id)->firstOrFail();
+        $dept->forceDelete();
+        return redirect()->back()->with('success', 'Department '. $dept->dept.' deleted successfully');
     }
 }
