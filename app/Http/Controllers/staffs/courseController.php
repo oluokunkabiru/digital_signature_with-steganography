@@ -30,6 +30,23 @@ class courseController extends Controller
         return view('users.staffs.courses.departmenList', compact(['depts']));
     }
 
+    public function selesctDept(Request $request){
+        $id =  $request->facultyid;
+        $id =  $request->deptid;
+        $depts = Department::where('faculty_id', $id)->orderBy('id', 'desc')->get();
+        return view('users.staffs.attendance.levelList', compact(['depts']));
+    }
+
+    public function selesctLevel(Request $request){
+        $facultyid =  $request->facultyid;
+        $deptid =  $request->dept;
+        $level =  $request->level;
+        $courses = Course::where(['faculty_id' => $facultyid, 'department_id'=>$deptid, 'level'=>$level])->orderBy('id', 'desc')->get();
+    //    return $courses;
+        return view('users.staffs.attendance.courseList', compact(['courses']));
+    }
+
+
     /**
      * Show the form for creating a new resource.
      *
