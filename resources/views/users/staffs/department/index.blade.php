@@ -172,8 +172,7 @@
                     <form id="newcategory" action="{{ route('faculty.store') }}" method="POST">
                         <div class="form-group">
                             <label for="email">Faculty name:</label>
-                            <input type="text" class="form-control {{ $errors->has('category') ? ' is-invalid' : '' }}"
-                                value="{{ old('faculty') }}" name="faculty">
+                            <input type="text" class="form-control {{ $errors->has('category') ? ' is-invalid' : '' }}" value="{{ old('faculty') }}" name="faculty">
                             @if ($errors->has('name'))
                                 <span class="invalid-feedback" role="alert">
                                     <strong>{{ $errors->first('name') }}</strong>
