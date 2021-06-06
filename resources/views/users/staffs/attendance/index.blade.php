@@ -68,7 +68,7 @@
                                             <td>{{ ucwords($attendant->course->title) }}</td>
                                             <td>{{ $attendant->level }}</td>
                                             <td>21</td>
-                                            <td>21</td>
+                                            <td><img src="{{  asset("qrcode/". $attendant->qrcode )}}" class="card-img img-rounded img-fluid" style="width:150px" alt=""></td>
                                             <td>{{ $attendant->date }}</td>
                                             <td>{{ $attendant->created_at }}</td>
                                             <td>
@@ -116,141 +116,142 @@
 
 
 
+  {{-- edit --}}
+  <div class="modal" id="addattendance">
+    <div class="modal-dialog">
+        <div class="modal-content">
 
-
-    <div class="modal" id="addattendance">
-        <div class="modal-dialog">
-            <div class="modal-content">
-
-                <!-- Modal Header -->
-                <div class="modal-header">
-                    <h4 class="modal-title text-uppercase">Add new attendance</h4>
-                    <button type="button" class="btn btn-danger" data-dismiss="modal">&times;</button>
-                </div>
-
-                <!-- Modal body -->
-                <div class="modal-body">
-                    <form id="newcategory" action="{{ route('attendance.store') }}" method="POST">
-                        <div class="form-group">
-                            <label for="sel1">Select faculty:</label>
-                            <select class="form-control" id="selectfaculty" name="faculty">
-                                <option value="">Faculty</option>
-                                @if ($faculties)
-                                    @foreach ($faculties as $faculty)
-                                        <option value="{{ $faculty->id }}">{{ $faculty->faculty }}</option>
-
-                                    @endforeach
-
-                                @endif
-                            </select>
-                          </div>
-                          <div class="form-group">
-                            <label for="sel1">Select department:</label>
-                            <select class="form-control" id="dept" name="dept">
-                              <option value="">Departments</option>
-                            </select>
-                          </div>
-
-
-                          <div class="form-group">
-                            <label for="sel1">Select course level:</label>
-                            <select class="form-control" id="level" name="level">
-                                <option value="">Level</option>
-
-                            </select>
-                          </div>
-
-                          <div class="form-group">
-                            <label for="sel1">Select course:</label>
-                            <select class="form-control" id="course" name="course">
-                              <option value="">Courses</option>
-                            </select>
-                          </div>
-                          <div class="form-group">
-                            <label for="email">Choose date:</label>
-                            <input type="date" class="form-control" name="date" id="date">
-                        </div>
-
-                        {{ csrf_field() }}
-                </div>
-
-                <!-- Modal footer -->
-                <div class="modal-footer">
-                    <button id="addcategorybtn" type="submit" class="btn btn-primary text-uppercase">Add attendance</button>
-                </div>
-                </form>
+            <!-- Modal Header -->
+            <div class="modal-header">
+                <h4 class="modal-title text-uppercase">Add new attendance</h4>
+                <button type="button" class="btn btn-danger" data-dismiss="modal">&times;</button>
             </div>
+
+            <!-- Modal body -->
+            <div class="modal-body">
+                <form id="newcategory" action="{{ route('attendance.store') }}" method="POST">
+                    <div class="form-group">
+                        <label for="sel1">Select faculty:</label>
+                        <select class="form-control" id="selectfaculty" name="faculty">
+                            <option value="">Faculty</option>
+                            @if ($faculties)
+                                @foreach ($faculties as $faculty)
+                                    <option value="{{ $faculty->id }}">{{ $faculty->faculty }}</option>
+
+                                @endforeach
+
+                            @endif
+                        </select>
+                      </div>
+                      <div class="form-group">
+                        <label for="sel1">Select department:</label>
+                        <select class="form-control" id="dept" name="dept">
+                          <option value="">Departments</option>
+                        </select>
+                      </div>
+
+
+                      <div class="form-group">
+                        <label for="sel1">Select course level:</label>
+                        <select class="form-control" id="level" name="level">
+                            <option value="">Level</option>
+
+                        </select>
+                      </div>
+
+                      <div class="form-group">
+                        <label for="sel1">Select course:</label>
+                        <select class="form-control" id="course" name="course">
+                          <option value="">Courses</option>
+                        </select>
+                      </div>
+                      <div class="form-group">
+                        <label for="email">Choose date:</label>
+                        <input type="date" class="form-control" name="date" id="date">
+                    </div>
+
+                    {{ csrf_field() }}
+            </div>
+
+            <!-- Modal footer -->
+            <div class="modal-footer">
+                <button id="addcategorybtn" type="submit" class="btn btn-primary text-uppercase">Add attendance</button>
+            </div>
+            </form>
         </div>
     </div>
+</div>
 
+  <div class="modal" id="editattendance">
+    <div class="modal-dialog">
+        <div class="modal-content">
 
-    {{-- edit --}}
-
-    <div class="modal" id="editattendance">
-        <div class="modal-dialog">
-            <div class="modal-content">
-
-                <!-- Modal Header -->
-                <div class="modal-header">
-                    <h4 class="modal-title text-uppercase">edit <span id="attendancename"></span></h4>
-                    <button type="button" class="btn btn-danger" data-dismiss="modal">&times;</button>
-                </div>
-
-                <!-- Modal body -->
-                <div class="modal-body">
-                    <form id="updateattendanceform" action="" method="POST">
-                        <div class="form-group">
-                            <label for="sel1">Select faculty:</label>
-                            <select class="form-control" id="selectfaculty" name="faculty">
-                                <option value="" id="selectsfaculty">Faculty</option>
-                                @if ($faculties)
-                                    @foreach ($faculties as $faculty)
-                                        <option value="{{ $faculty->id }}">{{ $faculty->faculty }}</option>
-
-                                    @endforeach
-
-                                @endif
-                            </select>
-                          </div>
-                          <div class="form-group">
-                            <label for="sel1">Select department:</label>
-                            <select class="form-control" id="dept" name="dept">
-                              <option value=""  id="selectdept">Departments</option>
-                            </select>
-                          </div>
-
-
-                          <div class="form-group">
-                            <label for="sel1">Select course level:</label>
-                            <select class="form-control" id="level" name="level">
-                                <option value=""  id="selectlevel">Level</option>
-
-                            </select>
-                          </div>
-
-                          <div class="form-group">
-                            <label for="sel1">Select course:</label>
-                            <select class="form-control" id="course" name="course">
-                              <option value=""  id="selectcourse">Courses</option>
-                            </select>
-                          </div>
-                          <div class="form-group">
-                            <label for="email">Choose date:</label>
-                            <input type="date" class="form-control" name="date" id="date">
-                        </div>
-
-                        {{ csrf_field() }}
-                        @method('PUT')
-                </div>
-
-                <!-- Modal footer -->
-                <div class="modal-footer">
-                    <button id="addcategorybtn" type="submit" class="btn btn-primary text-uppercase">Add attendance</button>
-                </div>
-                </form>
+            <!-- Modal Header -->
+            <div class="modal-header">
+                <h4 class="modal-title text-uppercase">edit <span id="attendancename"></span></h4>
+                <button type="button" class="btn btn-danger" data-dismiss="modal">&times;</button>
             </div>
+
+            <!-- Modal body -->
+            <div class="modal-body">
+                <form id="updateattendanceform" action="" method="POST">
+                    <div class="form-group">
+                        <label for="sel1">Select faculty:</label>
+                        <select class="form-control" id="selectfaculty" name="faculty">
+                            <option value="" id="selectsfaculty">Faculty</option>
+                            @if ($faculties)
+                                @foreach ($faculties as $faculty)
+                                    <option value="{{ $faculty->id }}">{{ $faculty->faculty }}</option>
+
+                                @endforeach
+
+                            @endif
+                        </select>
+                      </div>
+                      <div class="form-group">
+                        <label for="sel1">Select department:</label>
+                        <select class="form-control" id="dept" name="dept">
+                          <option value=""  id="selectdept">Departments</option>
+                        </select>
+                      </div>
+
+
+                      <div class="form-group">
+                        <label for="sel1">Select course level:</label>
+                        <select class="form-control" id="level" name="level">
+                            <option value=""  id="selectlevel">Level</option>
+
+                        </select>
+                      </div>
+
+                      <div class="form-group">
+                        <label for="sel1">Select course:</label>
+                        <select class="form-control" id="course" name="course">
+                          <option value=""  id="selectcourse">Courses</option>
+                        </select>
+                      </div>
+                      <div class="form-group">
+                        <label for="email">Choose date:</label>
+                        <input type="date" class="form-control" name="date" id="date">
+                    </div>
+
+                    {{ csrf_field() }}
+                    @method('PUT')
+            </div>
+
+            <!-- Modal footer -->
+            <div class="modal-footer">
+                <button id="addcategorybtn" type="submit" class="btn btn-primary text-uppercase">Add attendance</button>
+            </div>
+            </form>
         </div>
     </div>
+</div>
+
+
+
+
+
  {{-- delete faculty --}}
  <div class="modal" id="deleteattendance">
     <div class="modal-dialog">
@@ -392,6 +393,7 @@ $("#level").on('change', function(){
                 $("#selectlevel").val(level);
                 $("#selectcourse").text(coursecode);
                 $("#selectcourse").val(courseid);
+                $("#attendancename").text(coursecode);
                 $("#date").val(date);
                 $("#updateattendanceform").attr("action", urlink);
 
@@ -403,7 +405,6 @@ $('#deleteattendance').on('show.bs.modal', function(e) {
                 var title = $(e.relatedTarget).attr('title');
                 //   alert(facultyname)
                 var urlink = $(e.relatedTarget).attr('deurl');
-                alert(urlink);
                 $("#attendancedeletename").text(title);
                 $("#attendancedeleteform").attr("action", urlink);
 

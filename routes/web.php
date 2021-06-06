@@ -17,6 +17,9 @@ use Illuminate\Support\Facades\Auth;
 Route::get('/', 'Pages@index')->name('welcome');
 Route::post('customlogin', 'Pages@customLogin')->name('login');
 Route::post('logout', 'Pages@signOut')->name('logout');
+Route::get('scan', function () {
+return view('users.staffs.attendance.scanned');
+});
 
 
 // Auth::routes();

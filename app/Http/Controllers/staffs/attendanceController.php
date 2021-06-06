@@ -56,13 +56,24 @@ class attendanceController extends Controller
         $attendance->date = $request->date;
         $attendance->level = $request->level;
         $course = Course::with(['faculty', 'department'])->where('id', $request->course)->firstOrFail();
-        $qrcode = str_replace(" ", "-", $course->faculty->faculty."_".$course->department->dept."_". $course->title."_".$course->code).".png";
+
+        // return $message;
+
+
+        $qrcode = str_replace(" ", "Faculty::", $course->faculty->faculty."_".$course->department->dept."_". $course->title."_".$course->code).".png";
         $qrcodes = str_replace(" ", "-", $course->faculty->faculty."_".$course->department->dept."_". $course->title."_".$course->code)."|";
         $attendance->qrcode = $qrcode;
 
         $attendance->save();
         // return $attendance->id;
-        QrCode::size(500)->format('png')->generate($qrcodes."smartqrcode".$attendance->id, public_path('qrcode/'.$qrcode));
+        $message = "Faculty:".$course->faculty->faculty."<br>";
+        $message .= "Department:".$course->department->dept."<br>";
+        $message .= "Course title:".$course->title."<br>";
+        $message .= "Course code:".$course->code."<br>";
+        $message .= "Course unit:".$course->unit."<br>";
+        $message .= "Attendance date:".$request->date."<br>";
+        $message .= "Smartcode:smartme".time()."_".$attendance->id;
+        QrCode::size(500)->format('png')->generate(html_entity_decode($message), public_path('qrcode/'.$qrcode));
         return redirect()->back()->with('success', 'New attendance created successfully');
 
 
@@ -107,8 +118,9 @@ class attendanceController extends Controller
         $attendance->faculty_id = $request->faculty;
         $attendance->date = $request->date;
         $attendance->level = $request->level;
+        unlink(public_path("qrcode/".$attendance->qrcode));
         $course = Course::with(['faculty', 'department'])->where('id', $request->course)->firstOrFail();
-        $qrcode = str_replace(" ", "-", $course->faculty->faculty."_".$course->department->dept."_". $course->title."_".$course->code).".png";
+        $qrcode = str_replace(" ", "-", $course->faculty->faculty."_".$course->department->dept."_". $course->title."_".$course->code). time() .".png";
         $qrcodes = str_replace(" ", "-", $course->faculty->faculty."_".$course->department->dept."_". $course->title."_".$course->code)."|";
         $attendance->qrcode = $qrcode;
         $attendance->update();
@@ -127,9 +139,11 @@ class attendanceController extends Controller
     public function destroy($id)
     {
         //
-        $course = Attendance::with(['course'])->where('id', $id)->firstOrFail();
-        $course->forceDelete();
-        return redirect()->back()->with('success', 'Attendance '. $course->course->title.' deleted successfully');
+        $attendance = Attendance::with(['course'])->where('id', $id)->firstOrFail();
+        unlink(public_path("qrcode/".$attendance->qrcode));
+        $attendance->forceDelete();
+
+        return redirect()->back()->with('success', 'Attendance '. $attendance->course->title.' deleted successfully');
 
     }
 }
