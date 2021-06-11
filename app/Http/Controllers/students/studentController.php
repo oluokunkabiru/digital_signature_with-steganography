@@ -40,7 +40,7 @@ class studentController extends Controller
 
     }
 
-    public function scanninigQRcode($id){
+    public function scanninigQRcode(){
         return view('users.students.scanning');
 
     }

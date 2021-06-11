@@ -1,4 +1,3 @@
-<script src="{{ asset('assets/js/jsQR.js') }}"></script>
 
 <script src="{{ asset('assets/users/assets/bundles/lib.vendor.bundle.js') }}"></script>
 <script src="{{ asset('assets/users/assets/modules/dist/min/dropzone.min.js') }}"></script>
@@ -20,3 +19,4 @@
 
 <!-- Template JS File -->
 <script src="{{ asset('assets/users/js/scripts.js') }}"></script>
+{{--  <script src="{{ asset('assets/js/jsQR.js') }}"></script>  --}}
