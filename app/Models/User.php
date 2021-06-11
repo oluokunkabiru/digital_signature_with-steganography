@@ -42,6 +42,15 @@ class User extends Authenticatable
     protected $casts = [
         'email_verified_at' => 'datetime',
     ];
+
+
+    public function faculty(){
+        return $this->belongsTo('App\Models\Faculty');
+    }
+    public function department(){
+        return $this->belongsTo('App\Models\Department');
+    }
+    
     function nextMatric(){
         $last = User::where('role', 'student')->max('id');
         $student = User::where('id', $last)->firstOrFail();

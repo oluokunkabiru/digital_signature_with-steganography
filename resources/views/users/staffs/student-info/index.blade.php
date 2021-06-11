@@ -58,30 +58,31 @@
                                         @php
                                             $i = 0;
                                         @endphp
-                                        {{-- @if ($categories)
-                                        @foreach ($categories as $category) --}}
+                                        @if ($students)
+                                        @foreach ($students as $student)
                                         <tr>
                                             <td>{{ ++$i }}</td>
-                                            <td>{21</td>
-                                            <td>21</td>
-                                            <td>21</td>
-                                            <td>21</td>
-                                            <td>21</td>
-                                            <td>21</td>
-                                            <td>21</td>
+                                            <td>{{ $student->name }}</td>
+                                            <td>{{ $student->level }}</td>
+                                            <td>{{ $student->matric_no }}</td>
+                                            <td>{{ isset($student->phone)?$student->phone:"Nill" }}</td>
+                                            <td>{{ $student->email }}</td>
+                                            <td><img src="" style="width: 200px" alt=""></td>
+                                            <td>{{ $student->created_at }}</td>
                                             <td>
                                                 <div class="row">
-                                                    <a href="#editCategory" data-toggle="modal" myurl="" mycategory=""
-                                                        class="badge badge-pill badge-warning mx-1"><span
+                                                    <a href="{{ route('student-info.edit', $student->id) }}"                                                         class="badge badge-pill badge-warning mx-1"><span
                                                             class="fa fa-edit p-1 text-white"></span></a>
-                                                    <a href="#deleteCategory" data-toggle="modal" delurl="" delcategory=""
-                                                        class="badge badge-pill badge-danger mx-1"><span
-                                                            class="fa fa-trash p-1 text-white"></span></a>
-                                                </div>
+                                                            <a href="#deletestudent" data-toggle="modal"
+                                                            deurl="{{ route('student-info.destroy', $student->id) }}"
+                                                            studentname="{{ ucwords($student->name) }}"
+                                                            class="badge badge-pill badge-danger mx-1"><span
+                                                                class="fa fa-trash p-1 text-white"></span></a>
+                                                        </div>
                                             </td>
                                         </tr>
-                                        {{-- @endforeach --}}
-                                        {{-- @endif --}}
+                                        @endforeach
+                                        @endif
 
                                     </tbody>
                                 </table>
@@ -101,85 +102,39 @@
 
     </section>
 
-    <div class="modal" id="addclass">
+    {{-- delete faculty --}}
+    <div class="modal" id="deletestudent">
         <div class="modal-dialog">
             <div class="modal-content">
 
                 <!-- Modal Header -->
                 <div class="modal-header">
-                    <h4 class="modal-title text-uppercase">Add new class</h4>
+                    <h4 class="modal-title text-uppercase">are you sure you want to delete <span id="studentdeletename"></span>
+                        ?</h4>
                     <button type="button" class="btn btn-danger" data-dismiss="modal">&times;</button>
                 </div>
 
                 <!-- Modal body -->
                 <div class="modal-body">
-                    <form id="newcategory" action="" method="POST">
-                        <div class="form-group">
-                            <label for="email">Class name:</label>
-                            <input type="text" class="form-control" name="category" id="category">
-                        </div>
-                        {{ csrf_field() }}
-                </div>
+                    <form id="studentdeleteform" action="" method="POST">
+                        @method('DELETE')
 
-                <!-- Modal footer -->
-                <div class="modal-footer">
-                    <button id="addcategorybtn" type="submit" class="btn btn-primary text-uppercase">Add</button>
+                        {{ csrf_field() }}
+
+
+                        <!-- Modal footer -->
+                        <div class="modal-footer">
+                            <button class="btn btn-success float-left mx-2" data-dismiss="modal">Cancel</button>
+                            <button id="addcategorybtn" type="submit" class="btn btn-danger text-uppercase">delete
+                                student</button>
+                        </div>
+                    </form>
                 </div>
-                </form>
             </div>
         </div>
     </div>
 
-
-
-
-    <div class="modal" id="addcourse">
-        <div class="modal-dialog">
-            <div class="modal-content">
-
-                <!-- Modal Header -->
-                <div class="modal-header">
-                    <h4 class="modal-title text-uppercase">Add new course</h4>
-                    <button type="button" class="btn btn-danger" data-dismiss="modal">&times;</button>
-                </div>
-
-                <!-- Modal body -->
-                <div class="modal-body">
-                    <form id="newcategory" action="" method="POST">
-                        <div class="form-group">
-                            <label for="email">Course title:</label>
-                            <input type="text" class="form-control" name="category" id="category">
-                        </div>
-                        <div class="form-group">
-                            <label for="email">Course code:</label>
-                            <input type="text" class="form-control" name="category" id="category">
-                        </div>
-                        <div class="form-group">
-                            <label for="email">Course unit:</label>
-                            <input type="text" class="form-control" name="category" id="category">
-                        </div>
-
-                        <div class="form-group">
-                            <label for="sel1">Select course level:</label>
-                            <select class="form-control" id="sel1">
-                              <option>100</option>
-                              <option>200</option>
-                              <option>300</option>
-                              <option>400</option>
-                              <option>500</option>
-                            </select>
-                          </div>
-                        {{ csrf_field() }}
-                </div>
-
-                <!-- Modal footer -->
-                <div class="modal-footer">
-                    <button id="addcategorybtn" type="submit" class="btn btn-primary text-uppercase">Add</button>
-                </div>
-                </form>
-            </div>
-        </div>
-    </div>
+    {{-- end of faculty deletion --}}
 @endsection
 
 @section('script')
@@ -197,6 +152,16 @@
                     "targets": [2, 3]
                 }]
             });
+
+
+            $('#deletestudent').on('show.bs.modal', function(e) {
+                var studentname = $(e.relatedTarget).attr('studentname');
+                //   alert(studentname)
+                var url = $(e.relatedTarget).attr('deurl');
+                $("#studentdeletename").text(studentname);
+                $("#studentdeleteform").attr("action", url);
+
+            })
 
         })
 

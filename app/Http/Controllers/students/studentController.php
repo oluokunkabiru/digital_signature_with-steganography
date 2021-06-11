@@ -3,7 +3,10 @@
 namespace App\Http\Controllers\students;
 
 use App\Http\Controllers\Controller;
+use App\Models\Attendance;
+use App\Models\Course;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class studentController extends Controller
 {
@@ -15,10 +18,16 @@ class studentController extends Controller
     public function index()
     {
         //
-        return view('users.students.index');
+                $today = date('Y-m-d');
+
+          $attendances = Attendance::with(['user', 'faculty', 'department', 'course'])->orderBy('id', 'desc')->where(['level'=>Auth::user()->level, 'department_id'=>Auth::user()->department_id, 'faculty_id'=>Auth::user()->faculty_id, 'date'=>$today])->get();
+        // return $attendances;
+        return view('users.students.index', compact(['attendances']));
     }
     public function courseTaken(){
-        return view('users.students.courses');
+        $courses = Course::where(['level'=>Auth::user()->level, 'department_id'=>Auth::user()->department_id, 'faculty_id'=>Auth::user()->faculty_id])->get();
+
+        return view('users.students.courses', compact(['courses']));
     }
     /**
      * Show the form for creating a new resource.
@@ -28,6 +37,12 @@ class studentController extends Controller
     public function create()
     {
         //
+
+    }
+
+    public function scanninigQRcode($id){
+        return view('users.students.scanning');
+
     }
 
     /**

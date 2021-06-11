@@ -20,7 +20,7 @@ class studentController extends Controller
     {
         //
 
-        $students = User::where('role', 'student')->get();
+        $students = User::where('role', 'student')->OrderBy('id','desc')->get();
         return view('users.staffs.student-info.index', compact(['students']));
     }
 
@@ -90,6 +90,9 @@ class studentController extends Controller
     public function edit($id)
     {
         //
+        $student = User::with(['faculty', 'department'])->where('id', $id)->firstOrfail();
+        $faculties = Faculty::orderBy('id', 'desc')->get();
+        return view('users.staffs.student-info.update', compact(['student', 'faculties']));
     }
 
     /**
@@ -99,9 +102,27 @@ class studentController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(studentRegisterRequest $request, $id)
     {
         //
+        $student = User::where('id', $id)->first();
+        $student->name = $request->sname." ". $request->fname." ". $request->lname;
+        // $student->password = Hash::make(strtolower($request->fname));
+        // $student->email = $student->nextEmail($request->sname,$request->fname,$request->lname);
+        $student->country = $request->country;
+        $student->dob = $request->dob;
+        $student->city = $request->city;
+        $student->state = $request->state;
+        $student->faculty_id = $request->faculty;
+        $student->department_id = $request->dept;
+        $student->level = $request->level;
+        $student->phone = $request->phone;
+        $student->gender = $request->gender;
+        // $student->role = "student";
+        // $student->matric_no = $student->nextMatric();
+        $student->update();
+        return redirect()->route('student-info.index')->with('success', $student->name.' details updated successfully');
+
     }
 
     /**
@@ -113,5 +134,9 @@ class studentController extends Controller
     public function destroy($id)
     {
         //
+        $user = User::where('id', $id)->firstOrFail();
+        $user->forceDelete();
+        return redirect()->back()->with('success', 'Student '. $user->name.' deleted successfully');
+
     }
 }

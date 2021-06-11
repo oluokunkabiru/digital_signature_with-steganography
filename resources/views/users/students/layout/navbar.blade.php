@@ -74,8 +74,6 @@
             <li class="dropdown">
                 <a href="#" class="nav-link has-dropdown" data-toggle="dropdown"><i class="fas fa-columns"></i> <span>Attendance</span></a>
                 <ul class="dropdown-menu">
-                    <li><a class="nav-link" href="{{ route('student-info.create') }}">New attendance</a></li>
-
                     <li><a class="nav-link" href="{{ route('student-attendance.index') }}">Manage attendance</a></li>
                 </ul>
             </li>

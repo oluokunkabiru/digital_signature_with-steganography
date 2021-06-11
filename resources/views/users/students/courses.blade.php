@@ -37,18 +37,18 @@
                                         @php
                                             $i = 0;
                                         @endphp
-                                        {{-- @if ($categories)
-                                        @foreach ($categories as $category) --}}
+                                        @if ($courses)
+                                        @foreach ($courses as $course)
                                         <tr>
                                             <td>{{ ++$i }}</td>
-                                            <td>{21</td>
-                                            <td>21</td>
-                                            <td>21</td>
-                                            <td>21</td>
-                                            
+                                            <td>{{ ucwords($course->title) }}</td>
+                                            <td>{{ strtoupper($course->code) }}</td>
+                                            <td>{{ $course->unit }}</td>
+                                            <td>{{ $course->hod }}</td>
+
                                         </tr>
-                                        {{-- @endforeach --}}
-                                        {{-- @endif --}}
+                                        @endforeach
+                                        @endif
 
                                     </tbody>
                                 </table>
