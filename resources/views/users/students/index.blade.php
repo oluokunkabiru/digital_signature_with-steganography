@@ -1,5 +1,9 @@
 @extends('users.students.layout.app')
 @section('title', 'Student Dashboard')
+@section('style')
+<link rel="stylesheet" href="{{ asset('scanner/css/qrcode-reader.css') }}">
+
+@endsection
 @section('content')
 <section class="section">
     <div class="section-header">
@@ -76,8 +80,18 @@
             <div class="col-7 col-md-7 col-lg-7">
                 <div class="card">
                         <div class="card-header">
-                            <h4> <span class="fa fa-user p-1 mx-2" style="font-size: 60px"></span> Profile Details <a href="{{ route('scanningqrcode') }}" class="mr-auto"> <span class="fa fa-qrcode p-1 mx-2" style="font-size: 60px"></span>Take attendance</a></h4>
+                            <h4>
+                                <span class="fa fa-user p-1 mx-2" style="font-size: 60px"></span> Profile Details
+                                <a href="#" id="openreader-single2"
+                                data-qrr-target="#single2"
+                                data-qrr-line-color="#00FF00"
+                                data-qrr-repeat-timeout="0"
+                                data-qrr-audio-feedback="true" class="mr-auto"> <span class="fa fa-qrcode p-1 mx-2" style="font-size: 60px"></span>Take attendance</a>
+                            </h4>
                         </div>
+                        {{--  <form >  --}}
+                            <input id="single2"   type="hidden" size="50">
+                          {{--  </form>  --}}
                         <div class="card-body">
                             <div class="row">
                                 <div class="form-group col-md-6 col-12">
@@ -211,9 +225,45 @@
 @endsection
 
 @section('script')
+<script src="{{ asset('scanner/js/qrcode-reader.min.js') }}"></script>
 
 <script>
 
+  $(function(){
 
-  </script>
+    // overriding path of JS script and audio
+    $.qrCodeReader.jsQRpath = "{{ asset('scanner/js/jsQR/jsQR.min.js') }}"; //"../dist/js/jsQR/jsQR.min.js";
+    $.qrCodeReader.beepPath = "{{ asset('scanner/audio/beep.mp3') }}"; //"../dist/audio/beep.mp3";
+
+
+    $("#openreader-single2").qrCodeReader({callback: function(code) {
+      if (code) {
+        // window.location.href = code;
+        var a = code.indexOf("Smartcode:smartme");
+        alert(code);
+        alert(a);
+        var b = code.slice(a);
+        alert(b);
+        var c =b.split("_");
+       alert(c);
+      }
+    }}).off("click.qrCodeReader").on("click", function(){
+        // var qrcode = $("#single2").val().trim();
+        var qrcode = $("#single2").val();
+      if (qrcode) {
+          alert(qrcode);
+        window.location.href = qrcode;
+      } else {
+        $.qrCodeReader.instance.open.call(this);
+      }
+    });
+
+
+  });
+
+</script>
+
+
+
 @endsection
+

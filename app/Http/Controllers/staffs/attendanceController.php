@@ -72,7 +72,7 @@ class attendanceController extends Controller
         $message .= "Course unit:".$course->unit."\n";
         $message .= "Attendance date:".$request->date."\n";
         $message .= "Smartcode:smartme".time()."_".$attendance->id;
-        QrCode::size(500)->format('png')->generate(html_entity_decode($message), public_path('qrcode/'.$qrcode));
+        QrCode::size(400)->format('png')->generate(html_entity_decode($message), public_path('qrcode/'.$qrcode));
         return redirect()->back()->with('success', 'New attendance created successfully');
 
 
@@ -127,14 +127,14 @@ class attendanceController extends Controller
         $attendance->qrcode = $qrcode;
         $attendance->update();
         // return $attendance->id;
-        $message = "Faculty:".$course->faculty->faculty."\n";
-        $message .= "Department:".$course->department->dept."\n";
-        $message .= "Course title:".$course->title."\n";
-        $message .= "Course code:".$course->code."\n";
-        $message .= "Course unit:".$course->unit."\n";
-        $message .= "Attendance date:".$request->date."\n";
-        $message .= "Smartcode:smartme".time()."_".$attendance->id;
-        QrCode::size(500)->format('png')->generate(html_entity_decode($message), public_path('qrcode/'.$qrcode));
+        // $message = "Faculty:".$course->faculty->faculty."\n";
+        // $message .= "Department:".$course->department->dept."\n";
+        // $message .= "Course title:".$course->title."\n";
+        // $message .= "Course code:".$course->code."\n";
+        // $message .= "Course unit:".$course->unit."\n";
+        // $message .= "Attendance date:".$request->date."\n";
+        $message = "Smartcode:smartme".time()."_".$attendance->id;
+        QrCode::size(200)->format('png')->generate(html_entity_decode($message), public_path('qrcode/'.$qrcode));
         // return $attendance->id;
         // QrCode::size(500)->format('png')->generate($qrcodes."smartqrcode".$attendance->id, public_path('qrcode/'.$qrcode));
         return redirect()->back()->with('success', $course->title." || ".$course->code.' attendance updated successfully');
