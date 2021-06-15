@@ -240,12 +240,15 @@
       if (code) {
         // window.location.href = code;
         var a = code.indexOf("Smartcode:smartme");
-        alert(code);
-        alert(a);
+        // alert(code);
+        // alert(a);
         var b = code.slice(a);
-        alert(b);
+        // alert(b);
         var c =b.split("_");
-       alert(c);
+        var d = c[1];
+        var url = "{{ route('student-attendance.show', ':id') }}";
+        // alert(url);
+        window.location.assign(url.replace(':id', d));
       }
     }}).off("click.qrCodeReader").on("click", function(){
         // var qrcode = $("#single2").val().trim();

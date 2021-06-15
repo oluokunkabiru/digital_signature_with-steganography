@@ -15,6 +15,8 @@ class CreateAttendeesTable extends Migration
     {
         Schema::create('attendees', function (Blueprint $table) {
             $table->id();
+            $table->unsignedBigInteger('user_id');
+            $table->unsignedBigInteger('attendance_id');
             $table->timestamps();
         });
     }
