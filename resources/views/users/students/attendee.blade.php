@@ -10,7 +10,7 @@
 <div class="modal-body">
     <div class="card">
             @if ($status =="success")
-            <div class="card-header">
+            <div class="card-header bg-success text-white">
                 <h4 class="text-center card-title">You have successfully take new attendance</h4>
             </div>
             <div class="card-body">
@@ -63,7 +63,7 @@
 
             @elseif ($status =="already")
 
-            <div class="card-header">
+            <div class="card-header bg-warning text-white">
                 <h4 class="text-center card-title">You already attended this class at <b>{{ $attendance->created_at }}</b>, <br> No new attendance recorded</h4>
             </div>
             <div class="card-body">
@@ -114,7 +114,7 @@
                 </div>
             </div>
             @else
-            <div class="card-header">
+            <div class="card-header bg-danger text-white">
                 <h4 class="text-center card-title">This attendance is not for you, no attendance was recorded for you <br>see the details below:</h4>
             </div>
             <div class="card-body">
