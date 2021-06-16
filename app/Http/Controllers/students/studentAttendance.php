@@ -3,7 +3,10 @@
 namespace App\Http\Controllers\students;
 
 use App\Http\Controllers\Controller;
+use App\Models\Attendance;
+use App\Models\Attendee;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class studentAttendance extends Controller
 {
@@ -47,9 +50,10 @@ class studentAttendance extends Controller
     public function show($id)
     {
         //
-        return $id;
+
     }
 
+    
     /**
      * Show the form for editing the specified resource.
      *

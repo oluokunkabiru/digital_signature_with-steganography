@@ -17,6 +17,8 @@ class CreateAttendeesTable extends Migration
             $table->id();
             $table->unsignedBigInteger('user_id');
             $table->unsignedBigInteger('attendance_id');
+            $table->foreign('user_id')->references('id')->on('users');
+            $table->foreign('attendance_id')->references('id')->on('attendances');
             $table->timestamps();
         });
     }

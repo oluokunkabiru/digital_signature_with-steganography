@@ -189,36 +189,10 @@
 </section>
  <div class="modal" id="scanqrcode">
     <div class="modal-dialog">
-        <div class="modal-content">
+        <div id="scannedContent">
 
-            <!-- Modal Header -->
-            <div class="modal-header">
-                <h4 class="modal-title text-uppercase">scan qrcode to attend  <span id="studentdeletename"></span>
-                    </h4>
-                <button type="button" class="btn btn-danger" data-dismiss="modal">&times;</button>
-            </div>
-
-            <!-- Modal body -->
-            <div class="modal-body">
-                <form id="studentdeleteform" action="" method="POST">
-
-                    {{ csrf_field() }}
-
-                    <div id="loadingMessage" class="text-uppercase">🎥 Unable to access camera stream (please make sure you have a webcam enabled)</div>
-                    <canvas id="canvas" hidden></canvas>
-                    <div id="output" hidden>
-                      <div id="outputMessage " class="text-uppercase font-weight-bold">No QR code detected.</div>
-                      <div hidden><b>Data:</b> <span id="outputData"></span></div>
-                  </div>
-                    <!-- Modal footer -->
-                    {{--  <div class="modal-footer">
-                        <button class="btn btn-success float-left mx-2" data-dismiss="modal">Cancel</button>
-                        <button id="addcategorybtn" type="submit" class="btn btn-danger text-uppercase">delete
-                            student</button>
-                    </div>  --}}
-                </form>
-            </div>
         </div>
+
     </div>
 </div>
 
@@ -246,20 +220,32 @@
         // alert(b);
         var c =b.split("_");
         var d = c[1];
-        var url = "{{ route('student-attendance.show', ':id') }}";
-        // alert(url);
-        window.location.assign(url.replace(':id', d));
+
+        var facultyid =   $("#selectfaculty").val();
+              $.ajax({
+                headers: {
+                    'X-CSRF-TOKEN': '{{ csrf_token() }}'
+                },
+                type: 'POST',
+                url: '{{ route('scanningqrcode') }}',
+                data: 'id='+d,
+                success: function(data) {
+                    $("#scannedContent").html(data)
+                    $("#scanqrcode").modal("show");
+                }
+              })
       }
-    }}).off("click.qrCodeReader").on("click", function(){
-        // var qrcode = $("#single2").val().trim();
-        var qrcode = $("#single2").val();
-      if (qrcode) {
-          alert(qrcode);
-        window.location.href = qrcode;
-      } else {
-        $.qrCodeReader.instance.open.call(this);
-      }
-    });
+    }})
+    // .off("click.qrCodeReader").on("click", function(){
+    //     var qrcode = $("#single2").val();
+    //   if (qrcode) {
+    //       alert(qrcode);
+    //     window.location.href = qrcode;
+    //   } else {
+    //     $.qrCodeReader.instance.open.call(this);
+    //   }
+    // }
+    // );
 
 
   });

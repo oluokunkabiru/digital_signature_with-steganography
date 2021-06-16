@@ -49,8 +49,8 @@ Route::prefix('students')->middleware(['auth', 'student'])->group(function () {
     Route::get('dashboard', 'students\studentController@index')->name('studentDashboard');
     Route::get('course-taken', 'students\studentController@courseTaken')->name('courseTaken');
     Route::resource('student-attendance', 'students\studentAttendance');
-    Route::get('/scanning-QRcode', 'students\studentController@scanninigQRcode')->name('scanningqrcode');
-    
+    Route::post('/scanning-QRcode', 'students\studentController@scanninigQRcode')->name('scanningqrcode');
+
 
 });
 

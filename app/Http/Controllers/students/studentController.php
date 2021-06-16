@@ -4,6 +4,7 @@ namespace App\Http\Controllers\students;
 
 use App\Http\Controllers\Controller;
 use App\Models\Attendance;
+use App\Models\Attendee;
 use App\Models\Course;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -40,8 +41,33 @@ class studentController extends Controller
 
     }
 
-    public function scanninigQRcode(){
-        return view('users.students.scanning');
+    public function scanninigQRcode(Request $request){
+        $id = $request->id;
+        $attendee = Attendance::with(['faculty', 'department', 'user', 'course'])->where('id', $id)->firstOrFail();
+        $departmentId = $attendee->department->id;
+        if($departmentId ==Auth::user()->department_id){
+            $attendance = Attendee::where(['attendance_id' => $id, 'user_id' => Auth::user()->id])->exists();
+            if($attendance){
+                $status = "already";
+                $attendance = Attendee::where(['attendance_id' => $id, 'user_id' => Auth::user()->id])->first();
+                return view('users.students.attendee', compact(['attendee', 'status', 'attendance']));
+            }else{
+                $attendance = new Attendee();
+                $attendance->user_id = Auth::user()->id;
+                $attendance->attendance_id = $id;
+                $attendance->save();
+                $status = "success";
+                return view('users.students.attendee', compact(['attendee', 'status', 'attendance']));
+
+
+             }
+
+        }else{
+            $status = "not";
+            $attendance="";
+            return view('users.students.attendee', compact(['attendee', 'status', 'attendance']));
+            // return redirect()->back()->with('fail','');
+        }
 
     }
 
