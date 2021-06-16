@@ -28,13 +28,12 @@
     <ul class="navbar-nav navbar-right">
         <li class="dropdown">
             <a href="#" data-toggle="dropdown" class="nav-link dropdown-toggle nav-link-lg nav-link-user">
-            <img alt="image" src="assets/img/avatar/avatar-1.png" class="rounded-circle mr-1">
+            <img alt="image" src="{{ asset('assets/images/img_avatar3.png') }}" class="rounded-circle mr-1">
             <div class="d-sm-none d-lg-inline-block">Hi, {{ ucwords(Auth::user()->name) }}</div></a>
             <div class="dropdown-menu dropdown-menu-right">
-                <div class="dropdown-title">Logged in 5 min ago</div>
-                <a href="features-profile.html" class="dropdown-item has-icon"><i class="far fa-user"></i> Profile</a>
-                <a href="features-activities.html" class="dropdown-item has-icon"><i class="fas fa-bolt"></i> Activities</a>
-                <a href="features-settings.html" class="dropdown-item has-icon"><i class="fas fa-cog"></i> Settings</a>
+                {{-- <div class="dropdown-title">Logged in 5 min ago</div> --}}
+
+                <a href="features-settings.html" class="dropdown-item has-icon"><i class="fas fa-cog"></i> Update profile</a>
                 <div class="dropdown-divider"></div>
                 <form id="logout-form" action="{{ route('logout') }}" method="POST" class="d-none">
                     @csrf
@@ -50,7 +49,7 @@
 <div class="main-sidebar sidebar-style-2">
     <aside id="sidebar-wrapper">
         <div class="sidebar-brand">
-            <a href="">KOADIT</a>
+            <a href="{{ route('login') }}">Smart QR code attendance</a>
         </div>
 
         <ul class="sidebar-menu">
@@ -74,7 +73,7 @@
             <li class="dropdown">
                 <a href="#" class="nav-link has-dropdown" data-toggle="dropdown"><i class="fas fa-columns"></i> <span>Attendance</span></a>
                 <ul class="dropdown-menu">
-                    <li><a class="nav-link" href="{{ route('student-attendance.index') }}">Manage attendance</a></li>
+                    <li><a class="nav-link" href="{{ route('student-attendance.index') }}">Attendance history</a></li>
                 </ul>
             </li>
 
@@ -87,8 +86,6 @@
                 <a href="#" class="nav-link has-dropdown"><i class="fas fa-cog"></i> <span>Settings</span></a>
                 <ul class="dropdown-menu">
                     <li><a class="nav-link" href="components-article.html">Update Profile</a></li>
-                    <li><a class="nav-link" href="components-article.html">Change Password</a></li>
-                    <li><a class="nav-link" href="components-article.html">Message Us</a></li>
                 </ul>
             </li>
 

@@ -18,6 +18,11 @@ class studentAttendance extends Controller
     public function index()
     {
         //
+        $courses = Attendee::join('attendances', 'attendances.id', 'attendees.attendance_id')
+        ->join('courses', 'attendances.course_id', 'courses.id')
+        ->join('departments', 'departments.id', 'attendances.department_id')
+        ->join('users', 'users.id', 'attendances.user_id')->where('attendees.user_id', Auth::user()->id)->get();
+        return view('users.students.attendance-history', compact(['courses']));
     }
 
     /**
@@ -53,7 +58,7 @@ class studentAttendance extends Controller
 
     }
 
-    
+
     /**
      * Show the form for editing the specified resource.
      *

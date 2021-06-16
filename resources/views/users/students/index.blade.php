@@ -20,7 +20,7 @@
                         <h4>Total attendance</h4>
                     </div>
                     <div class="card-body">
-                        10
+                        {{ count($tattendances) }}
                     </div>
                 </div>
             </div>
@@ -35,7 +35,7 @@
                         <h4>Total attended</h4>
                     </div>
                     <div class="card-body">
-                        400
+                        {{ count($attended) }}
                     </div>
                 </div>
             </div>
@@ -50,7 +50,7 @@
                         <h4>Total missed</h4>
                     </div>
                     <div class="card-body">
-                        1,201
+                        {{ count($tattendances)- count($attended) }}
                     </div>
                 </div>
             </div>
@@ -65,7 +65,7 @@
                         <h4>Today's class</h4>
                     </div>
                     <div class="card-body">
-                        47
+                        {{ count($attendances) }}
                     </div>
                 </div>
             </div>
