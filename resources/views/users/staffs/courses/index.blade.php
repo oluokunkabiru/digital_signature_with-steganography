@@ -63,7 +63,7 @@
                                         <tr>
                                             <td>{{ ++$i }}</td>
                                             <td>{{ $course->title }}</td>
-                                            <td>{{ $course->code }}</td>
+                                            <td>{{ strtoupper($course->code) }}</td>
                                             <td>{{ $course->unit }}</td>
                                             <td>{{ $course->level }}</td>
                                             <td>{{ $course->faculty->faculty }}</td>

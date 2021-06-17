@@ -5,6 +5,7 @@ namespace App\Http\Controllers\staffs;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\attendanceRequest;
 use App\Models\Attendance;
+use App\Models\Attendee;
 use App\Models\Course;
 use App\Models\Department;
 use App\Models\Faculty;
@@ -77,7 +78,21 @@ class attendanceController extends Controller
 
 
     }
+    public function showTodaysAttendance(){
+        $attendance = Attendee::with(['user'])->join('attendances', 'attendances.id', 'attendees.attendance_id')
+        ->join('courses', 'attendances.course_id', 'courses.id')
+        ->join('departments', 'departments.id', 'attendances.department_id')
+        ->join('users', 'users.id', 'attendees.user_id')->whereDate('attendees.created_at',date('Y-m-d'))->get();
+    //    return $attendance;
+        return view('users.staffs.todays-attendance',compact(['attendance']));
+    }
 
+    public function showTodaysClass(){
+        $today = date('Y-m-d');
+        $attendance = Attendance::with(['user', 'faculty', 'department', 'course'])->orderBy('id', 'desc')->whereDate('date','=', $today)->get();
+        return view('users.staffs.todays-class', compact(['attendance']));
+    
+    }
     /**
      * Display the specified resource.
      *
@@ -127,14 +142,14 @@ class attendanceController extends Controller
         $attendance->qrcode = $qrcode;
         $attendance->update();
         // return $attendance->id;
-        // $message = "Faculty:".$course->faculty->faculty."\n";
-        // $message .= "Department:".$course->department->dept."\n";
-        // $message .= "Course title:".$course->title."\n";
-        // $message .= "Course code:".$course->code."\n";
-        // $message .= "Course unit:".$course->unit."\n";
-        // $message .= "Attendance date:".$request->date."\n";
-        $message = "Smartcode:smartme".time()."_".$attendance->id;
-        QrCode::size(200)->format('png')->generate(html_entity_decode($message), public_path('qrcode/'.$qrcode));
+        $message = "Faculty:".$course->faculty->faculty."\n";
+        $message .= "Department:".$course->department->dept."\n";
+        $message .= "Course title:".$course->title."\n";
+        $message .= "Course code:".$course->code."\n";
+        $message .= "Course unit:".$course->unit."\n";
+        $message .= "Attendance date:".$request->date."\n";
+        $message .= "Smartcode:smartme".time()."_".$attendance->id;
+        QrCode::size(400)->format('png')->generate(html_entity_decode($message), public_path('qrcode/'.$qrcode));
         // return $attendance->id;
         // QrCode::size(500)->format('png')->generate($qrcodes."smartqrcode".$attendance->id, public_path('qrcode/'.$qrcode));
         return redirect()->back()->with('success', $course->title." || ".$course->code.' attendance updated successfully');

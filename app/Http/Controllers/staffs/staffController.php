@@ -3,7 +3,11 @@
 namespace App\Http\Controllers\staffs;
 
 use App\Http\Controllers\Controller;
+use App\Models\Attendance;
+use App\Models\Attendee;
+use App\Models\User;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class staffController extends Controller
 {
@@ -15,7 +19,15 @@ class staffController extends Controller
     public function index()
     {
         //
-        return view('users.staffs.dashboard');
+        $today = date('Y-m-d');
+        $attendances = Attendance::with(['user', 'faculty', 'department', 'course'])->orderBy('id', 'desc')->whereDate('date','=', $today)->get();
+        $incomingattendances = Attendance::with(['user', 'faculty', 'department', 'course'])->orderBy('id', 'desc')->whereDate('date','>', $today)->get();
+        $tattendances = Attendance::with(['user', 'faculty', 'department', 'course'])->orderBy('id', 'desc')->get();
+        $students = User::where('role', 'student')->OrderBy('id','desc')->get();
+        $totalatendee = Attendee::get();
+        $todayatendee = Attendee::whereDate('created_at', $today)->get();
+
+        return view('users.staffs.dashboard', compact([ 'todayatendee','totalatendee','students', 'attendances', 'tattendances', 'incomingattendances']));
     }
 
     /**

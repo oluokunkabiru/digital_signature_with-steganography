@@ -40,8 +40,8 @@ Route::prefix('staffs')->middleware(['auth', 'staff'])->group(function () {
     Route::post('selectfaculty', 'staffs\courseController@selesctFaculty')->name('selectFaculty');
     Route::post('selectdept', 'staffs\courseController@selesctDept')->name('selectdept');
     Route::post('selectlevel', 'staffs\courseController@selesctLevel')->name('selectlevel');
-
-
+    Route::get('/today-attendance', 'staffs\attendanceController@showTodaysAttendance')->name('todayAttendance');
+    Route::get('todays-class', 'staffs\attendanceController@showTodaysClass')->name('todaysClass');
 
 });
 
@@ -50,6 +50,7 @@ Route::prefix('students')->middleware(['auth', 'student'])->group(function () {
     Route::get('course-taken', 'students\studentController@courseTaken')->name('courseTaken');
     Route::resource('student-attendance', 'students\studentAttendance');
     Route::post('/scanning-QRcode', 'students\studentController@scanninigQRcode')->name('scanningqrcode');
+
 
 
 });
