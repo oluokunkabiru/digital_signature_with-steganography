@@ -281,7 +281,7 @@
 
                         <div class="form-group">
                             <label for="sel1">Select faculty:</label>
-                            <select class="form-control" id="selectfaculty" name="faculty">
+                            <select class="form-control" id="upselectfaculty" name="faculty">
                                 <option value="" id="faculty">Faculty</option>
                                 @if ($faculties)
                                     @foreach ($faculties as $faculty)
@@ -295,7 +295,7 @@
                         </div>
                           <div class="form-group">
                             <label for="sel1">Select department:</label>
-                            <select class="form-control" id="selectdept" name="dept">
+                            <select class="form-control" id="upselectdept" name="dept">
                               <option value="" id="dept">Departments</option>
                             </select>
                           </div>
@@ -407,6 +407,23 @@
 
             })
 
+            $("#upselectfaculty").on('change', function(){
+              var facultyid =   $("#upselectfaculty").val();
+              $.ajax({
+                headers: {
+                    'X-CSRF-TOKEN': '{{ csrf_token() }}'
+                },
+                type: 'POST',
+                url: '{{ route('selectFaculty') }}',
+                data: 'facultyid='+facultyid,
+                success: function(data) {
+                    $("#upselectdept").html(data)
+                }
+
+
+              })
+
+            })
             // edit courses
             $('#editCourse').on('show.bs.modal', function(e) {
     var dept = $(e.relatedTarget).attr('dept');

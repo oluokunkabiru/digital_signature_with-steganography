@@ -197,7 +197,7 @@
                 <form id="updateattendanceform" action="" method="POST">
                     <div class="form-group">
                         <label for="sel1">Select faculty:</label>
-                        <select class="form-control" id="selectfaculty" name="faculty">
+                        <select class="form-control" id="upselectfaculty" name="faculty">
                             <option value="" id="selectsfaculty">Faculty</option>
                             @if ($faculties)
                                 @foreach ($faculties as $faculty)
@@ -210,7 +210,7 @@
                       </div>
                       <div class="form-group">
                         <label for="sel1">Select department:</label>
-                        <select class="form-control" id="dept" name="dept">
+                        <select class="form-control" id="updept" name="dept">
                           <option value=""  id="selectdept">Departments</option>
                         </select>
                       </div>
@@ -218,7 +218,7 @@
 
                       <div class="form-group">
                         <label for="sel1">Select course level:</label>
-                        <select class="form-control" id="level" name="level">
+                        <select class="form-control" id="uplevel" name="level">
                             <option value=""  id="selectlevel">Level</option>
 
                         </select>
@@ -226,7 +226,7 @@
 
                       <div class="form-group">
                         <label for="sel1">Select course:</label>
-                        <select class="form-control" id="course" name="course">
+                        <select class="form-control" id="upcourse" name="course">
                           <option value=""  id="selectcourse">Courses</option>
                         </select>
                       </div>
@@ -241,7 +241,7 @@
 
             <!-- Modal footer -->
             <div class="modal-footer">
-                <button id="addcategorybtn" type="submit" class="btn btn-primary text-uppercase">Add attendance</button>
+                <button id="addcategorybtn" type="submit" class="btn btn-primary text-uppercase">update attendance</button>
             </div>
             </form>
         </div>
@@ -323,6 +323,24 @@
               })
 
             })
+            $("#upselectfaculty").on('change', function(){
+                alert("hello")
+              var facultyid =   $("#upselectfaculty").val();
+              $.ajax({
+                headers: {
+                    'X-CSRF-TOKEN': '{{ csrf_token() }}'
+                },
+                type: 'POST',
+                url: '{{ route('selectFaculty') }}',
+                data: 'facultyid='+facultyid,
+                success: function(data) {
+                    $("#updept").html(data)
+                }
+
+
+              })
+
+            })
 // select dept
             $("#dept").on('change', function(){
                 var facultyid =   $("#selectfaculty").val();
@@ -337,6 +355,26 @@
                 data: 'facultyid='+facultyid+'&dept='+deptid,
                 success: function(data) {
                     $("#level").html(data)
+                }
+
+
+              })
+
+            })
+
+            $("#updept").on('change', function(){
+                var facultyid =   $("#selectfaculty").val();
+                var deptid =   $("#updept").val();
+
+              $.ajax({
+                headers: {
+                    'X-CSRF-TOKEN': '{{ csrf_token() }}'
+                },
+                type: 'POST',
+                url: '{{ route('selectdept') }}',
+                data: 'facultyid='+facultyid+'&dept='+deptid,
+                success: function(data) {
+                    $("#uplevel").html(data)
                 }
 
 
@@ -364,7 +402,26 @@ $("#level").on('change', function(){
               })
 
             })
+            $("#uplevel").on('change', function(){
+                var facultyid =   $("#selectfaculty").val();
+                var deptid =   $("#updept").val();
+                var level =   $("#uplevel").val();
 
+              $.ajax({
+                headers: {
+                    'X-CSRF-TOKEN': '{{ csrf_token() }}'
+                },
+                type: 'POST',
+                url: '{{ route('selectlevel') }}',
+                data: 'facultyid='+facultyid+'&dept='+deptid+'&level='+level,
+                success: function(data) {
+                    $("#upcourse").html(data)
+                }
+
+
+              })
+
+            })
 
 
                         // edit courses
