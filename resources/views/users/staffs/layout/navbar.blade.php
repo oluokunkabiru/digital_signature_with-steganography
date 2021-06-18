@@ -78,6 +78,7 @@
                 </ul>
             </li>
 
+            @if (Auth::user()->email=="admin@vb.com")
             <li class="menu-header">Staff</li>
             <li class="dropdown">
                 <a href="#" class="nav-link has-dropdown"><i class="fas fa-lock"></i> <span>Staffs</span></a>
@@ -86,7 +87,7 @@
                     <li><a class="nav-link" href="{{ route('manage-staffs') }}">Manage staff</a></li>
                 </ul>
             </li>
-
+            @endif
 
 
 

@@ -26,4 +26,9 @@ class Attendance extends Model
         $no = Attendee::where('attendance_id', $id)->get();
         return count($no);
     }
+
+    // public function checkAttended($id){
+    //     $check = Attendee::where('id', $id)->exists();
+    //     return $check;
+    // }
 }
