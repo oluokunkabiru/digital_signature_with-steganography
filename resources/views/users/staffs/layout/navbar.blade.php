@@ -78,6 +78,14 @@
                 </ul>
             </li>
 
+            <li class="menu-header">Staff</li>
+            <li class="dropdown">
+                <a href="#" class="nav-link has-dropdown"><i class="fas fa-lock"></i> <span>Staffs</span></a>
+                <ul class="dropdown-menu">
+                    <li><a class="nav-link" href="{{ route('student-attendance.create') }}">New staff</a></li>
+                    <li><a class="nav-link" href="{{ route('manage-staffs') }}">Manage staff</a></li>
+                </ul>
+            </li>
 
 
 

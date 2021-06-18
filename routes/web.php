@@ -32,6 +32,8 @@ return view('users.staffs.attendance.scanned');
 
 Route::prefix('staffs')->middleware(['auth', 'staff'])->group(function () {
     Route::get('dashboard', 'staffs\staffController@index')->name('staffDashboard');
+    Route::resource('staffs-info', 'staffs\staffController');
+    Route::get('manage-staffs', 'staffs\staffController@staffsInfo')->name('manage-staffs');
     Route::resource('courses-and-classes', 'staffs\courseController');
     Route::resource('student-info', 'staffs\studentController');
     Route::resource('faculty', 'staffs\facultyController');

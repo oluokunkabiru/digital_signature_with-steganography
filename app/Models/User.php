@@ -50,7 +50,7 @@ class User extends Authenticatable
     public function department(){
         return $this->belongsTo('App\Models\Department');
     }
-    
+
     function nextMatric(){
         $last = User::where('role', 'student')->max('id');
         $student = User::where('id', $last)->firstOrFail();
@@ -70,6 +70,25 @@ class User extends Authenticatable
             $number = $newcheck[1];
             $newNumber  = isset($number) && is_numeric($number)?$number+1:0;
             $newEmail = $new.$newNumber."@student.smartqrcode";
+            return $newEmail;
+        }
+        return $proposeEmail;
+
+    }
+
+    function nextStaffEmail($sname, $fname, $lname){
+        $new =strtolower($sname[0].$fname[0].$lname);
+        $proposeEmail = strtolower($new."@staff.smartqrcode");
+        // $proposeEmail = "admin@vb.com";
+        $last = User::where('email', $proposeEmail)->first();
+        if($last != null){
+             $prevEmail = $last->email;
+            $extractmail = explode("@", $prevEmail);
+            $extractedmail = $extractmail[0];
+            $newcheck = explode($new, $extractedmail);
+            $number = $newcheck[1];
+            $newNumber  = isset($number) && is_numeric($number)?$number+1:0;
+            $newEmail = $new.$newNumber."@staff.smartqrcode";
             return $newEmail;
         }
         return $proposeEmail;

@@ -3,7 +3,7 @@
 @section('content')
     <section class="section">
         <div class="section-header">
-            <h1>Course and classes</h1>
+            <h1>Manage staffs</h1>
         </div>
         <div class="container">
             @if (session('success'))
@@ -31,10 +31,10 @@
 
 
                         <div class="card-header">
-                            <h3 class="card-title text-uppercase">Manage student</h3>
+                            <h3 class="card-title text-uppercase">Manage staffs</h3>
                         </div>
                         <div class="card-body">
-                            <a href="{{ route('student-info.create') }}" class="btn btn-success text-uppercase " >Add student</a>
+                            <a href="{{ route('staffs-info.create') }}" class="btn btn-success text-uppercase " >Add new staff</a>
                             <div class="table-responsive">
                                 <table class="table table-striped v_center" id="table-1">
 
@@ -44,8 +44,7 @@
                                                 ID
                                             </th>
                                             <th>Name</th>
-                                            <th>Level</th>
-                                            <th>Matric No</th>
+                                            <th>Level taken</th>
                                             <th>Phone No</th>
                                             <th>Email</th>
                                             <th>Avatar</th>
@@ -64,17 +63,16 @@
                                             <td>{{ ++$i }}</td>
                                             <td>{{ $student->name }}</td>
                                             <td>{{ $student->level }}</td>
-                                            <td>{{ $student->matric_no }}</td>
                                             <td>{{ isset($student->phone)?$student->phone:"Nill" }}</td>
                                             <td>{{ $student->email }}</td>
                                             <td><img src="{{ asset('assets/images/img_avatar3.png') }}" style="width: 60px" class="rounded-circle card-img" alt=""></td>
                                             <td>{{ $student->created_at }}</td>
                                             <td>
                                                 <div class="row">
-                                                    <a href="{{ route('student-info.edit', $student->id) }}"                                                         class="badge badge-pill badge-warning mx-1"><span
+                                                    <a href="{{ route('staffs-info.edit', $student->id) }}"                                                         class="badge badge-pill badge-warning mx-1"><span
                                                             class="fa fa-edit p-1 text-white"></span></a>
                                                             <a href="#deletestudent" data-toggle="modal"
-                                                            deurl="{{ route('student-info.destroy', $student->id) }}"
+                                                            deurl="{{ route('staffs-info.destroy', $student->id) }}"
                                                             studentname="{{ ucwords($student->name) }}"
                                                             class="badge badge-pill badge-danger mx-1"><span
                                                                 class="fa fa-trash p-1 text-white"></span></a>
@@ -126,7 +124,7 @@
                         <div class="modal-footer">
                             <button class="btn btn-success float-left mx-2" data-dismiss="modal">Cancel</button>
                             <button id="addcategorybtn" type="submit" class="btn btn-danger text-uppercase">delete
-                                student</button>
+                                staff</button>
                         </div>
                     </form>
                 </div>

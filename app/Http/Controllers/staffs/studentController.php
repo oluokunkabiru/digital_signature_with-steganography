@@ -107,8 +107,6 @@ class studentController extends Controller
         //
         $student = User::where('id', $id)->first();
         $student->name = $request->sname." ". $request->fname." ". $request->lname;
-        // $student->password = Hash::make(strtolower($request->fname));
-        // $student->email = $student->nextEmail($request->sname,$request->fname,$request->lname);
         $student->country = $request->country;
         $student->dob = $request->dob;
         $student->city = $request->city;
@@ -118,8 +116,7 @@ class studentController extends Controller
         $student->level = $request->level;
         $student->phone = $request->phone;
         $student->gender = $request->gender;
-        // $student->role = "student";
-        // $student->matric_no = $student->nextMatric();
+
         $student->update();
         return redirect()->route('student-info.index')->with('success', $student->name.' details updated successfully');
 

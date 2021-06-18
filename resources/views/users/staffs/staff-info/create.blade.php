@@ -3,17 +3,17 @@
                                             @section('content')
                                                 <section class="section">
                                                     <div class="section-header">
-                                                        <h1>Add new student</h1>
+                                                        <h1>Add new stff</h1>
                                                     </div>
                                                     <div class="container">
 
                                                         <div class="card">
                                                             <div class="card-body">
 
-                                                                <form id="newcategory" action="{{ route('student-info.store') }}" method="POST">
+                                                                <form id="newcategory" action="{{ route('staffs-info.store') }}" method="POST">
                                                                     <div class="row">
                                                                         <div class="form-group col-md-6">
-                                                                            <label for="text">Student Surname:</label>
+                                                                            <label for="text">Staff Surname:</label>
                                                                             <input type="text"
                                                                                 class="form-control {{ $errors->has('sname') ? ' is-invalid' : '' }}"
                                                                                 value="{{ old('sname') }}" name="sname">
@@ -24,7 +24,7 @@
                                                                             @endif
                                                                         </div>
                                                                         <div class="form-group col-md-6">
-                                                                            <label for="text">Student Firstname:</label>
+                                                                            <label for="text">Staff Firstname:</label>
                                                                             <input type="text"
                                                                                 class="form-control {{ $errors->has('fname') ? ' is-invalid' : '' }}"
                                                                                 value="{{ old('fname') }}" name="fname">
@@ -35,7 +35,7 @@
                                                                             @endif
                                                                         </div>
                                                                         <div class="form-group col-md-6">
-                                                                            <label for="text">Student Lastname:</label>
+                                                                            <label for="text">Staff Lastname:</label>
                                                                             <input type="text"
                                                                                 class="form-control {{ $errors->has('lname') ? ' is-invalid' : '' }}"
                                                                                 value="{{ old('lname') }}" name="lname">
@@ -46,7 +46,7 @@
                                                                             @endif
                                                                         </div>
                                                                         <div class="form-group col-md-6">
-                                                                            <label for="email">Student phone number:</label>
+                                                                            <label for="email">Staff phone number:</label>
                                                                             <input type="text"
                                                                                 class="form-control {{ $errors->has('phone') ? ' is-invalid' : '' }}"
                                                                                 value="{{ old('phone') }}" name="phone">
@@ -426,7 +426,7 @@
                                                                     <!-- Modal footer -->
                                                                     <button id="addcategorybtn" type="submit"
                                                                         class="btn btn-primary text-uppercase">add new
-                                                                        student</button>
+                                                                        staff</button>
                                                                 </form>
 
                                                                 {{-- </div> --}}

@@ -13,10 +13,10 @@
                         $names = explode(" ", $student->name);
                     @endphp
 
-                    <form id="newcategory" action="{{ route('student-info.update', $student->id) }}" method="POST">
+                    <form id="newcategory" action="{{ route('staffs-info.update', $student->id) }}" method="POST">
                         <div class="row">
                             <div class="form-group col-md-6">
-                                <label for="text">Student Surname:</label>
+                                <label for="text">Staff Surname:</label>
                                 <input type="text"
                                     class="form-control {{ $errors->has('sname') ? ' is-invalid' : '' }}"
                                     value="{{ $names[0], old('sname') }}" name="sname">
@@ -27,7 +27,7 @@
                                 @endif
                             </div>
                             <div class="form-group col-md-6">
-                                <label for="text">Student Firstname:</label>
+                                <label for="text">Staff Firstname:</label>
                                 <input type="text"
                                     class="form-control {{ $errors->has('fname') ? ' is-invalid' : '' }}"
                                     value="{{ $names[1], old('fname') }}" name="fname">
@@ -38,7 +38,7 @@
                                 @endif
                             </div>
                             <div class="form-group col-md-6">
-                                <label for="text">Student Lastname:</label>
+                                <label for="text">Staff Lastname:</label>
                                 <input type="text"
                                     class="form-control {{ $errors->has('lname') ? ' is-invalid' : '' }}"
                                     value="{{ $names[2], old('lname') }}" name="lname">
@@ -49,7 +49,7 @@
                                 @endif
                             </div>
                             <div class="form-group col-md-6">
-                                <label for="email">Student phone number:</label>
+                                <label for="email">Staff phone number:</label>
                                 <input type="text"
                                     class="form-control {{ $errors->has('phone') ? ' is-invalid' : '' }}"
                                     value="{{$student->phone, old('phone') }}" name="phone">
@@ -429,7 +429,7 @@
 
                         <!-- Modal footer -->
                         <button id="addcategorybtn" type="submit"
-                            class="btn btn-primary text-uppercase">update student </button>
+                            class="btn btn-primary text-uppercase">update  staff </button>
                     </form>
 
                     {{-- </div> --}}
