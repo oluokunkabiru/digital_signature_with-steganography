@@ -91,7 +91,7 @@ class attendanceController extends Controller
         $today = date('Y-m-d');
         $attendance = Attendance::with(['user', 'faculty', 'department', 'course'])->orderBy('id', 'desc')->whereDate('date','=', $today)->get();
         return view('users.staffs.todays-class', compact(['attendance']));
-    
+
     }
     /**
      * Display the specified resource.
@@ -102,6 +102,9 @@ class attendanceController extends Controller
     public function show($id)
     {
         //
+        $attendance = Attendee::with(['user'])->where('attendance_id', $id)->orderBy('id', 'desc')->get();
+       return $attendance;
+        return view('users.staffs.attendance.attendee', compact(['attendance']));
     }
 
     /**

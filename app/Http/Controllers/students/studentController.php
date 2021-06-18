@@ -44,9 +44,11 @@ class studentController extends Controller
 
     public function scanninigQRcode(Request $request){
         $id = $request->id;
+        $today = date('Y-m-d');
         $attendee = Attendance::with(['faculty', 'department', 'user', 'course'])->where('id', $id)->firstOrFail();
         $departmentId = $attendee->department->id;
         if($departmentId ==Auth::user()->department_id){
+            if($attendee->date == $today){
             $attendance = Attendee::where(['attendance_id' => $id, 'user_id' => Auth::user()->id])->exists();
             if($attendance){
                 $status = "already";
@@ -62,6 +64,11 @@ class studentController extends Controller
 
 
              }
+            }else{
+                $status = "nottoday";
+                $attendance="";
+                return view('users.students.attendee', compact(['attendee', 'status', 'attendance']));
+            }
 
         }else{
             $status = "not";

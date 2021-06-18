@@ -67,8 +67,8 @@
                                             <td>{{ strtoupper($attendant->course->code) }}</td>
                                             <td>{{ ucwords($attendant->course->title) }}</td>
                                             <td>{{ $attendant->level }}</td>
-                                            <td>21</td>
-                                            <td><img src="{{  asset("qrcode/". $attendant->qrcode )}}" class="card-img img-rounded img-fluid" style="width:150px" alt=""></td>
+                                            <td> <a href="{{ route('attendance.show', $attendant->id) }}" > <span class="badge badge-pill badge-success p-2 font-weight-bold" >{{ $attendant->numbersOfAttendee($attendant->id) }}</span> </a> </td>
+                                            <td><a href="{{  asset("qrcode/". $attendant->qrcode )}}" download><img src="{{  asset("qrcode/". $attendant->qrcode )}}" class="card-img img-rounded img-fluid" style="width:150px" alt=""></a></td>
                                             <td>{{ $attendant->date }}</td>
                                             <td>{{ $attendant->created_at }}</td>
                                             <td>
@@ -409,6 +409,13 @@ $('#deleteattendance').on('show.bs.modal', function(e) {
                 $("#attendancedeleteform").attr("action", urlink);
 
             })
+
+
+
+//             setInterval(() => {
+//   $(".numbersOfAttendee").load(" .numbersOfAttendee");
+
+// }, 6000);
 
 
         })

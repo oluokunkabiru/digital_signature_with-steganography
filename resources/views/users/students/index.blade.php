@@ -196,6 +196,31 @@
     </div>
 </div>
 
+
+<div class="modal fade" id="notsmartcode">
+    <div class="modal-dialog modal-dialog-centered">
+      <div class="modal-content">
+
+        <!-- Modal Header -->
+        <div class="modal-header bg-danger text-white">
+          <h4 class="modal-title">OOPS!!! <br> This is not QR code from smart attendance</h4>
+          <button type="button" class="close" data-dismiss="modal">&times;</button>
+        </div>
+
+        <!-- Modal body -->
+        <div class="modal-body">
+          <h5 id="notsmartqrcontent"></h5>
+        </div>
+
+        <!-- Modal footer -->
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+        </div>
+
+      </div>
+    </div>
+  </div>
+
 @endsection
 
 @section('script')
@@ -215,13 +240,13 @@
         // window.location.href = code;
         var a = code.indexOf("Smartcode:smartme");
         // alert(code);
+        if(a != -1){
+        // alert(code);
         // alert(a);
         var b = code.slice(a);
         // alert(b);
         var c =b.split("_");
         var d = c[1];
-
-        var facultyid =   $("#selectfaculty").val();
               $.ajax({
                 headers: {
                     'X-CSRF-TOKEN': '{{ csrf_token() }}'
@@ -234,6 +259,11 @@
                     $("#scanqrcode").modal("show");
                 }
               })
+      }else{
+        //   alert("not discover");
+        $("#notsmartqrcontent").text(code)
+        $("#notsmartcode").modal("show");
+      }
       }
     }})
     // .off("click.qrCodeReader").on("click", function(){

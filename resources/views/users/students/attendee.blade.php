@@ -113,6 +113,53 @@
                     </div>
                 </div>
             </div>
+            @elseif ($status =="nottoday")
+            <div class="card-header bg-muted text-white">
+                <h4 class="text-center card-title">This attendance is late for you, no attendance was recorded for you <br>see the details below:</h4>
+            </div>
+            <div class="card-body">
+                <div class="row">
+                    <div class="col-6">
+                        <h6 class="text-muted">Faculty:</h6>
+                    </div>
+                    <div class="col-6">
+                        <h6 class="font-weight-bold">{{ ucwords($attendee->faculty->faculty) }}</h6>
+                    </div>
+                    <div class="col-6">
+                        <h6 class="text-muted">Dept:</h6>
+                    </div>
+                    <div class="col-6">
+                        <h6 class="font-weight-bold">{{ ucwords($attendee->department->dept) }}</</h6>
+                    </div>
+                    <div class="col-6">
+                        <h6 class="text-muted">Course Code:</h6>
+                    </div>
+                    <div class="col-6">
+                        <h6 class="font-weight-bold text-uppercase">{{ $attendee->course->code }}</</h6>
+                    </div>
+                    <div class="col-6">
+                        <h6 class="text-muted">Course title:</h6>
+                    </div>
+                    <div class="col-6">
+                        <h6 class="font-weight-bold">{{ ucwords($attendee->course->title) }}</h6>
+                    </div>
+
+                    <div class="col-6">
+                        <h6 class="text-muted">Lecturer:</h6>
+                    </div>
+                    <div class="col-6">
+                        <h6 class="font-weight-bold">{{ ucwords($attendee->user->name) }}</h6>
+                    </div>
+                    <div class="col-6">
+                        <h6 class="text-muted">Attendance Date:</h6>
+                    </div>
+                    <div class="col-6">
+                        <h6 class="font-weight-bold">{{ $attendee->date }}</h6>
+                    </div>
+
+                </div>
+            </div>
+
             @else
             <div class="card-header bg-danger text-white">
                 <h4 class="text-center card-title">This attendance is not for you, no attendance was recorded for you <br>see the details below:</h4>

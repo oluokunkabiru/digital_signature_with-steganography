@@ -51,7 +51,7 @@
                         <h4>Today's attendee</h4>
                     </div>
 
-                    <div class="card-body">
+                    <div class="card-body" id="numbersOfAttendee">
                        {{count($todayatendee)}}
                     </div>
 
@@ -94,7 +94,7 @@
                             </div>
                             <div class="profile-widget-item">
                                 <div class="profile-widget-item-label">Total students attended</div>
-                                <div class="profile-widget-item-value">{{ count($totalatendee) }}</div>
+                                <div class="profile-widget-item-value" id="numbersOfAttendee">{{ count($totalatendee) }}</div>
                             </div>
                             <div class="profile-widget-item">
                                 <div class="profile-widget-item-label">Incoming class</div>
@@ -162,6 +162,16 @@
     </div>
 
 </section>
+@endsection
+@section('content')
+<script>
+$(document).ready(function() {
+    setInterval(() => {
+    $("#numbersOfAttendee").load(" #numbersOfAttendee");
+
+    }, 6000);
+})
+</script>
 @endsection
 
 

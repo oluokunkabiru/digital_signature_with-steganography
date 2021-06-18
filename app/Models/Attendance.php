@@ -21,4 +21,9 @@ class Attendance extends Model
     public function course(){
         return $this->belongsTo('App\Models\Course');
     }
+
+    public function numbersOfAttendee($id){
+        $no = Attendee::where('attendance_id', $id)->get();
+        return count($no);
+    }
 }
