@@ -68,7 +68,7 @@
                                                                 facultyname="{{ ucwords($faculty->faculty) }}"
                                                                 class="badge badge-pill badge-warning mx-1"><span
                                                                     class="fa fa-edit p-1 text-white"></span></a>
-                                                            <a href="#deletefaculty" data-toggle="modal"
+                                                            <a href="#{{ $faculty->numbersOfExist($faculty->id) > 0 ? "deptAlreadyCreated" :"deletefaculty" }}" noOfDept="{{ $faculty->numbersOfExist($faculty->id) }}" data-toggle="modal"
                                                                 myurl="{{ route('faculty.destroy', $faculty->id) }}"
                                                                 facultyname="{{ ucwords($faculty->faculty) }}"
                                                                 class="badge badge-pill badge-danger mx-1"><span
@@ -129,7 +129,7 @@
                                                             facultyid = "{{ $dept->faculty->id }}"
                                                             class="badge badge-pill badge-warning mx-1"><span
                                                                 class="fa fa-edit p-1 text-white"></span></a>
-                                                        <a href="#deletefaculty" data-toggle="modal"
+                                                        <a href="#{{ $dept->numbersOfExist($dept->id) > 0 ? "courseAlreadyCreated" : "deletedept" }}" data-toggle="modal" courseNo="{{ $dept->numbersOfExist($dept->id) }}"
                                                             myurl="{{ route('department-info.destroy', $dept->id) }}"
                                                             facultyname="{{ ucwords($dept->dept) }}"
                                                             class="badge badge-pill badge-danger mx-1"><span
@@ -264,6 +264,35 @@
         </div>
     </div>
 
+
+
+    <div class="modal" id="deptAlreadyCreated">
+        <div class="modal-dialog">
+            <div class="modal-content">
+
+                <!-- Modal Header -->
+                <div class="modal-header">
+                    <h4 class="modal-title text-uppercase">you can not delete <span id="facultyNoname"></span></h4>
+                    <button type="button" class="btn btn-danger" data-dismiss="modal">&times;</button>
+                </div>
+
+                <!-- Modal body -->
+                <div class="modal-body">
+                    <div class="card">
+                        <div class="card-header">
+                            <h3 class="text-danger">Reason</h3>
+                        </div>
+                        <div class="card-body">
+                         <h1 id="facultyNo" class="text-center"></h1>
+                        <h4>Departments already created for this faculty</h4>
+                        </div>
+                    </div>
+
+
+                </div>
+            </div>
+        </div>
+    </div>
     {{-- end of faculty deletion --}}
 
 
@@ -402,6 +431,33 @@
             </div>
         </div>
     </div>
+    <div class="modal" id="courseAlreadyCreated">
+        <div class="modal-dialog">
+            <div class="modal-content">
+
+                <!-- Modal Header -->
+                <div class="modal-header">
+                    <h4 class="modal-title text-uppercase">you can not delete <span id="deptNoname"></span></h4>
+                    <button type="button" class="btn btn-danger" data-dismiss="modal">&times;</button>
+                </div>
+
+                <!-- Modal body -->
+                <div class="modal-body">
+                    <div class="card">
+                        <div class="card-header">
+                            <h3 class="text-danger">Reason</h3>
+                        </div>
+                        <div class="card-body">
+                         <h1 id="deptNo" class="text-center"></h1>
+                        <h4>Courses already created for this faculty</h4>
+                        </div>
+                    </div>
+
+
+                </div>
+            </div>
+        </div>
+    </div>
 
     {{-- end of faculty deletion --}}
 @endsection
@@ -471,7 +527,8 @@
             // delete
 
             $('#deletedept').on('show.bs.modal', function(e) {
-                var facultyname = $(e.relatedTarget).attr('deptname');
+                var facultyname = $(e.relatedTarget).attr('facultyname');
+
                 //   alert(facultyname)
                 var url = $(e.relatedTarget).attr('myurl');
                 $("#deptdeletename").text(facultyname);
@@ -479,7 +536,24 @@
 
             })
 
+   $('#deptAlreadyCreated').on('show.bs.modal', function(e) {
+                var title = $(e.relatedTarget).attr('facultyname');
+                //   alert(facultyname)
+                var attendedNo = $(e.relatedTarget).attr('noOfDept');
+                $("#facultyNoname").text(title);
+                $("#facultyNo").text(attendedNo);
 
+            })
+
+
+            $('#courseAlreadyCreated').on('show.bs.modal', function(e) {
+                var title = $(e.relatedTarget).attr('deptname');
+                //   alert(facultyname)
+                var attendedNo = $(e.relatedTarget).attr('courseNo');
+                $("#deptNoname").text(title);
+                $("#deptNo").text(attendedNo);
+
+            })
 
         })
 

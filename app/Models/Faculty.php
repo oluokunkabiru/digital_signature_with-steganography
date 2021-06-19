@@ -9,4 +9,8 @@ class Faculty extends Model
 {
     use HasFactory;
     protected $fillable = ['id', 'faculty'];
+    public function numbersOfExist($id){
+        $no = Department::where('faculty_id', $id)->get();
+        return count($no);
+    }
 }

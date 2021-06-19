@@ -1,5 +1,5 @@
 @extends('users.staffs.layout.app')
-@section('title', 'Student management')
+@section('title', 'Staffs management')
 @section('content')
     <section class="section">
         <div class="section-header">
@@ -71,9 +71,10 @@
                                                 <div class="row">
                                                     <a href="{{ route('staffs-info.edit', $student->id) }}"                                                         class="badge badge-pill badge-warning mx-1"><span
                                                             class="fa fa-edit p-1 text-white"></span></a>
-                                                            <a href="#deletestudent" data-toggle="modal"
-                                                            deurl="{{ route('staffs-info.destroy', $student->id) }}"
+                                                            <a href="#{{ $student->numbersOfStudentAttendance($student->id) > 0  ? "attendedalready": "deletestaff" }}" data-toggle="modal"
+                                                                deurl="{{ route('staffs-info.destroy', $student->id) }}"
                                                             studentname="{{ ucwords($student->name) }}"
+                                                            noOfAttendance= "{{ $student->numbersOfStudentAttendance($student->id) }}"
                                                             class="badge badge-pill badge-danger mx-1"><span
                                                                 class="fa fa-trash p-1 text-white"></span></a>
                                                         </div>
@@ -101,7 +102,7 @@
     </section>
 
     {{-- delete faculty --}}
-    <div class="modal" id="deletestudent">
+    <div class="modal" id="deletestaff">
         <div class="modal-dialog">
             <div class="modal-content">
 
@@ -131,7 +132,33 @@
             </div>
         </div>
     </div>
+    <div class="modal" id="attendedalready">
+        <div class="modal-dialog">
+            <div class="modal-content">
 
+                <!-- Modal Header -->
+                <div class="modal-header">
+                    <h4 class="modal-title text-uppercase">you can not delete <span id="attendedNoname"></span></h4>
+                    <button type="button" class="btn btn-danger" data-dismiss="modal">&times;</button>
+                </div>
+
+                <!-- Modal body -->
+                <div class="modal-body">
+                    <div class="card">
+                        <div class="card-header">
+                            <h3 class="text-danger">Reason</h3>
+                        </div>
+                        <div class="card-body">
+                         <h1 id="attendedNo" class="text-center"></h1>
+                        <h4>Staff already created the above number of attendance activities</h4>
+                        </div>
+                    </div>
+
+
+                </div>
+            </div>
+        </div>
+    </div>
     {{-- end of faculty deletion --}}
 @endsection
 
@@ -152,12 +179,20 @@
             });
 
 
-            $('#deletestudent').on('show.bs.modal', function(e) {
+            $('#deletestaff').on('show.bs.modal', function(e) {
                 var studentname = $(e.relatedTarget).attr('studentname');
                 //   alert(studentname)
                 var url = $(e.relatedTarget).attr('deurl');
                 $("#studentdeletename").text(studentname);
                 $("#studentdeleteform").attr("action", url);
+
+            })
+            $('#attendedalready').on('show.bs.modal', function(e) {
+                var title = $(e.relatedTarget).attr('studentname');
+                //   alert(facultyname)
+                var attendedNo = $(e.relatedTarget).attr('noOfAttendance');
+                $("#attendedNoname").text(title);
+                $("#attendedNo").text(attendedNo);
 
             })
 

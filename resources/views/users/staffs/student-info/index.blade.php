@@ -3,7 +3,7 @@
 @section('content')
     <section class="section">
         <div class="section-header">
-            <h1>Course and classes</h1>
+            <h1>Manage students</h1>
         </div>
         <div class="container">
             @if (session('success'))
@@ -71,11 +71,12 @@
                                             <td>{{ $student->created_at }}</td>
                                             <td>
                                                 <div class="row">
-                                                    <a href="{{ route('student-info.edit', $student->id) }}"                                                         class="badge badge-pill badge-warning mx-1"><span
+                                                    <a href="{{ route('student-info.edit', $student->id) }}" class="badge badge-pill badge-warning mx-1"><span
                                                             class="fa fa-edit p-1 text-white"></span></a>
-                                                            <a href="#deletestudent" data-toggle="modal"
+                                                            <a href="#{{ $student->numbersOfStudentAttended($student->id) > 0  ? "attendedalready": "deletestudent" }}" data-toggle="modal"
                                                             deurl="{{ route('student-info.destroy', $student->id) }}"
                                                             studentname="{{ ucwords($student->name) }}"
+                                                            noOfAttendance= "{{ $student->numbersOfStudentAttended($student->id) }}"
                                                             class="badge badge-pill badge-danger mx-1"><span
                                                                 class="fa fa-trash p-1 text-white"></span></a>
                                                         </div>
@@ -133,7 +134,33 @@
             </div>
         </div>
     </div>
+    <div class="modal" id="attendedalready">
+        <div class="modal-dialog">
+            <div class="modal-content">
 
+                <!-- Modal Header -->
+                <div class="modal-header">
+                    <h4 class="modal-title text-uppercase">you can not delete <span id="attendedNoname"></span></h4>
+                    <button type="button" class="btn btn-danger" data-dismiss="modal">&times;</button>
+                </div>
+
+                <!-- Modal body -->
+                <div class="modal-body">
+                    <div class="card">
+                        <div class="card-header">
+                            <h3 class="text-danger">Reason</h3>
+                        </div>
+                        <div class="card-body">
+                         <h1 id="attendedNo" class="text-center"></h1>
+                        <h4>Students already mark the above number of attendance activities</h4>
+                        </div>
+                    </div>
+
+
+                </div>
+            </div>
+        </div>
+    </div>
     {{-- end of faculty deletion --}}
 @endsection
 
@@ -163,6 +190,15 @@
 
             })
 
+
+            $('#attendedalready').on('show.bs.modal', function(e) {
+                var title = $(e.relatedTarget).attr('studentname');
+                //   alert(facultyname)
+                var attendedNo = $(e.relatedTarget).attr('noOfAttendance');
+                $("#attendedNoname").text(title);
+                $("#attendedNo").text(attendedNo);
+
+            })
         })
 
     </script>

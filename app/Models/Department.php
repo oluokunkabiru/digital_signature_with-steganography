@@ -13,6 +13,10 @@ class Department extends Model
     public function faculty(){
         return $this->belongsTo('App\Models\Faculty');
     }
+    public function numbersOfExist($id){
+        $no = Course::where('department_id', $id)->get();
+        return count($no);
+    }
 }
 
 

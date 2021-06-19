@@ -84,7 +84,7 @@
                                                      data-toggle="modal"
                                                         class="badge badge-pill badge-warning mx-1"><span
                                                             class="fa fa-edit p-1 text-white"></span></a>
-                                                    <a href="#deletecourse" data-toggle="modal" deurl = "{{ route('courses-and-classes.destroy', $course->id) }}" title="{{ $course->title }}"
+                                                    <a href="#{{ $course->numbersOfExist($course->id) > 0 ?"attendanceAlreadyCreate":"deletecourse" }}" numbersOfAttendance={{ $course->numbersOfExist($course->id) }} data-toggle="modal" deurl = "{{ route('courses-and-classes.destroy', $course->id) }}" title="{{ $course->title }}"
                                                         class="badge badge-pill badge-danger mx-1"><span
                                                             class="fa fa-trash p-1 text-white"></span></a>
                                                 </div>
@@ -367,7 +367,33 @@
             </div>
         </div>
     </div>
+    <div class="modal" id="attendanceAlreadyCreate">
+        <div class="modal-dialog">
+            <div class="modal-content">
 
+                <!-- Modal Header -->
+                <div class="modal-header">
+                    <h4 class="modal-title text-uppercase">you can not delete <span id="attendedNoname"></span></h4>
+                    <button type="button" class="btn btn-danger" data-dismiss="modal">&times;</button>
+                </div>
+
+                <!-- Modal body -->
+                <div class="modal-body">
+                    <div class="card">
+                        <div class="card-header">
+                            <h3 class="text-danger">Reason</h3>
+                        </div>
+                        <div class="card-body">
+                         <h1 id="attendedNo" class="text-center"></h1>
+                        <h4>Attendance already created</h4>
+                        </div>
+                    </div>
+
+
+                </div>
+            </div>
+        </div>
+    </div>
     {{-- end of faculty deletion --}}
 @endsection
 
@@ -461,6 +487,15 @@ $('#deletecourse').on('show.bs.modal', function(e) {
                 var urlink = $(e.relatedTarget).attr('deurl');
                 $("#coursedeletename").text(title);
                 $("#coursedeleteform").attr("action", urlink);
+
+            })
+
+            $('#attendanceAlreadyCreate').on('show.bs.modal', function(e) {
+                var title = $(e.relatedTarget).attr('title');
+                //   alert(facultyname)
+                var attendedNo = $(e.relatedTarget).attr('numbersOfAttendance');
+                $("#attendedNoname").text(title);
+                $("#attendedNo").text(attendedNo);
 
             })
 

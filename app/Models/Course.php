@@ -15,4 +15,8 @@ class Course extends Model
     public function department(){
         return $this->belongsTo('App\Models\Department');
     }
+    public function numbersOfExist($id){
+        $no = Attendance::where('course_id', $id)->get();
+        return count($no);
+    }
 }

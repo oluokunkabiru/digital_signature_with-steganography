@@ -94,4 +94,18 @@ class User extends Authenticatable
         return $proposeEmail;
 
     }
+    public function numbersOfExist($id){
+        $no = Attendance::where('course_id', $id)->get();
+        return count($no);
+    }
+
+    public function numbersOfStudentAttended($id){
+        $no = Attendee::where('user_id', $id)->get();
+        return count($no);
+    }
+
+    public function numbersOfStudentAttendance($id){
+        $no = Attendance::where('user_id', $id)->get();
+        return count($no);
+    }
 }
