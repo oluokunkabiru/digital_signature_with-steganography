@@ -44,12 +44,12 @@ class Pages extends Controller
                 return redirect(route('studentDashboard'));
 
             }else{
-                return redirect()->back()->withErrors('password',"Invalid login details");
+                return redirect()->back()->with('password',"Invalid login details");
             }
 
         }
 
-        return redirect()->back()->withErrors('password','Login details are not valid');
+        return redirect()->back()->with('password','Login details are not valid');
     }
 
     /**

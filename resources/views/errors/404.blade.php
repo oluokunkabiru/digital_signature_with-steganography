@@ -7,7 +7,7 @@ License URL: http://creativecommons.org/licenses/by/3.0/
 <html lang="zxx">
 
 <head>
-	<title>Smart Attendance with QR code</title>
+	<title>Smart Attendance with QR code :: page not found</title>
 	<!-- Meta tag Keywords -->
 	<meta name="viewport" content="width=device-width, initial-scale=1">
 	<meta charset="UTF-8" />
@@ -64,97 +64,50 @@ License URL: http://creativecommons.org/licenses/by/3.0/
 
 
             @if (! Auth::check())
+			<div class="container mt-5 pt-5">
+                <div class="row">
+                    <div class="col-md-3"></div>
+                    <div class="col-md-6">
+                        <div class="card">
+                            <div class="card-header">
+                                 <h1 class="display-3 text-danger font-weight-bold">404</h1>
+                            </div>
+                            <div class="card-body">
+                                <div class="alert alert-danger text-center">
+                    <p class="display-5">Oops! Something is wrong.</p>
+                    <h3> The page you are looking for could not be found</h3>
+                    <a href="{{ route('welcome') }}" class="text-center my-3 btn btn-success"> Home</a>
+                </div>
+                            </div>
+                        </div>
 
-
-			<form method="POST" action="{{ route('login') }}">
-                @if (session('password'))
-                    <div class="alert alert-danger alert-dismissible">
-                        <button type="button" class="close" data-dismiss="alert">&times;</button>
-                        <strong>OOPS! </strong> {{ session('password') }}
                     </div>
-                 @endif
-
-                {{ csrf_field() }}
-				<div class="form-style-agile">
-					<label>
-						<i class="fas fa-user"></i>Email</label>
-					<input placeholder="Username" class="form-control @error('email') is-invalid @enderror" name="email" value="{{ old('email') }}" required autocomplete="email" autofocus type="email" >
-                    @error('email')
-                    <span class="invalid-feedback" role="alert">
-                        <strong>{{ $message }}</strong>
-                    </span>
-                @enderror
+                    <div class="col-md-3"></div>
                 </div>
-				<div class="form-style-agile">
-					<label>
-						<i class="fas fa-unlock-alt"></i>Password</label>
-					<input placeholder="Password" type="password" class="form-control @error('password') is-invalid @enderror" name="password" required autocomplete="current-password">
-                    @error('password')
-                    <span class="invalid-feedback" role="alert">
-                        <strong>{{ $message }}</strong>
-                    </span>
-                @enderror
-                </div>
-				<!-- switch -->
-				<div class="checkout-w3l">
-					<div class="demo5">
-						<div class="switch demo3">
-                            <input class="form-check-input" type="checkbox" name="remember" id="remember" {{ old('remember') ? 'checked' : '' }}>
-							<label>
-								<i></i>
-							</label>
-						</div>
-					</div>
-					{{-- <a href="#">Remember Me</a> --}}
 
-                    <label class="form-check-label" for="remember">
-                        {{ __('Remember Me') }}
-                    </label>
-				</div>
-				<!-- //switch -->
-				<input type="submit" value="Log In">
-				<!-- social icons -->
-				{{-- <div class="footer-social">
-					<h2>Or Login With</h2>
-					<ul>
-						<li>
-							<a href="#">
-								<i class="fab fa-facebook-f icon_facebook"></i>
-							</a>
-						</li>
-						<li>
-							<a href="#">
-								<i class="fab fa-twitter icon_twitter"></i>
-							</a>
-						</li>
-						<li>
-							<a href="#">
-								<i class="fab fa-dribbble icon_dribbble"></i>
-							</a>
-						</li>
-						<li>
-							<a href="#">
-								<i class="fab fa-google-plus-g icon_g_plus"></i>
-							</a>
-						</li>
-					</ul>
-				</div> --}}
-				<!-- //social icons -->
-			</form>
+            </div>
             @else
                 <div class="container">
                     <div class="row">
                         <div class="col-md-3"></div>
                         <div class="col-md-6">
-                            <div class="card-cark">
+
+                            <div class="card">
                                 <div class="card-header">
                                     <div class="text-center">
                                         <span class="fa fa-user display-3"></span>
+                                        <h1 class="display-3 text-danger font-weight-bold">404</h1>
+                                    </div>
+                                    <div class="card-body">
+                                        <div class="alert alert-danger text-center">
+                                        <p class="display-5">Oops! Something is wrong.</p>
+                                        <h3> The page you are looking for could not be found</h3>
+                                    </div>
+                                        <h1 class="my-2">{{ ucwords(Auth::user()->name) }}</h1>
+
                                     </div>
 
-                                    <h1 class="my-4">{{ ucwords(Auth::user()->name) }}</h1>
-
-                                    <div class="row">
+                                    <div class="row card-footer">
                                         <div class="col">
                                             <a class="btn btn-lg btn-warning float-left mx-2" href="{{ route('logout') }}"
                                             onclick="event.preventDefault(); document.getElementById('logout-form').submit();">Logout</a>
