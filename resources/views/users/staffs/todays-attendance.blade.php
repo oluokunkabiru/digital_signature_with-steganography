@@ -29,6 +29,7 @@
                                             <th>Level</th>
                                             <th>Student</th>
                                             <th>Attended time</th>
+                                            <th>Left time</th>
                                         </tr>
                                     </thead>
                                     <tbody>
@@ -43,7 +44,8 @@
                                             <td>{{ ucwords($attendant->title) }}</td>
                                             <td>{{ $attendant->level }}</td>
                                             <td>{{ ucwords($attendant->name) }}</td>
-                                            <td>{{ $attendant->created_at }}</td>
+                                            <td>{{ $attendant->in_date }}</td>
+                                            <td>{{ isset($attendant->out_date)?$attendant->out_date:"Not yet leave the class" }}</td>
                                         </tr>
                                         @endforeach
                                         @endif

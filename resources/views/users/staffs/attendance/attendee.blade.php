@@ -29,6 +29,7 @@
                                             <th>Level</th>
                                             <th>Email</th>
                                             <th>Attended time</th>
+                                            <th>Left time</th>
                                         </tr>
                                     </thead>
                                     <tbody>
@@ -43,8 +44,9 @@
                                             <td>{{ ($attendant->user->matric_no) }}</td>
                                             <td>{{ $attendant->user->level }}</td>
                                             <td>{{ ($attendant->user->email) }}</td>
-                                            <td>{{ $attendant->created_at }}</td>
-                                        </tr>
+                                            <td>{{ $attendant->in_date }}</td>
+                                            <td>{{ isset($attendant->out_date)?$attendant->out_date:"Not yet leave the class" }}</td>
+                                                                                </tr>
                                         @endforeach
                                         @endif
 
@@ -84,7 +86,7 @@
                 "targets": [2, 3]
             }]
         });
-      
+
 
         setInterval(() => {
     $("#table-1").load(" #table-1");

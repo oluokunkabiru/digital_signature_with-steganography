@@ -187,7 +187,7 @@ License URL: http://creativecommons.org/licenses/by/3.0/
 
 
 	<!-- Jquery -->
-	<script src="{{ asset('asset/bootsrap/jquery.js') }}"></script>
+	<script src="{{ asset('asset/js/jquery-2.2.3.min.js') }}"></script>
     <script src="{{ asset('asset/bootsrap/popper.js') }}"></script>
     <script src="{{ asset('asset/bootsrap/bootstrap.min.js') }}"></script>
 	<!-- //Jquery -->

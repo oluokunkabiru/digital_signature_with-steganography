@@ -31,6 +31,7 @@
                                             <th>Course Unit</th>
                                             <th>Lecture in charge</th>
                                             <th>Attended date and time</th>
+                                            <th>Left date and time</th>
 
                                         </tr>
                                     </thead>
@@ -46,7 +47,8 @@
                                             <td>{{ strtoupper($course->code) }}</td>
                                             <td>{{ $course->unit }}</td>
                                             <td>{{ ucwords($course->name) }}</td>
-                                            <td>{{ $course->created_at }}</td>
+                                            <td>{{ $course->in_date }}</td>
+                                            <td>{{ isset($course->out_date)?$course->out_date:"Not yet leave the class" }}</td>
 
                                         </tr>
                                         @endforeach

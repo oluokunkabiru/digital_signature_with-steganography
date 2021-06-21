@@ -45,21 +45,32 @@ class studentController extends Controller
     public function scanninigQRcode(Request $request){
         $id = $request->id;
         $today = date('Y-m-d');
+        $now = date('Y-m-d h:i:s');
+
         $attendee = Attendance::with(['faculty', 'department', 'user', 'course'])->where('id', $id)->firstOrFail();
         $departmentId = $attendee->department->id;
         if($departmentId ==Auth::user()->department_id){
             if($attendee->date == $today){
             $attendance = Attendee::where(['attendance_id' => $id, 'user_id' => Auth::user()->id])->exists();
             if($attendance){
-                $status = "already";
                 $attendance = Attendee::where(['attendance_id' => $id, 'user_id' => Auth::user()->id])->first();
+                if($attendance->out_date == null){
+                    $status = "out";
+                $attendance->out_date = $now;
+                $attendance->update();
                 return view('users.students.attendee', compact(['attendee', 'status', 'attendance']));
+                }else{
+                    $status = "already";
+                    return view('users.students.attendee', compact(['attendee', 'status', 'attendance']));
+
+                }
             }else{
                 $attendance = new Attendee();
                 $attendance->user_id = Auth::user()->id;
                 $attendance->attendance_id = $id;
+                $attendance->in_date = $now;
                 $attendance->save();
-                $status = "success";
+                $status = "in";
                 return view('users.students.attendee', compact(['attendee', 'status', 'attendance']));
 
 

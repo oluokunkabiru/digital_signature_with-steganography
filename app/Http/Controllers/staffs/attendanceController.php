@@ -103,7 +103,7 @@ class attendanceController extends Controller
     {
         //
         $attendance = Attendee::with(['user'])->where('attendance_id', $id)->orderBy('id', 'desc')->get();
-       return $attendance;
+    //    return $attendance;
         return view('users.staffs.attendance.attendee', compact(['attendance']));
     }
 
