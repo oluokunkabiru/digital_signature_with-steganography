@@ -32,7 +32,7 @@ License URL: http://creativecommons.org/licenses/by/3.0/
 	<!-- web-fonts -->
 	{{-- <link href="//fonts.googleapis.com/css?family=Marck+Script&amp;subset=cyrillic,latin-ext" rel="stylesheet"> --}}
 	{{-- <link href="//fonts.googleapis.com/css?family=Montserrat:100,100i,200,200i,300,300i,400,400i,500,500i,600,600i,700,700i,800,800i,900,900i&amp;subset=cyrillic,latin-ext" --}}
-	    rel="stylesheet">
+	    {{--  rel="stylesheet">  --}}
 	<!-- //web-fonts -->
 </head>
 

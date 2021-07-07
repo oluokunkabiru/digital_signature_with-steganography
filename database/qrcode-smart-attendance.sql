@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: localhost
--- Generation Time: Jun 19, 2021 at 12:55 PM
+-- Generation Time: Jul 08, 2021 at 12:14 AM
 -- Server version: 10.4.17-MariaDB
 -- PHP Version: 8.0.0
 
@@ -45,10 +45,10 @@ CREATE TABLE `attendances` (
 --
 
 INSERT INTO `attendances` (`id`, `faculty_id`, `department_id`, `course_id`, `level`, `date`, `user_id`, `qrcode`, `created_at`, `updated_at`) VALUES
-(19, 1, 8, 10, '200', '2021-06-17', 1, 'engineeringFaculty::andFaculty::technology_computerFaculty::science_NumericalFaculty::analysis_cseFaculty::207.png', '2021-06-17 21:11:11', '2021-06-17 21:11:11'),
-(20, 4, 7, 6, '100', '2021-06-18', 1, 'pure-and-applied-science_pure-and-applied-mathematics_elementary-mathematics-II_MTH-1021624035776.png', '2021-06-17 21:11:42', '2021-06-18 16:02:56'),
-(21, 1, 8, 9, '300', '2021-06-17', 1, 'engineeringFaculty::andFaculty::technology_computerFaculty::science_introductionFaculty::toFaculty::database_cseFaculty::305.png', '2021-06-17 21:12:21', '2021-06-17 21:12:21'),
-(22, 1, 8, 10, '200', '2021-06-18', 1, 'engineering-and-technology_computer-science_Numerical-analysis_cse-2071624035597.png', '2021-06-17 21:13:48', '2021-06-18 15:59:57');
+(46, 8, 13, 13, '300', '2021-07-01', 1, 'FacultyFaculty::basicFaculty::medicalFaculty::science_Nursing_MaternintyFaculty::Nursing_NURFaculty::301.png', '2021-07-01 07:54:31', '2021-07-01 07:54:31'),
+(47, 1, 8, 12, '300', '2021-07-14', 1, 'engineeringFaculty::andFaculty::technology_computerFaculty::science_introductionFaculty::databseFaculty::management_CSEFaculty::307.png', '2021-07-07 21:13:22', '2021-07-07 21:13:22'),
+(48, 4, 7, 6, '100', '2021-07-07', 1, 'pureFaculty::andFaculty::appliedFaculty::science_pureFaculty::andFaculty::appliedFaculty::mathematics_elementaryFaculty::mathematicsFaculty::II_MTHFaculty::102.png', '2021-07-07 21:13:52', '2021-07-07 21:13:52'),
+(49, 6, 11, 11, '200', '2021-07-10', 1, 'agriculturalFaculty::science_cropFaculty::productionFaculty::andFaculty::healthFaculty::science_animalFaculty::nutritionist_aphFaculty::201.png', '2021-07-07 21:14:22', '2021-07-07 21:14:22');
 
 -- --------------------------------------------------------
 
@@ -61,16 +61,10 @@ CREATE TABLE `attendees` (
   `user_id` bigint(20) UNSIGNED NOT NULL,
   `attendance_id` bigint(20) UNSIGNED NOT NULL,
   `created_at` timestamp NULL DEFAULT NULL,
-  `updated_at` timestamp NULL DEFAULT NULL
+  `updated_at` timestamp NULL DEFAULT NULL,
+  `in_date` datetime DEFAULT NULL,
+  `out_date` datetime DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
-
---
--- Dumping data for table `attendees`
---
-
-INSERT INTO `attendees` (`id`, `user_id`, `attendance_id`, `created_at`, `updated_at`) VALUES
-(1, 4, 22, '2021-06-17 23:40:23', '2021-06-17 23:40:23'),
-(2, 5, 22, '2021-06-17 23:40:23', '2021-06-17 23:40:23');
 
 -- --------------------------------------------------------
 
@@ -103,7 +97,10 @@ INSERT INTO `courses` (`id`, `title`, `unit`, `code`, `level`, `faculty_id`, `de
 (7, 'elementary biology', '2', 'BIO 101', '100', 4, 6, '2021-06-05 06:17:14', '2021-06-05 06:17:14'),
 (8, 'introduction to python programming', '4', 'cse 202', '200', 1, 8, '2021-06-17 15:28:00', '2021-06-17 15:28:00'),
 (9, 'introduction to database', '3', 'cse 305', '300', 1, 8, '2021-06-17 15:28:49', '2021-06-17 15:28:49'),
-(10, 'Numerical analysis', '2', 'cse 207', '200', 1, 8, '2021-06-17 15:35:22', '2021-06-17 15:35:22');
+(10, 'Numerical analysis', '2', 'cse 207', '200', 1, 8, '2021-06-17 15:35:22', '2021-06-17 15:35:22'),
+(11, 'animal nutritionist', '2', 'aph 201', '200', 6, 11, '2021-06-21 11:07:37', '2021-06-21 11:07:37'),
+(12, 'introduction databse management', '3', 'CSE 307', '300', 1, 8, '2021-06-24 21:07:02', '2021-06-24 21:07:02'),
+(13, 'Materninty Nursing', '4', 'NUR 301', '300', 8, 13, '2021-06-24 21:12:15', '2021-06-24 21:12:15');
 
 -- --------------------------------------------------------
 
@@ -131,7 +128,9 @@ INSERT INTO `departments` (`id`, `dept`, `faculty_id`, `user_id`, `created_at`, 
 (6, 'pure and applied biology', 4, NULL, '2021-06-05 06:13:43', '2021-06-05 06:13:43'),
 (7, 'pure and applied mathematics', 4, NULL, '2021-06-05 06:15:00', '2021-06-05 06:15:00'),
 (8, 'computer science', 1, NULL, '2021-06-17 15:25:16', '2021-06-17 15:25:16'),
-(10, 'mechanical engineering', 1, NULL, '2021-06-17 15:26:01', '2021-06-17 15:26:01');
+(10, 'mechanical engineering', 1, NULL, '2021-06-17 15:26:01', '2021-06-17 15:26:01'),
+(11, 'crop production and health science', 6, NULL, '2021-06-21 11:06:10', '2021-06-21 11:06:10'),
+(13, 'Nursing', 8, NULL, '2021-06-24 21:05:40', '2021-06-24 21:05:40');
 
 -- --------------------------------------------------------
 
@@ -155,7 +154,9 @@ INSERT INTO `faculties` (`id`, `faculty`, `dean`, `created_at`, `updated_at`) VA
 (1, 'engineering and technology', NULL, '2021-06-03 09:49:22', '2021-06-03 09:49:22'),
 (3, 'Faculty of engineering', NULL, '2021-06-03 18:02:40', '2021-06-03 18:02:40'),
 (4, 'pure and applied science', NULL, '2021-06-05 06:12:49', '2021-06-05 06:12:49'),
-(5, 'manangement sciences', NULL, '2021-06-18 21:23:38', '2021-06-18 21:23:38');
+(5, 'manangement sciences', NULL, '2021-06-18 21:23:38', '2021-06-18 21:23:38'),
+(6, 'agricultural science', NULL, '2021-06-21 11:05:32', '2021-06-21 11:05:32'),
+(8, 'Faculty basic medical science', NULL, '2021-06-24 21:02:35', '2021-06-24 21:02:35');
 
 -- --------------------------------------------------------
 
@@ -247,9 +248,15 @@ CREATE TABLE `users` (
 
 INSERT INTO `users` (`id`, `name`, `email`, `matric_no`, `role`, `gender`, `address`, `phone`, `avatar`, `email_verified_at`, `password`, `remember_token`, `created_at`, `updated_at`, `country`, `state`, `city`, `dob`, `faculty_id`, `department_id`, `level`) VALUES
 (1, 'adesina kabir oluokun', 'admin@vb.com', NULL, 'staff', NULL, NULL, NULL, NULL, NULL, '$2y$10$93T1AYwkB79MrmobLDnVXO5uU2CPjn.8A9tloaC59gEpR/MeqJWQC', NULL, '2021-06-02 08:00:22', '2021-06-02 08:00:22', '', '', '', '0000-00-00', NULL, NULL, NULL),
-(4, 'Oluokun Kabiru Adesina', 'okadesina@student.smartqrcode', '210002', 'student', 'male', NULL, '9898980', NULL, NULL, '$2y$10$v8qbXp8T/lrklxDusi0bz.XAfDB5JMeylY3QD33ltHiBe56JPFmMW', NULL, '2021-06-06 16:36:43', '2021-06-09 23:57:35', 'Armenia', 'Oyo', 'Iseyin', '2021-04-26', 4, 7, 100),
+(4, 'Oluokun Kabiru Adesina', 'okadesina@student.smartqrcode', '210002', 'student', 'male', NULL, '9898980', NULL, NULL, '$2y$10$v8qbXp8T/lrklxDusi0bz.XAfDB5JMeylY3QD33ltHiBe56JPFmMW', NULL, '2021-06-06 16:36:43', '2021-06-21 12:29:53', 'Armenia', 'Oyo', 'Iseyin', '2021-06-08', 1, 8, 200),
 (5, 'Oluokun Kabiru Adesina', 'okadesina0@student.smartqrcode', '210003', 'student', 'male', NULL, '8973453', NULL, NULL, '$2y$10$XdVd3JfgRADU5Pf3B/CL4.ffooUGtwlJpxsty/9qXJ2WroOSjc92G', NULL, '2021-06-06 16:41:24', '2021-06-09 23:57:00', 'Algeria', 'Ogun', 'Oyo', '2021-06-01', 4, 7, 200),
-(10, 'vboy village kabiru', 'vvkabiru@staff.smartqrcode', NULL, 'staff', 'male', NULL, '8932749246', NULL, NULL, '$2y$10$Nlgfq7nWueDd5Rv1qd1PSuHoZygpmKdPvPyfSi6yrVJpwYN0z2Tn2', NULL, '2021-06-19 08:53:58', '2021-06-19 08:53:58', 'Azerbaijan', 'onde', 'iseyin', '2021-06-19', 4, 7, 400);
+(10, 'vboy village kabiru', 'vvkabiru@staff.smartqrcode', NULL, 'staff', 'male', NULL, '8932749246', NULL, NULL, '$2y$10$Nlgfq7nWueDd5Rv1qd1PSuHoZygpmKdPvPyfSi6yrVJpwYN0z2Tn2', NULL, '2021-06-19 08:53:58', '2021-06-19 08:53:58', 'Azerbaijan', 'onde', 'iseyin', '2021-06-19', 4, 7, 400),
+(11, 'Olatayo Lateef Damilola', 'oldamilola@student.smartqrcode', '210004', 'student', 'male', NULL, '78098079', NULL, NULL, '$2y$10$nxp4aaLbmzerRQQx4MK0depqT9fOPlETlsvXF6lD4HVjDmm9Cu8Gy', NULL, '2021-06-21 10:08:53', '2021-06-21 10:08:53', 'Nigeria', 'oyo', 'oyo', '2002-02-05', 1, 8, 200),
+(12, 'musbau jamiu dare', 'mjdare@student.smartqrcode', '210005', 'student', 'male', NULL, '08104307011', NULL, NULL, '$2y$10$mm/2hK3CvolXOARcciqWEePPgc10VtmnQALnZd.YuItz2oMeaHvp6', NULL, '2021-06-21 11:22:22', '2021-06-21 11:22:22', 'Nigeria', 'osun', 'ogbomosho', '1998-06-06', 6, 11, 200),
+(13, 'Yusuff Abiola Abiodun', 'yaabiodun@staff.smartqrcode', NULL, 'staff', 'male', NULL, '08162495580', NULL, NULL, '$2y$10$ur6umE38foD/O0EtG5Q/TOF6F9CkyrAzca3uKHRjMeoEbvkhPA2Sa', NULL, '2021-06-21 11:31:07', '2021-06-21 11:31:07', 'Nambia', 'nambia city', 'ogbomosho', '2020-05-20', 6, 11, 200),
+(14, 'wakil aminat funmilayo', 'wafunmilayo@student.smartqrcode', '210006', 'student', 'female', NULL, '08068954995', NULL, NULL, '$2y$10$cATW2YSqK09Ycz1v3Lzj0OeDL96c5wYTKdnW2OZl.toVBe4qpUV7m', NULL, '2021-06-21 11:39:05', '2021-06-21 11:39:05', 'Nigeria', 'osun', 'ife', '1999-09-09', 6, 11, 200),
+(15, 'liadi kafayat olabisi', 'lkolabisi@student.smartqrcode', '210007', 'student', 'female', NULL, '8934758937', NULL, NULL, '$2y$10$NfnkFb6SabzQhjsnMW7c8uiAtQA9SgLqWyWPshnzwPB7ETInlPxDa', NULL, '2021-06-24 21:09:44', '2021-06-24 21:09:44', 'Nigeria', 'Oyo', 'Iseyin', '2002-05-08', 8, 13, 300),
+(16, 'village boy adesina', 'vb@kb,vb', NULL, 'admin', NULL, NULL, NULL, NULL, NULL, 'village boy adesina', NULL, NULL, NULL, '', '', '', '0000-00-00', NULL, NULL, NULL);
 
 --
 -- Indexes for dumped tables
@@ -333,31 +340,31 @@ ALTER TABLE `users`
 -- AUTO_INCREMENT for table `attendances`
 --
 ALTER TABLE `attendances`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=23;
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=50;
 
 --
 -- AUTO_INCREMENT for table `attendees`
 --
 ALTER TABLE `attendees`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT;
 
 --
 -- AUTO_INCREMENT for table `courses`
 --
 ALTER TABLE `courses`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=14;
 
 --
 -- AUTO_INCREMENT for table `departments`
 --
 ALTER TABLE `departments`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=14;
 
 --
 -- AUTO_INCREMENT for table `faculties`
 --
 ALTER TABLE `faculties`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
 
 --
 -- AUTO_INCREMENT for table `failed_jobs`
@@ -375,7 +382,7 @@ ALTER TABLE `migrations`
 -- AUTO_INCREMENT for table `users`
 --
 ALTER TABLE `users`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=17;
 
 --
 -- Constraints for dumped tables
