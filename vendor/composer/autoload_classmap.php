@@ -6,6 +6,11 @@ $vendorDir = dirname(dirname(__FILE__));
 $baseDir = dirname($vendorDir);
 
 return array(
+    'Andyabih\\LaravelToUML\\Facades\\LaravelToUML' => $vendorDir . '/andyabih/laravel-to-uml/src/Facades/LaravelToUML.php',
+    'Andyabih\\LaravelToUML\\Http\\Controllers\\Controller' => $vendorDir . '/andyabih/laravel-to-uml/src/Http/Controllers/Controller.php',
+    'Andyabih\\LaravelToUML\\Http\\Controllers\\LaravelToUMLController' => $vendorDir . '/andyabih/laravel-to-uml/src/Http/Controllers/LaravelToUMLController.php',
+    'Andyabih\\LaravelToUML\\LaravelToUML' => $vendorDir . '/andyabih/laravel-to-uml/src/LaravelToUML.php',
+    'Andyabih\\LaravelToUML\\LaravelToUMLServiceProvider' => $vendorDir . '/andyabih/laravel-to-uml/src/LaravelToUMLServiceProvider.php',
     'App\\Console\\Kernel' => $baseDir . '/app/Console/Kernel.php',
     'App\\Exceptions\\Handler' => $baseDir . '/app/Exceptions/Handler.php',
     'App\\Http\\Controllers\\Auth\\ConfirmPasswordController' => $baseDir . '/app/Http/Controllers/Auth/ConfirmPasswordController.php',
@@ -17,14 +22,6 @@ return array(
     'App\\Http\\Controllers\\Controller' => $baseDir . '/app/Http/Controllers/Controller.php',
     'App\\Http\\Controllers\\HomeController' => $baseDir . '/app/Http/Controllers/HomeController.php',
     'App\\Http\\Controllers\\Pages' => $baseDir . '/app/Http/Controllers/Pages.php',
-    'App\\Http\\Controllers\\staffs\\attendanceController' => $baseDir . '/app/Http/Controllers/staffs/attendanceController.php',
-    'App\\Http\\Controllers\\staffs\\courseController' => $baseDir . '/app/Http/Controllers/staffs/courseController.php',
-    'App\\Http\\Controllers\\staffs\\deptController' => $baseDir . '/app/Http/Controllers/staffs/deptController.php',
-    'App\\Http\\Controllers\\staffs\\facultyController' => $baseDir . '/app/Http/Controllers/staffs/facultyController.php',
-    'App\\Http\\Controllers\\staffs\\staffController' => $baseDir . '/app/Http/Controllers/staffs/staffController.php',
-    'App\\Http\\Controllers\\staffs\\studentController' => $baseDir . '/app/Http/Controllers/staffs/studentController.php',
-    'App\\Http\\Controllers\\students\\studentAttendance' => $baseDir . '/app/Http/Controllers/students/studentAttendance.php',
-    'App\\Http\\Controllers\\students\\studentController' => $baseDir . '/app/Http/Controllers/students/studentController.php',
     'App\\Http\\Kernel' => $baseDir . '/app/Http/Kernel.php',
     'App\\Http\\Middleware\\Authenticate' => $baseDir . '/app/Http/Middleware/Authenticate.php',
     'App\\Http\\Middleware\\EncryptCookies' => $baseDir . '/app/Http/Middleware/EncryptCookies.php',

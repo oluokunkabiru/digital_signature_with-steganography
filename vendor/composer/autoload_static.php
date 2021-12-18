@@ -177,6 +177,7 @@ class ComposerStaticInitab37d9629450264bee7fdb84234ad55b
         array (
             'Asm89\\Stack\\' => 12,
             'App\\' => 4,
+            'Andyabih\\LaravelToUML\\' => 22,
         ),
     );
 
@@ -512,6 +513,10 @@ class ComposerStaticInitab37d9629450264bee7fdb84234ad55b
         array (
             0 => __DIR__ . '/../..' . '/app',
         ),
+        'Andyabih\\LaravelToUML\\' => 
+        array (
+            0 => __DIR__ . '/..' . '/andyabih/laravel-to-uml/src',
+        ),
     );
 
     public static $prefixesPsr0 = array (
@@ -525,6 +530,11 @@ class ComposerStaticInitab37d9629450264bee7fdb84234ad55b
     );
 
     public static $classMap = array (
+        'Andyabih\\LaravelToUML\\Facades\\LaravelToUML' => __DIR__ . '/..' . '/andyabih/laravel-to-uml/src/Facades/LaravelToUML.php',
+        'Andyabih\\LaravelToUML\\Http\\Controllers\\Controller' => __DIR__ . '/..' . '/andyabih/laravel-to-uml/src/Http/Controllers/Controller.php',
+        'Andyabih\\LaravelToUML\\Http\\Controllers\\LaravelToUMLController' => __DIR__ . '/..' . '/andyabih/laravel-to-uml/src/Http/Controllers/LaravelToUMLController.php',
+        'Andyabih\\LaravelToUML\\LaravelToUML' => __DIR__ . '/..' . '/andyabih/laravel-to-uml/src/LaravelToUML.php',
+        'Andyabih\\LaravelToUML\\LaravelToUMLServiceProvider' => __DIR__ . '/..' . '/andyabih/laravel-to-uml/src/LaravelToUMLServiceProvider.php',
         'App\\Console\\Kernel' => __DIR__ . '/../..' . '/app/Console/Kernel.php',
         'App\\Exceptions\\Handler' => __DIR__ . '/../..' . '/app/Exceptions/Handler.php',
         'App\\Http\\Controllers\\Auth\\ConfirmPasswordController' => __DIR__ . '/../..' . '/app/Http/Controllers/Auth/ConfirmPasswordController.php',
@@ -536,14 +546,6 @@ class ComposerStaticInitab37d9629450264bee7fdb84234ad55b
         'App\\Http\\Controllers\\Controller' => __DIR__ . '/../..' . '/app/Http/Controllers/Controller.php',
         'App\\Http\\Controllers\\HomeController' => __DIR__ . '/../..' . '/app/Http/Controllers/HomeController.php',
         'App\\Http\\Controllers\\Pages' => __DIR__ . '/../..' . '/app/Http/Controllers/Pages.php',
-        'App\\Http\\Controllers\\staffs\\attendanceController' => __DIR__ . '/../..' . '/app/Http/Controllers/staffs/attendanceController.php',
-        'App\\Http\\Controllers\\staffs\\courseController' => __DIR__ . '/../..' . '/app/Http/Controllers/staffs/courseController.php',
-        'App\\Http\\Controllers\\staffs\\deptController' => __DIR__ . '/../..' . '/app/Http/Controllers/staffs/deptController.php',
-        'App\\Http\\Controllers\\staffs\\facultyController' => __DIR__ . '/../..' . '/app/Http/Controllers/staffs/facultyController.php',
-        'App\\Http\\Controllers\\staffs\\staffController' => __DIR__ . '/../..' . '/app/Http/Controllers/staffs/staffController.php',
-        'App\\Http\\Controllers\\staffs\\studentController' => __DIR__ . '/../..' . '/app/Http/Controllers/staffs/studentController.php',
-        'App\\Http\\Controllers\\students\\studentAttendance' => __DIR__ . '/../..' . '/app/Http/Controllers/students/studentAttendance.php',
-        'App\\Http\\Controllers\\students\\studentController' => __DIR__ . '/../..' . '/app/Http/Controllers/students/studentController.php',
         'App\\Http\\Kernel' => __DIR__ . '/../..' . '/app/Http/Kernel.php',
         'App\\Http\\Middleware\\Authenticate' => __DIR__ . '/../..' . '/app/Http/Middleware/Authenticate.php',
         'App\\Http\\Middleware\\EncryptCookies' => __DIR__ . '/../..' . '/app/Http/Middleware/EncryptCookies.php',

@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Http\Controllers\staffs;
+namespace App\Http\Controllers\Staffs;
 
 use App\Http\Controllers\Controller;
 use App\Http\Requests\deptRequest;
@@ -8,7 +8,7 @@ use App\Models\Department;
 use App\Models\Faculty;
 use Illuminate\Http\Request;
 
-class deptController extends Controller
+class DeptController extends Controller
 {
     /**
      * Display a listing of the resource.

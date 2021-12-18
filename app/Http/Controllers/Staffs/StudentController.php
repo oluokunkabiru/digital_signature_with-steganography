@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Http\Controllers\staffs;
+namespace App\Http\Controllers\Staffs;
 
 use App\Http\Controllers\Controller;
 use App\Http\Requests\studentRegisterRequest;
@@ -9,7 +9,7 @@ use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
 
-class studentController extends Controller
+class StudentController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -48,7 +48,12 @@ class studentController extends Controller
     public function store(studentRegisterRequest $request)
     {
         //
-
+        function nextMatric(){
+            $last = User::where('role', 'student')->max('id');
+            $student = User::where('id', $last)->firstOrFail();
+            $matric = !empty($student->matric_no) && is_numeric($student->matric_no)?$student->matric_no+1:date('y')."0001";
+            return $matric;
+        }
         $student = new User();
         $student->name = $request->sname." ". $request->fname." ". $request->lname;
         $student->password = Hash::make(strtolower($request->fname));

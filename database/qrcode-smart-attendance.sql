@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: localhost
--- Generation Time: Jul 08, 2021 at 12:14 AM
+-- Generation Time: Aug 04, 2021 at 12:51 PM
 -- Server version: 10.4.17-MariaDB
 -- PHP Version: 8.0.0
 
@@ -45,10 +45,7 @@ CREATE TABLE `attendances` (
 --
 
 INSERT INTO `attendances` (`id`, `faculty_id`, `department_id`, `course_id`, `level`, `date`, `user_id`, `qrcode`, `created_at`, `updated_at`) VALUES
-(46, 8, 13, 13, '300', '2021-07-01', 1, 'FacultyFaculty::basicFaculty::medicalFaculty::science_Nursing_MaternintyFaculty::Nursing_NURFaculty::301.png', '2021-07-01 07:54:31', '2021-07-01 07:54:31'),
-(47, 1, 8, 12, '300', '2021-07-14', 1, 'engineeringFaculty::andFaculty::technology_computerFaculty::science_introductionFaculty::databseFaculty::management_CSEFaculty::307.png', '2021-07-07 21:13:22', '2021-07-07 21:13:22'),
-(48, 4, 7, 6, '100', '2021-07-07', 1, 'pureFaculty::andFaculty::appliedFaculty::science_pureFaculty::andFaculty::appliedFaculty::mathematics_elementaryFaculty::mathematicsFaculty::II_MTHFaculty::102.png', '2021-07-07 21:13:52', '2021-07-07 21:13:52'),
-(49, 6, 11, 11, '200', '2021-07-10', 1, 'agriculturalFaculty::science_cropFaculty::productionFaculty::andFaculty::healthFaculty::science_animalFaculty::nutritionist_aphFaculty::201.png', '2021-07-07 21:14:22', '2021-07-07 21:14:22');
+(53, 8, 13, 13, '300', '2021-08-04', 1, 'FacultyFaculty::basicFaculty::medicalFaculty::science_Nursing_MaternintyFaculty::Nursing_NURFaculty::301.png', '2021-08-04 09:50:35', '2021-08-04 09:50:35');
 
 -- --------------------------------------------------------
 
@@ -340,7 +337,7 @@ ALTER TABLE `users`
 -- AUTO_INCREMENT for table `attendances`
 --
 ALTER TABLE `attendances`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=50;
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=54;
 
 --
 -- AUTO_INCREMENT for table `attendees`
@@ -364,7 +361,7 @@ ALTER TABLE `departments`
 -- AUTO_INCREMENT for table `faculties`
 --
 ALTER TABLE `faculties`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=10;
 
 --
 -- AUTO_INCREMENT for table `failed_jobs`

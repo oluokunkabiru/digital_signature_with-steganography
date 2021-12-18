@@ -352,7 +352,7 @@
 
             })
             $("#upselectfaculty").on('change', function(){
-                alert("hello")
+                // alert("hello")
               var facultyid =   $("#upselectfaculty").val();
               $.ajax({
                 headers: {

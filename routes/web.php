@@ -31,27 +31,27 @@ return view('users.staffs.attendance.scanned');
 
 
 Route::prefix('staffs')->middleware(['auth', 'staff'])->group(function () {
-    Route::get('dashboard', 'staffs\staffController@index')->name('staffDashboard');
-    Route::resource('staffs-info', 'staffs\staffController');
-    Route::get('manage-staffs', 'staffs\staffController@staffsInfo')->name('manage-staffs');
-    Route::resource('courses-and-classes', 'staffs\courseController');
-    Route::resource('student-info', 'staffs\studentController');
-    Route::resource('faculty', 'staffs\facultyController');
-    Route::resource('department-info', 'staffs\deptController');
-    Route::resource('attendance', 'staffs\attendanceController');
-    Route::post('selectfaculty', 'staffs\courseController@selesctFaculty')->name('selectFaculty');
-    Route::post('selectdept', 'staffs\courseController@selesctDept')->name('selectdept');
-    Route::post('selectlevel', 'staffs\courseController@selesctLevel')->name('selectlevel');
-    Route::get('/today-attendance', 'staffs\attendanceController@showTodaysAttendance')->name('todayAttendance');
-    Route::get('todays-class', 'staffs\attendanceController@showTodaysClass')->name('todaysClass');
+    Route::get('dashboard', 'Staffs\StaffController@index')->name('staffDashboard');
+    Route::resource('staffs-info', 'Staffs\StaffController');
+    Route::get('manage-staffs', 'Staffs\StaffController@staffsInfo')->name('manage-staffs');
+    Route::resource('courses-and-classes', 'Staffs\CourseController');
+    Route::resource('student-info', 'Staffs\StudentController');
+    Route::resource('faculty', 'Staffs\FacultyController');
+    Route::resource('department-info', 'Staffs\DeptController');
+    Route::resource('attendance', 'Staffs\AttendanceController');
+    Route::post('selectfaculty', 'Staffs\CourseController@selesctFaculty')->name('selectFaculty');
+    Route::post('selectdept', 'Staffs\CourseController@selesctDept')->name('selectdept');
+    Route::post('selectlevel', 'Staffs\CourseController@selesctLevel')->name('selectlevel');
+    Route::get('/today-attendance', 'Staffs\AttendanceController@showTodaysAttendance')->name('todayAttendance');
+    Route::get('todays-class', 'Staffs\AttendanceController@showTodaysClass')->name('todaysClass');
 
 });
 
 Route::prefix('students')->middleware(['auth', 'student'])->group(function () {
-    Route::get('dashboard', 'students\studentController@index')->name('studentDashboard');
-    Route::get('course-taken', 'students\studentController@courseTaken')->name('courseTaken');
-    Route::resource('student-attendance', 'students\studentAttendance');
-    Route::post('/scanning-QRcode', 'students\studentController@scanninigQRcode')->name('scanningqrcode');
+    Route::get('dashboard', 'Students\StudentController@index')->name('studentDashboard');
+    Route::get('course-taken', 'Students\StudentController@courseTaken')->name('courseTaken');
+    Route::resource('student-attendance', 'Students\studentAttendance');
+    Route::post('/scanning-QRcode', 'Students\StudentController@scanninigQRcode')->name('scanningqrcode');
 
 
 

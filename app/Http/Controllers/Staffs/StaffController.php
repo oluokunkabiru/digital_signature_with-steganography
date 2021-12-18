@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Http\Controllers\staffs;
+namespace App\Http\Controllers\Staffs;
 
 use App\Http\Controllers\Controller;
 use App\Http\Requests\studentRegisterRequest;
@@ -12,7 +12,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
 
-class staffController extends Controller
+class StaffController extends Controller
 {
     /**
      * Display a listing of the resource.

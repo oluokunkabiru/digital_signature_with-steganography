@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Http\Controllers\staffs;
+namespace App\Http\Controllers\Staffs;
 
 use App\Http\Controllers\Controller;
 use App\Http\Requests\attendanceRequest;
@@ -13,7 +13,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use SimpleSoftwareIO\QrCode\Facades\QrCode;
 
-class attendanceController extends Controller
+class AttendanceController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -73,7 +73,10 @@ class attendanceController extends Controller
         $message .= "Course unit:".$course->unit."\n";
         $message .= "Attendance date:".$request->date."\n";
         $message .= "Smartcode:smartme".time()."_".$attendance->id;
-        QrCode::size(400)->format('png')->generate(html_entity_decode($message), public_path('qrcode/'.$qrcode));
+        if(!is_dir(public_path()."/qrcode")){
+            mkdir(public_path()."/qrcode");
+        }
+        QrCode::size(400)->format('png')->generate(html_entity_decode($message), public_path().'/qrcode/'.$qrcode);
         return redirect()->back()->with('success', 'New attendance created successfully');
 
 
@@ -137,7 +140,7 @@ class attendanceController extends Controller
         $attendance->level = $request->level;
 
         if($attendance->qrcode){
-            unlink(public_path("qrcode/".$attendance->qrcode));
+            unlink(public_path()."/qrcode/".$attendance->qrcode);
         }
         $course = Course::with(['faculty', 'department'])->where('id', $request->course)->firstOrFail();
        $qrcode = str_replace(" ", "-", $course->faculty->faculty."_".$course->department->dept."_". $course->title."_".$course->code). time() .".png";
@@ -152,7 +155,7 @@ class attendanceController extends Controller
         $message .= "Course unit:".$course->unit."\n";
         $message .= "Attendance date:".$request->date."\n";
         $message .= "Smartcode:smartme".time()."_".$attendance->id;
-        QrCode::size(400)->format('png')->generate(html_entity_decode($message), public_path('qrcode/'.$qrcode));
+        QrCode::size(400)->format('png')->generate(html_entity_decode($message), public_path().'/qrcode/'.$qrcode);
         // return $attendance->id;
         // QrCode::size(500)->format('png')->generate($qrcodes."smartqrcode".$attendance->id, public_path('qrcode/'.$qrcode));
         return redirect()->back()->with('success', $course->title." || ".$course->code.' attendance updated successfully');
@@ -170,7 +173,7 @@ class attendanceController extends Controller
         //
         $attendance = Attendance::with(['course'])->where('id', $id)->firstOrFail();
         if($attendance->qrcode){
-            unlink(public_path("qrcode/".$attendance->qrcode));
+            unlink(public_path()."/qrcode/".$attendance->qrcode);
         }
         $attendance->forceDelete();
 

@@ -1,13 +1,13 @@
 <?php
 
-namespace App\Http\Controllers\staffs;
+namespace App\Http\Controllers\Staffs;
 
 use App\Http\Controllers\Controller;
 use App\Http\Requests\facultRequest;
 use App\Models\Faculty;
 use Illuminate\Http\Request;
 
-class facultyController extends Controller
+class FacultyController extends Controller
 {
     /**
      * Display a listing of the resource.
