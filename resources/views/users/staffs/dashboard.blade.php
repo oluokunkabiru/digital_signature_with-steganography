@@ -11,13 +11,13 @@
                 <div class="card-icon bg-primary">
                     <i class="far fa-user"></i>
                 </div>
-                <a href="{{ route('student-info.index') }}">
+                <a href="">
                 <div class="card-wrap">
                     <div class="card-header">
-                        <h4>Total student</h4>
+                        <h4>Message Encrypt</h4>
                     </div>
                     <div class="card-body">
-                        {{ count($students) }}
+
                     </div>
                 </div>
                 </a>
@@ -28,13 +28,13 @@
                 <div class="card-icon bg-danger">
                     <i class="far fa-newspaper"></i>
                 </div>
-                <a href="{{ route('todaysClass') }}">
+                <a href="">
                 <div class="card-wrap">
                     <div class="card-header">
-                        <h4>Today's classes</h4>
+                        <h4>vboy</h4>
                     </div>
                     <div class="card-body">
-                        {{ count($attendances) }}
+
                     </div>
                 </div>
             </a>
@@ -45,14 +45,14 @@
                 <div class="card-icon bg-warning">
                     <i class="far fa-file"></i>
                 </div>
-            <a href="{{ route('todayAttendance') }}">
+            <a href="">
                 <div class="card-wrap">
                     <div class="card-header">
-                        <h4>Today's attendee</h4>
+                        <h4></h4>
                     </div>
 
                     <div class="card-body" id="numbersOfAttendee">
-                       {{count($todayatendee)}}
+
                     </div>
 
                 </div>
@@ -65,13 +65,13 @@
                 <div class="card-icon bg-success">
                     <i class="fas fa-circle"></i>
                 </div>
-                <a href="{{ route('attendance.index') }}">
+                <a href="">
                 <div class="card-wrap">
                     <div class="card-header">
                         <h4>Total attendance</h4>
                     </div>
                     <div class="card-body">
-                        {{ count($tattendances) }}
+
                     </div>
                 </div>
             </a>
@@ -83,79 +83,134 @@
         {{--  <p class="section-lead">Change information about yourself on this page.</p>  --}}
 
         <div class="row mt-sm-4">
-            <div class="col-12 col-md-12 col-lg-5">
-                <div class="card profile-widget">
-                    <div class="profile-widget-header">
-                        <img alt="image" src="{{ asset('assets/images/img_avatar3.png') }}" class="rounded-circle profile-widget-picture">
-                        <div class="profile-widget-items">
-                            <div class="profile-widget-item">
-                                <div class="profile-widget-item-label">Total class create</div>
-                                <div class="profile-widget-item-value">{{ count($totalatendee) }}</div>
+            <div class="col-12 col-md-12 col-lg-6">
+                <div class="card">
+                    <div class="card-header">
+                        <h4>Encryption</h4>
+                    </div>
+                    <div class="card-body">
+                        <form id="encryptAES" method="post">
+                            <div class="form-group">
+                                <label for="comment">Message:</label>
+                                <textarea name="message" class="form-control  @error('message') is-invalid @enderror" rows="5" id="comment">
+                                    {{ old('message') }}
+                                </textarea>
+                                @error('message')
+                                <span class="invalid-feedback" role="alert">
+                                    <strong>{{ $message }}</strong>
+                                </span>
+                            @enderror
                             </div>
-                            <div class="profile-widget-item">
-                                <div class="profile-widget-item-label">Total students attended</div>
-                                <div class="profile-widget-item-value" id="numbersOfAttendee">{{ count($totalatendee) }}</div>
-                            </div>
-                            <div class="profile-widget-item">
-                                <div class="profile-widget-item-label">Incoming class</div>
-                                <div class="profile-widget-item-value">{{ count($incomingattendances) }}</div>
-                            </div>
+
+
+                        <div class="form-group">
+                            <label for="usr">Your Private Key:</label>
+                            <input type="password" value="{{ old('private') }}" name="private" class="form-control   @error('private') is-invalid @enderror" id="usr">
+                            @error('private')
+                            <span class="invalid-feedback" role="alert">
+                                <strong>{{ $message }}</strong>
+                            </span>
+                            @enderror
+                        </div>
+                         {{ csrf_field() }}
+
+
+                        <button type="submit" class="btn btn-warning">Encrypt With AES</button>
+                    </form>
+                    <form id="generateStego" method="post" enctype="multipart/form-data">
+
+
+                        <div class="form-group">
+                            <label for="comment">Encrypted Message:</label>
+                            <textarea id="encrypedmessage" class="form-control  @error('encrypedmessage') is-invalid @enderror" rows="5" name="encrypedmessage" id="comment">
+                                  {{old('encrypedmessage') }}
+                            </textarea>
+                            @csrf
+                            @error('encrypedmessage')
+                            <span class="invalid-feedback" role="alert">
+                                <strong>{{ $message }}</strong>
+                            </span>
+                             @enderror
+                        </div>
+                        <div class="form-group">
+                            <label for="">Choose Cover Image</label>
+                            <input type="file" id="coverimage" name="coverimage" class="form-control-file border  @error('coverimage') is-invalid @enderror" name="file">
+                            @error('coverimage')
+                            <span class="invalid-feedback" role="alert">
+                                <strong>{{ $message }}</strong>
+                            </span>
+                            @enderror
                         </div>
                     </div>
 
+                        <div class="row" id="imageinfo" style="display: none">
+                            <div class="col">
+                                <img id="imageinf" src="{{ asset('assets/fonts/images/img_avatar3.png') }}" style="width: 200px" class="card-img" alt="">
+                            </div>
+                            <div class="col">
+                                <h6>Image Information</h6>
+                                <p>Width: <b id="coverImgWidth"></b></p>
+                                <p>Height: <b id="coverImgHeight"></b></p>
+                                {{-- <p>Payload: <b>200</b></p> --}}
+                            </div>
+                        </div>
 
+                        <div id="generatedStedImage">
+
+                        </div>
+                    <div class="card-footer text-right">
+                        <button type="submit" class="btn btn-primary">Embed Now</button>
+                    </div>
+                </form>
                 </div>
             </div>
-            <div class="col-12 col-md-12 col-lg-7">
+            <div class="col-12 col-md-12 col-lg-6">
                 <div class="card">
                         <div class="card-header">
-                            <h4>Profile Details</h4>
+                            <h4>Decryption</h4>
                         </div>
                         <div class="card-body">
-                            <div class="row">
-                                <div class="form-group col-md-6 col-12">
-                                    <label class="fa fa-user"></label>
-                                   <h6>{{ ucwords(Auth::user()->name) }}</h6>
-                                </div>
-                                <div class="form-group col-md-6 col-12">
-                                    <label class="fa fa-envelope"></label>
-                                   <h6>{{ Auth::user()->email }}</h6>
-                                </div>
-
+                            <form id="decryptStegoIma" action="{{ route('decrypt') }}" method="post" enctype="multipart/form-data">
+                            @csrf
+                            <div class="form-group">
+                                <label for="">Choose Stego Image</label>
+                                <input name="stegoimage" id="stegoimage" type="file" class="form-control-file border  @error('stegoimage') is-invalid @enderror">
+                                @error('stegoimage')
+                                <span class="invalid-feedback" role="alert">
+                                    <strong>{{ $message }}</strong>
+                                </span>
+                                @enderror
                             </div>
-                            <div class="row">
-                                <div class="form-group col-md-4 col-12">
-                                    <label class="fa fa-phone"></label>
-                                   <h6>{{ Auth::user()->phone }}</h6>
-                                </div>
-                                <div class="form-group col-md-4 col-12">
-                                    <label class="fa fa-calendar"></label>
-                                   <h6>{{ Auth::user()->dob }}</h6>
-                                </div>
 
-                            </div>
-                            <div class="row">
-                                <div class="form-group col-md-4 col-4">
-                                    <label class="fa fa-map"></label>
-                                   <h5>{{ Auth::user()->country }}</h5>
-                                </div>
-                                <div class="form-group col-md-4 col-4">
-                                    <label class="fa fa-map-pin"></label>
-                                   <h5>{{ Auth::user()->state }}</h5>
-                                </div>
-                                <div class="form-group col-md-4 col-4">
-                                    <label class="fa fa-map-marker"></label>
-                                   <h5>{{ Auth::user()->city }}</h5>
-                                </div>
+                            <div class="form-group">
+                                <label for="usr">Sender Key:</label>
+                                <input type="password" name="dprivate"  value="{{ old('dprivate') }}" class="form-control @error('dprivate') is-invalid @enderror" id="usr">
+                                @error('dprivate')
+                                    <span class="invalid-feedback" role="alert">
+                                        <strong>{{ $message }}</strong>
+                                    </span>
+                                @enderror
                             </div>
 
 
 
                         </div>
                         <div class="card-footer text-right">
-                            <a href="#" class="btn btn-primary">Changes</a>
+                            <button type="submit" class="btn btn-primary">Decrypt now</button>
                         </div>
                     </form>
+                </div>
+
+                <div class="row" id="stegoimageinfo" style="display: none">
+                    <div class="col">
+                        <img id="stegoimageinf" src="{{ asset('assets/fonts/images/img_avatar3.png') }}" style="width: 200px" class="card-img" alt="">
+                    </div>
+                    <div class="col">
+                        <h6>Image Information</h6>
+                        <p>Width: <b id="stegoImgWidth"></b></p>
+                        <p>Height: <b id="stegoImgHeight"></b></p>
+                        {{-- <p>Payload: <b>200</b></p> --}}
+                    </div>
                 </div>
             </div>
         </div>
@@ -163,14 +218,135 @@
 
 </section>
 @endsection
-@section('content')
+@section('script')
 <script>
 $(document).ready(function() {
-    setInterval(() => {
-    $("#numbersOfAttendee").load(" #numbersOfAttendee");
 
-    }, 6000);
-})
+    $("#coverimage").change(function () {
+            previewpassport(this, "imageinf",'coverImgHeight', 'coverImgWidth', 'imageinfo');
+
+
+        });
+
+
+        $("#stegoimage").change(function () {
+            previewpassport(this, "stegoimageinf",'stegoImgHeight', 'stegoImgWidth', 'stegoimageinfo');
+
+
+        });
+
+        $('#encryptAES').submit(function(e) {
+            e.preventDefault();
+            var datas = new FormData(this);
+            $.ajax({
+                type: 'POST',
+                url: "{{ route('encryptAES') }}",
+                data: datas,
+                contentType: false,
+                // dataType : 'json',
+                cache: false,
+                processData: false,
+                success: function(data) {
+                    // console.log(data);
+                    $("#encrypedmessage").text(data);
+
+                },
+                error:function(err){
+                    if(err.status ==422){
+                        console.log(err.status);
+                        $.each(err.responseJSON.errors, function(i, error){
+                            var el = $(document).find('[name="'+i+'"]');
+                            el.after($('<span style="color:red">'+ error[0] +'</span>'))
+                        })
+                    }
+                }
+
+            })
+        })
+
+
+        $('#generateStego').submit(function(e) {
+            e.preventDefault();
+            var datas = new FormData(this);
+            $.ajax({
+                type: 'POST',
+                url: "{{ route('embed-with-stego') }}",
+                data: datas,
+                contentType: false,
+                // dataType : 'json',
+                cache: false,
+                processData: false,
+                success: function(data) {
+                    // console.log(data);
+                    $("#generatedStedImage").html(data);
+
+                },
+                error:function(err){
+                    if(err.status ==422){
+                        console.log(err.status);
+                        $.each(err.responseJSON.errors, function(i, error){
+                            var el = $(document).find('[name="'+i+'"]');
+                            el.after($('<span style="color:red">'+ error[0] +'</span>'))
+                        })
+                    }
+                }
+
+            })
+        })
+
+
+        $('#decryptStegoImage').submit(function(e) {
+            e.preventDefault();
+            var datas = new FormData(this);
+            $.ajax({
+                type: 'POST',
+                url: "{{ route('decrypt') }}",
+                data: datas,
+                contentType: false,
+                // dataType : 'json',
+                cache: false,
+                processData: false,
+                success: function(data) {
+                    // console.log(data);
+                    $("#generatedStedImage").html(data);
+                },
+                error:function(err){
+                    if(err.status ==422){
+                        console.log(err.status);
+                        $.each(err.responseJSON.errors, function(i, error){
+                            var el = $(document).find('[name="'+i+'"]');
+                            el.after($('<span style="color:red">'+ error[0] +'</span>'))
+                        })
+                    }
+                }
+
+            })
+        })
+
+
+
+    function previewpassport(input, data, h, w, display) {
+            if (input.files && input.files[0]) {
+                var reader = new FileReader();
+                reader.onload = function (e) {
+                    // $('#uppreviewimage + img').remove();
+                    // console.log(e);
+                    $('#'+data).attr('src', e.target.result);
+                    var img = new Image();
+                    img.src = e.target.result;
+                    img.onload = function(){
+                        // console.log(this.width);
+                        $("#"+w).text(this.width)
+                        $("#"+h).text(this.height)
+                        $("#"+display).removeAttr('style')
+                    }
+                };
+                reader.readAsDataURL(input.files[0]);
+            }
+        }
+
+
+    })
 </script>
 @endsection
 

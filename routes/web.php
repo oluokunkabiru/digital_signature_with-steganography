@@ -15,49 +15,18 @@ use Illuminate\Support\Facades\Auth;
 */
 
 Route::get('/', 'Pages@index')->name('welcome');
-Route::post('customlogin', 'Pages@customLogin')->name('login');
-Route::post('logout', 'Pages@signOut')->name('logout');
-Route::get('scan', function () {
-return view('users.staffs.attendance.scanned');
-});
+// Route::post('customlogin', 'Pages@customLogin')->name('login');
+// Route::post('logout', 'Pages@signOut')->name('logout');
+// Route::get('scan', function () {
+// return view('users.staffs.attendance.scanned');
+// });
 
 
-// Auth::routes();
-// Authentication url
-// Route::get('/', 'Auth\AuthController@showLoginForm');
-    // Route::post('login', 'Auth\AuthController@login');
-    // Route::get('logout', 'Auth\AuthController@logout');
-
-
-
-Route::prefix('staffs')->middleware(['auth', 'staff'])->group(function () {
-    Route::get('dashboard', 'Staffs\StaffController@index')->name('staffDashboard');
-    Route::resource('staffs-info', 'Staffs\StaffController');
-    Route::get('manage-staffs', 'Staffs\StaffController@staffsInfo')->name('manage-staffs');
-    Route::resource('courses-and-classes', 'Staffs\CourseController');
-    Route::resource('student-info', 'Staffs\StudentController');
-    Route::resource('faculty', 'Staffs\FacultyController');
-    Route::resource('department-info', 'Staffs\DeptController');
-    Route::resource('attendance', 'Staffs\AttendanceController');
-    Route::post('selectfaculty', 'Staffs\CourseController@selesctFaculty')->name('selectFaculty');
-    Route::post('selectdept', 'Staffs\CourseController@selesctDept')->name('selectdept');
-    Route::post('selectlevel', 'Staffs\CourseController@selesctLevel')->name('selectlevel');
-    Route::get('/today-attendance', 'Staffs\AttendanceController@showTodaysAttendance')->name('todayAttendance');
-    Route::get('todays-class', 'Staffs\AttendanceController@showTodaysClass')->name('todaysClass');
-
-});
-
-Route::prefix('students')->middleware(['auth', 'student'])->group(function () {
-    Route::get('dashboard', 'Students\StudentController@index')->name('studentDashboard');
-    Route::get('course-taken', 'Students\StudentController@courseTaken')->name('courseTaken');
-    Route::resource('student-attendance', 'Students\studentAttendance');
-    Route::post('/scanning-QRcode', 'Students\StudentController@scanninigQRcode')->name('scanningqrcode');
-
-
-
-});
-
-
+Auth::routes();
+Route::get('/home', 'HomeController@index');
+Route::post('generate-AES', 'EncryptionController@makeAES')->name('encryptAES');
+Route::post('embed-steganography','EncryptionController@steganogagraphy' )->name('embed-with-stego');
+Route::post('decrypt-message', 'EncryptionController@decryptStego')->name('decrypt');
 // staffs routes
 
 // end of staff routes

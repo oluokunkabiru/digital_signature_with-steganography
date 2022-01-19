@@ -7,7 +7,7 @@ License URL: http://creativecommons.org/licenses/by/3.0/
 <html lang="zxx">
 
 <head>
-	<title>Smart Attendance with QR code</title>
+	<title>Steganography with AES and LSB</title>
 	<!-- Meta tag Keywords -->
 	<meta name="viewport" content="width=device-width, initial-scale=1">
 	<meta charset="UTF-8" />
@@ -37,15 +37,15 @@ License URL: http://creativecommons.org/licenses/by/3.0/
 </head>
 
 <body>
-	<div class="video-w3l" data-vide-bg="{{ asset('asset/video/1') }}">
+	<div class="video-w3l" data-vide-bg="{{ asset('asset/vide1') }}">
 		<!-- title -->
-		<h1>
+		{{-- <h1>
 			<span>QR</span> code
 			<span>S</span>smart
 			<span>A</span>ttendance
 
 
-        </h1>
+        </h1> --}}
 		<!-- //title -->
 		<!-- content -->
         <div class="sub-main-w3">

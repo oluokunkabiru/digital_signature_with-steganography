@@ -15,9 +15,9 @@
                 <img alt="image" src="{{ asset('assets/images/img_avatar3.png') }}" class="rounded-circle mr-1">
                 <div class="d-sm-none d-lg-inline-block">Hi, {{ ucwords(Auth::user()->name) }}</div></a>
             <div class="dropdown-menu dropdown-menu-right">
-                <a href="{{ route('attendance.create') }}" class="dropdown-item has-icon"><i class="fas fa-clock"></i>New attendance</a>
-                <a href="{{ route('courses-and-classes.index') }}" class="dropdown-item has-icon"><i class="fas fa-home"></i>Classes</a>
-                <a href="{{ route('student-info.index') }}" class="dropdown-item has-icon"><i class="fas fa-users"></i>Students</a>
+                <a href="" class="dropdown-item has-icon"><i class="fas fa-clock"></i>Create and encrypt Message</a>
+                <a href="" class="dropdown-item has-icon"><i class="fas fa-home"></i>Decrypt Message</a>
+                <a href="" class="dropdown-item has-icon"><i class="fas fa-users"></i>Send Message</a>
                  <div class="dropdown-divider"></div>
                 <form id="logout-form" action="{{ route('logout') }}" method="POST" class="d-none">
                     @csrf
@@ -30,7 +30,7 @@
 </nav>
 
 <!-- Start main left sidebar menu -->
-<div class="main-sidebar sidebar-style-2">
+{{-- <div class="main-sidebar sidebar-style-2">
     <aside id="sidebar-wrapper">
         <div class="sidebar-brand">
             <a href="{{ route('welcome') }}">Smart QR code attendance</a>
@@ -46,7 +46,7 @@
             <li class="dropdown">
                 <a href="#" class="nav-link has-dropdown"><i class="fa fa-home"></i> <span>Faculty and department</span></a>
                 <ul class="dropdown-menu">
-                    {{--  <li><a href="">Add New Course</a></li>  --}}
+                    {{--  <li><a href="">Add New Course</a></li>
                     <li><a href="{{ route('department-info.index') }}">Manage faculty and dept</a></li>
 
                 </ul>
@@ -55,7 +55,7 @@
             <li class="dropdown">
                 <a href="#" class="nav-link has-dropdown"><i class="far fa-compass"></i> <span>Courses</span></a>
                 <ul class="dropdown-menu">
-                    {{--  <li><a href="">Add New Course</a></li>  --}}
+                    {{--  <li><a href="">Add New Course</a></li>  
                     <li><a href="{{ route('courses-and-classes.index') }}">Manage Course</a></li>
 
                 </ul>
@@ -97,4 +97,4 @@
              </ul>
 
     </aside>
-</div>
+</div> --}}
