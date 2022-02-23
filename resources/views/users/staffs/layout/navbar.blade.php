@@ -55,7 +55,7 @@
             <li class="dropdown">
                 <a href="#" class="nav-link has-dropdown"><i class="far fa-compass"></i> <span>Courses</span></a>
                 <ul class="dropdown-menu">
-                    {{--  <li><a href="">Add New Course</a></li>  
+                    {{--  <li><a href="">Add New Course</a></li>
                     <li><a href="{{ route('courses-and-classes.index') }}">Manage Course</a></li>
 
                 </ul>

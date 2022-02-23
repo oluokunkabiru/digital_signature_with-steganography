@@ -7,7 +7,7 @@ License URL: http://creativecommons.org/licenses/by/3.0/
 <html lang="zxx">
 
 <head>
-	<title>Steganography with AES and LSB</title>
+	<title>Digital Signature</title>
 	<!-- Meta tag Keywords -->
 	<meta name="viewport" content="width=device-width, initial-scale=1">
 	<meta charset="UTF-8" />
@@ -36,19 +36,19 @@ License URL: http://creativecommons.org/licenses/by/3.0/
 	<!-- //web-fonts -->
 </head>
 
-<body>
-	<div class="video-w3l" data-vide-bg="{{ asset('asset/vide1') }}">
+<body style="background-image: url({{ asset('asset/Digital-signature-banner-digital-signature.png') }}); background-repeat:repeat;">
+	<div class="video-w3l" data-vide="{{ asset('asset/vide1') }}">
 		<!-- title -->
-		{{-- <h1>
-			<span>QR</span> code
-			<span>S</span>smart
-			<span>A</span>ttendance
+		<h1>
+			<span>AES Cryptography,</span>
+			<span>PVDSteganography</span>
+			 <span>Digital</span>Signature
 
 
-        </h1> --}}
+        </h1>
 		<!-- //title -->
 		<!-- content -->
-        <div class="sub-main-w3">
+        <div class="sub-main-w3" style="background-image: url('{{ asset('asset/Digital-signature-with-eidas-electronic-signature-digital-signature.png') }}'); background-position:center; background-repeat:no-repeat">
 
             @php
                 $dashboard="";
@@ -77,7 +77,7 @@ License URL: http://creativecommons.org/licenses/by/3.0/
                 {{ csrf_field() }}
 				<div class="form-style-agile">
 					<label>
-						<i class="fas fa-user"></i>Email</label>
+						<i class="fas fa-user">Email</i></label>
 					<input placeholder="Username" class="form-control @error('email') is-invalid @enderror" name="email" value="{{ old('email') }}" required autocomplete="email" autofocus type="email" >
                     @error('email')
                     <span class="invalid-feedback" role="alert">
@@ -87,7 +87,7 @@ License URL: http://creativecommons.org/licenses/by/3.0/
                 </div>
 				<div class="form-style-agile">
 					<label>
-						<i class="fas fa-unlock-alt"></i>Password</label>
+						<i class="fas fa-unlock-alt">Password</i></label>
 					<input placeholder="Password" type="password" class="form-control @error('password') is-invalid @enderror" name="password" required autocomplete="current-password">
                     @error('password')
                     <span class="invalid-feedback" role="alert">
